@@ -1,7 +1,8 @@
 package commandlineUI;
 
-import BibTexKanta.reference;
+import database.Database;
 import java.util.Scanner;
+import reference.BookRef;
 
 public class BookAdder {
 
@@ -22,7 +23,7 @@ public class BookAdder {
         this.book = new BookRef("temp");
     }
 
-    public void addBookToDB(database db) {
+    public void addBookToDB(Database db) {
         System.out.println("Kirjaviitteen syöttäminen.");
         reader = new Scanner(System.in);
         addDetails();
@@ -80,7 +81,7 @@ public class BookAdder {
     private boolean addAuthor() {
         String author = reader.nextLine();
         if (true) {
-            this.book.setAuthor(author);
+            this.book.addAuthor(author);
             return true;
         }
         return false;
@@ -100,7 +101,7 @@ public class BookAdder {
     private boolean addPublisher() {
         String publisher = reader.nextLine();
         if (true) {
-            this.book.setPublisher(publisher);
+            this.book.addPublisher(publisher);
             return true;
         }
         return false;

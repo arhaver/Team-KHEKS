@@ -20,7 +20,7 @@ public class BookAdder {
     private final String readyNext = "R";
 
     public BookAdder() {
-        this.book = new BookRef("temp");
+        this.book = null;
     }
 
     public void addBookToDB(Database db) {
@@ -81,7 +81,6 @@ public class BookAdder {
     private boolean addAuthor() {
         String author = reader.nextLine();
         if (true) {
-            this.book.addAuthor(author);
             return true;
         }
         return false;
@@ -91,7 +90,6 @@ public class BookAdder {
     private boolean addYear() {
         int year = Integer.getInteger(reader.nextLine());
         if (true) {
-            this.book.setYear(year);
             return true;
         }
         return false;
@@ -101,7 +99,6 @@ public class BookAdder {
     private boolean addPublisher() {
         String publisher = reader.nextLine();
         if (true) {
-            this.book.addPublisher(publisher);
             return true;
         }
         return false;

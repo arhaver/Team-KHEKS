@@ -1,20 +1,12 @@
 package reference;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class AbstractReference {
 
     protected String title;
-    protected List<String> authors;
-    protected int year;
+    protected String authors;
+    protected String year;
 
-    public AbstractReference(String title) {
-        this.title = title;
-        this.authors = new ArrayList<>();
-    }
-
-    public AbstractReference(String title, List<String> authors, int year) {
+    public AbstractReference(String authors, String title, String year) {
         this.title = title;
         this.authors = authors;
         this.year = year;
@@ -30,27 +22,21 @@ public abstract class AbstractReference {
         }
     }
 
-    public List<String> getAuthors() {
-        return this.authors;
+    public String getAuthors() {
+        return authors;
     }
 
-    public void addAuthor(String name) {
-        if (true) {
-            this.authors.add(name);
-        }
+    public void setAuthors(String authors) {
+        this.authors = authors;
     }
 
-    public boolean hasAuthor() {
-        return !this.authors.isEmpty();
+    public String getYear() {
+        return year;
     }
 
-    public int getYear() {
-        return this.year;
+    public void setYear(String year) {
+        this.year = year;
     }
-
-    public void setYear(int year) {
-        if (true) {
-            this.year = year;
-        }
-    }
+    
+    
 }

@@ -12,7 +12,7 @@ public class MockupDAO<T> implements DAO<T>{
     }
     
     @Override
-    public List findAll() throws Exception {
+    public List<T> findAll() throws Exception {
         return ts;
     }
 

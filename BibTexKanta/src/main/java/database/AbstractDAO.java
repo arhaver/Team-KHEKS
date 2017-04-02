@@ -62,7 +62,7 @@ public abstract class AbstractDAO<T> implements DAO<T>{
         return createdAmount > 0;
     }
     
-    protected abstract T createFromResultSet(ResultSet rs);
+    protected abstract T createFromResultSet(ResultSet rs) throws Exception;
     protected abstract List<Object> decompose(T t);
     
     private void setPreparedStatementValues(PreparedStatement ps, List<Object> values) throws Exception{

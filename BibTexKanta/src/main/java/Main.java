@@ -10,7 +10,7 @@ public class Main {
         
         Scanner reader = new Scanner (System.in);
         Database db = new Database("SD");
-        BookAdder ba = new BookAdder();
+        BookAdder ba = new BookAdder(db);
         
         System.out.println("");
         System.out.println("Lähdeviitteidenhallintaohjelma by Team-KHEKS.");
@@ -25,7 +25,7 @@ public class Main {
             String response = reader.nextLine();
             
             if (response.matches("1")){
-//                ba.addBookToDB(db);
+                ba.addBookToDB();
             } else if(response.matches("q") || response.matches("Q")){
                 break;                
             }

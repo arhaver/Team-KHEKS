@@ -22,7 +22,8 @@ public abstract class AbstractDAO<T> implements DAO<T>{
     }
     
     @Override
-    public List<T> findAll() throws Exception{
+    public List<T> findAll(){
+        try{
         Connection c = db.getConnection();
         
         PreparedStatement query = c.prepareStatement("SELECT * FROM "+tableName);
@@ -40,10 +41,15 @@ public abstract class AbstractDAO<T> implements DAO<T>{
         c.close();
         
         return ts;
+        }catch(Exception e){
+            printError(e);
+            return null;
+        }
     }
 
     @Override
-    public boolean add(T t) throws Exception{
+    public boolean add(T t){
+        try{
         Connection c = db.getConnection();
         
         List<Object> decomposed = decompose(t);
@@ -60,6 +66,11 @@ public abstract class AbstractDAO<T> implements DAO<T>{
         c.close();
         
         return createdAmount > 0;
+        
+        }catch(Exception e){
+            printError(e);
+            return false;
+        }
     }
     
     protected abstract T createFromResultSet(ResultSet rs) throws Exception;
@@ -101,6 +112,10 @@ public abstract class AbstractDAO<T> implements DAO<T>{
         }
         
         return b.toString()+"?";
+    }
+    
+    private void printError(Exception e){
+        
     }
     
 }

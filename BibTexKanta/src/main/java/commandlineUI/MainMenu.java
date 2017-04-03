@@ -20,7 +20,6 @@ public class MainMenu {
     
     public void loop() {
         String command;
-        boolean responseValid;
         boolean again = true;
         
         while (again) {

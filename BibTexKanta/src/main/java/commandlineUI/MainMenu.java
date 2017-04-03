@@ -15,7 +15,7 @@ public class MainMenu {
         this.db = db;
         this.options[0] = "Päävalikko:\n";
         this.options[1] = "1 Lisää kirja viiteluetteloon";
-        this.options[2] = "q Lopeta ohjelma";
+        this.options[2] = "Q Lopeta ohjelma";
     }
     
     public void loop() {
@@ -45,6 +45,9 @@ public class MainMenu {
     }
     
     public void openMainMenu() {
+
+        io.print("\nLähdeviitehallintaohjelma by Team-KHEKS.");
+        io.print("\nTERVETULOA!");
         loop();
     }
     

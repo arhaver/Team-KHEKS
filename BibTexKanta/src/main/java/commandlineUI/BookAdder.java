@@ -1,117 +1,191 @@
 package commandlineUI;
 
 import database.Database;
-import java.util.Scanner;
+import database.BookDAO;
 import reference.BookRef;
+import io.IO;
+import io.ConsoleIO;
 
 public class BookAdder {
 
-    private BookRef book;
-    private Scanner reader;
-    private boolean titleOK = false;
-    private boolean authorOK = false;
-    private boolean yearOK = false;
-    private boolean publisherOK = false;
-    private final String authorNext = "N";
-    private final String publisherNext = "P";
-    private final String yearNext = "Y";
-    private final String titleNext = "T";
-    private final String quitNext = "Q";
-    private final String readyNext = "R";
+    private final IO io;
+    private final Database db;
+    private final int CURRENT_YEAR = 2017;
+    private String authors;
+    private String publisher;
+    private String address;
+    private int year;
+    private String title;
+    private final String[] options = new String[10];
 
-    public BookAdder() {
-        this.book = null;
+    public BookAdder(Database db) {
+        this.io = new ConsoleIO();
+        this.db = db;
+        this.options[0] = "Kirjaviitteen lisääminen:\n";
+        this.options[1] = "1 Teoksen nimi";
+        this.options[2] = "2 Kirjoittaja(t)";
+        this.options[3] = "3 Julkaisuvuosi";
+        this.options[4] = "4 Kustantaja";
+        this.options[5] = "5 Kustantajan osoite";
+        this.options[6] = "6 Näytä syötetyt tiedot";
+        this.options[7] = "7 Tallenna ja lopeta";
+        this.options[8] = "8 Listaa vaihtoehdot";
+        this.options[9] = "9 Lopeta tallentamatta";
     }
 
-    public void addBookToDB(Database db) {
-        System.out.println("Kirjaviitteen syöttäminen.");
-        reader = new Scanner(System.in);
-        addDetails();
-        if (titleOK && authorOK && yearOK && publisherOK) {
-            //valmis! Tallenna olio tietokantaan!
-        } else {
-            if (!titleOK) {
-                System.out.println("Teoksen nimi välttämätön!");
-            }
-            if (!authorOK) {
-                System.out.println("Tekijän nimi puuttuu!");
-            }
-            if (!publisherOK) {
-                System.out.println("Julkaisija puuttuu!");
-            }
-            if (!yearOK) {
-                System.out.println("Julkaisuvuosi puuttuu!");
-            }
-            addDetails();
-        }
+    public void loop() {
 
-    }
+        String response, command;
+        boolean responseValid;
+        boolean again = true;
+        listOptions();
 
-    private boolean addDetails() {
-        String response = reader.nextLine();
-        while (!(response.matches("X") || response.matches("Q"))) {
-            switch (response) {
-                case titleNext:
-                    titleOK = addTitle();
-                case authorNext:
-                    authorOK = addAuthor();
-                case yearNext:
-                    yearOK = addYear();
-                case publisherNext:
-                    publisherOK = addPublisher();
-                case quitNext:
-                    return false;
-                default:
+        while (again) {
+
+            command = io.readLine("\nValitse toiminto (1-9)");
+
+            switch (command) {
+                case "1":
+                    response = addTitle();
+                    responseValid = isValidString(response);
+                    if (responseValid) {
+                        this.title = response;
+                    }
+                    userFeedback(response, responseValid);
+                    break;
+
+                case "2":
+                    response = addAuthor();
+                    responseValid = isValidString(response);
+                    if (responseValid) {
+                        this.authors = response;
+                    }
+                    userFeedback(response, responseValid);
+                    break;
+
+                case "3":
+                    int y = addYear();
+                    responseValid = isValidYear(y);
+                    if (responseValid) {
+                        this.year = y;
+                    }
+                    userFeedback(Integer.toString(y), responseValid);
+                    break;
+
+                case "4":
+                    response = addPublisher();
+                    responseValid = isValidString(response);
+                    if (responseValid) {
+                        this.publisher = response;
+                    }
+                    userFeedback(publisher, responseValid);
+                    break;
+
+                case "5":
+                    response = addAddress();
+                    responseValid = isValidString(response);
+                    if (responseValid) {
+                        this.address = response;
+                    }
+                    userFeedback(publisher, responseValid);
+                    break;
+
+                case "6":
+                    if (this.title != null)
+                        io.print("Nimi: " + this.title);
+                    if (this.authors != null) 
+                        io.print("Tekijä(t): " + this.authors);
+                    if (this.year > 0)
+                        io.print("Julkaisuvuosi: " + this.year);                    
+                    if (this.publisher != null)
+                        io.print("Kustantaja: " + this.publisher);
+                    if (this.address != null)
+                        io.print("Kustantajan osoite:" + this.address);
+                    break;
+
+                case "7":
+                    try {
+                        BookRef book = new BookRef(authors, title, publisher, Integer.toString(year), address);
+                        BookDAO bd = new BookDAO(db);
+                        bd.add(book);
+                        again = false;
+                        io.print("Viite lisätty onnistuneesti\n");
+                    } catch (Exception e) {
+                        io.print("Tallennus epäonnistui\n");
+                        io.print(e.getMessage());
+
+                    }
+                    break;
+
+                case "8":
                     listOptions();
+                    break;
+
+                case "9":
+                    again = false;
+                    break;
+
+                case "q":
+                    again = false;
+                    break;
+
+                default:
+                    break;
             }
+
         }
-        return true;
     }
 
-    private boolean addTitle() {
-        String title = reader.nextLine();
-        if (true) {
-            this.book.setTitle(title);
-            return true;
-        }
-        return false;
+    public void addBookToDB() {
+        loop();
 
     }
 
-    private boolean addAuthor() {
-        String author = reader.nextLine();
-        if (true) {
-            return true;
-        }
-        return false;
+    private void userFeedback(String input, boolean success) {
 
+        if (!success)
+            io.print("Lisäys '" + input + "' virheellinen\n");
     }
 
-    private boolean addYear() {
-        int year = Integer.getInteger(reader.nextLine());
-        if (true) {
-            return true;
-        }
-        return false;
-
+    private String addTitle() {
+        return io.readLine("Anna teoksen nimi:");
     }
 
-    private boolean addPublisher() {
-        String publisher = reader.nextLine();
-        if (true) {
-            return true;
-        }
-        return false;
+    private String addAuthor() {
+        return io.readLine("Anna tekijä(t):");
+    }
 
+    private int addYear() {
+        return io.readInt("Anna julkaisuvuosi:");
+    }
+
+    private String addPublisher() {
+        return io.readLine("Anna julkaisija:");
+    }
+
+    private String addAddress() {
+        return io.readLine("Anna julkaisijan osoite:");
     }
 
     private void listOptions() {
-        System.out.println("Paina " + titleNext + " ja enter, jos haluat syöttää kirjan nimen.");
-        System.out.println("Paina " + authorNext + " ja enter, jos haluat syöttää tekijän nimen.");
-        System.out.println("Paina " + yearNext + " ja enter, jos haluat syöttää kirjan julkaisuvuoden.");
-        System.out.println("Paina " + publisherNext + " ja enter, jos haluat syöttää kirjan kustantajan.");
-        System.out.println("Paina " + readyNext + " ja enter, jos syöttö on valmis");
-        System.out.println("Paina " + quitNext + " ja enter, jos haluat keskeyttää viitetiedon syöttämisen");
+        io.print("");
+        for (int a = 0; a < this.options.length; a++) {
+            io.print(options[a]);
+        }        
     }
 
+    private boolean isValidYear(int year) {
+        if (0 < year && year <= CURRENT_YEAR) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isValidString(String input) {
+
+        if (input.length() > 2) {
+            return true;
+        }
+        return false;
+    }
 }

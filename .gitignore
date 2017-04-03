@@ -1,4 +1,4 @@
 **/build
 *.tmp
 /BibTexKanta/.nb-gradle/
-/.gradle
+**/.gradle

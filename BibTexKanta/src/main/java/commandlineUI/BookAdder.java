@@ -4,33 +4,45 @@ import database.Database;
 import database.BookDAO;
 import reference.BookRef;
 import io.IO;
-import io.ConsoleIO;
 
-public class BookAdder {
+public class BookAdder extends AbstractAdder {
 
-    private final IO io;
-    private final Database db;
-    private final int CURRENT_YEAR = 2017;
     private String authors;
     private String publisher;
     private String address;
     private int year;
     private String title;
-    private final String[] options = new String[10];
 
-    public BookAdder(Database db) {
-        this.io = new ConsoleIO();
-        this.db = db;
-        this.options[0] = "Kirjaviitteen lisääminen:\n";
-        this.options[1] = "1 Teoksen nimi";
-        this.options[2] = "2 Kirjoittaja(t)";
-        this.options[3] = "3 Julkaisuvuosi";
-        this.options[4] = "4 Kustantaja";
-        this.options[5] = "5 Kustantajan osoite";
-        this.options[6] = "6 Näytä syötetyt tiedot";
-        this.options[7] = "7 Tallenna ja lopeta";
-        this.options[8] = "8 Listaa vaihtoehdot";
-        this.options[9] = "9 Lopeta tallentamatta";
+    public BookAdder(Database db, IO io) {
+
+        super(db, io);
+
+        String[] options = new String[10];
+        options[0] = "Kirjaviitteen lisääminen:\n";
+        options[1] = "1 Teoksen nimi";
+        options[2] = "2 Kirjoittaja(t)";
+        options[3] = "3 Julkaisuvuosi";
+        options[4] = "4 Kustantaja";
+        options[5] = "5 Kustantajan osoite";
+        options[6] = "6 Näytä syötetyt tiedot";
+        options[7] = "7 Tallenna ja lopeta";
+        options[8] = "8 Listaa vaihtoehdot";
+        options[9] = "9 Lopeta tallentamatta";
+
+        super.setOptions(options);
+
+    }
+
+    public void addBookToDB() {
+        loop();
+    }
+        
+    protected String addPublisher() {
+        return io.readLine("Anna julkaisija:");
+    }
+
+    protected String addAddress() {
+        return io.readLine("Anna julkaisijan osoite:");
     }
 
     public void loop() {
@@ -38,16 +50,20 @@ public class BookAdder {
         String response, command;
         boolean responseValid;
         boolean again = true;
-        listOptions();
+        this.listOptions();
 
         while (again) {
 
-            command = io.readLine("\nValitse toiminto (1-9)");
+            command = io.readLine("Valitse toiminto (1-9)");
+
+            if (command.isEmpty()) {
+                listOptions();
+            }
 
             switch (command) {
                 case "1":
                     response = addTitle();
-                    responseValid = isValidString(response);
+                    responseValid = this.isValidString(response);
                     if (responseValid) {
                         this.title = response;
                     }
@@ -78,7 +94,7 @@ public class BookAdder {
                     if (responseValid) {
                         this.publisher = response;
                     }
-                    userFeedback(publisher, responseValid);
+                    userFeedback(response, responseValid);
                     break;
 
                 case "5":
@@ -87,20 +103,25 @@ public class BookAdder {
                     if (responseValid) {
                         this.address = response;
                     }
-                    userFeedback(publisher, responseValid);
+                    userFeedback(response, responseValid);
                     break;
 
                 case "6":
-                    if (this.title != null)
+                    if (this.title != null) {
                         io.print("Nimi: " + this.title);
-                    if (this.authors != null) 
+                    }
+                    if (this.authors != null) {
                         io.print("Tekijä(t): " + this.authors);
-                    if (this.year > 0)
-                        io.print("Julkaisuvuosi: " + this.year);                    
-                    if (this.publisher != null)
+                    }
+                    if (this.year > 0) {
+                        io.print("Julkaisuvuosi: " + this.year);
+                    }
+                    if (this.publisher != null) {
                         io.print("Kustantaja: " + this.publisher);
-                    if (this.address != null)
+                    }
+                    if (this.address != null) {
                         io.print("Kustantajan osoite:" + this.address);
+                    }
                     break;
 
                 case "7":
@@ -125,67 +146,10 @@ public class BookAdder {
                     again = false;
                     break;
 
-                case "q":
-                    again = false;
-                    break;
-
                 default:
                     break;
             }
 
         }
-    }
-
-    public void addBookToDB() {
-        loop();
-
-    }
-
-    private void userFeedback(String input, boolean success) {
-
-        if (!success)
-            io.print("Lisäys '" + input + "' virheellinen\n");
-    }
-
-    private String addTitle() {
-        return io.readLine("Anna teoksen nimi:");
-    }
-
-    private String addAuthor() {
-        return io.readLine("Anna tekijä(t):");
-    }
-
-    private int addYear() {
-        return io.readInt("Anna julkaisuvuosi:");
-    }
-
-    private String addPublisher() {
-        return io.readLine("Anna julkaisija:");
-    }
-
-    private String addAddress() {
-        return io.readLine("Anna julkaisijan osoite:");
-    }
-
-    private void listOptions() {
-        io.print("");
-        for (int a = 0; a < this.options.length; a++) {
-            io.print(options[a]);
-        }        
-    }
-
-    private boolean isValidYear(int year) {
-        if (0 < year && year <= CURRENT_YEAR) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isValidString(String input) {
-
-        if (input.length() > 2) {
-            return true;
-        }
-        return false;
     }
 }

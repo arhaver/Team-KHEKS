@@ -29,7 +29,7 @@ public class MainMenu {
             
             switch (command) {
                 case "1":
-                    BookAdder newbook = new BookAdder(db);
+                    BookAdder newbook = new BookAdder(db, io);
                     newbook.addBookToDB();
                     break;
                     

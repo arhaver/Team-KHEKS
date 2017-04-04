@@ -1,3 +1,6 @@
 language: java
 
 before_script: cd BibTexKanta
+
+after_success:
+- ./gradlew jacocoTestReport coveralls

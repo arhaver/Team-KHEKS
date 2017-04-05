@@ -40,6 +40,9 @@ public class MainMenu {
                 case "Q":
                     again = false;
                     break;
+                
+                default:
+                    break;
             }
         }
     }

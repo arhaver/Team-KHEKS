@@ -54,7 +54,7 @@ public abstract class AbstractAdder {
 
     protected boolean isValidString(String input) {
 
-        if (input.length() > 2) {
+        if (input != null && input.length() > 2) {
             return true;
         }
         return false;

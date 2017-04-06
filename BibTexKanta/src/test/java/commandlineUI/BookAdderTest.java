@@ -62,7 +62,7 @@ public class BookAdderTest {
     public void tooShortTitleCannotBeAdded() {
         lines.add("1");
         lines.add("K");
-        lines.add("7");
+        lines.add("9");
         StubIO io = new StubIO(lines);
         io.setTestString("Lisäys 'K' virheellinen\n");
         BookAdder ba = new BookAdder(db, io);
@@ -74,7 +74,7 @@ public class BookAdderTest {
     public void negativeYearCannotBeAdded() {
         lines.add("3");
         lines.add("-1");
-        lines.add("7");
+        lines.add("9");
         StubIO io = new StubIO(lines);
         io.setTestString("Lisäys '-1' virheellinen\n");
         BookAdder ba = new BookAdder(db, io);
@@ -86,7 +86,7 @@ public class BookAdderTest {
     public void tooShortAuthorNameCannotBeAdded() {
         lines.add("2");
         lines.add("A");
-        lines.add("7");
+        lines.add("9");
         StubIO io = new StubIO(lines);
         io.setTestString("Lisäys 'A' virheellinen\n");
         BookAdder ba = new BookAdder(db, io);
@@ -98,7 +98,7 @@ public class BookAdderTest {
     public void tooShortPublisherCannotBeAdded() {
         lines.add("4");
         lines.add("P");
-        lines.add("7");
+        lines.add("9");
         StubIO io = new StubIO(lines);
         io.setTestString("Lisäys 'P' virheellinen\n");
         BookAdder ba = new BookAdder(db, io);
@@ -110,9 +110,33 @@ public class BookAdderTest {
     public void tooShortPublisherAddressCannotBeAdded() {
         lines.add("5");
         lines.add("A");
-        lines.add("7");
+        lines.add("9");
         StubIO io = new StubIO(lines);
         io.setTestString("Lisäys 'A' virheellinen\n");
+        BookAdder ba = new BookAdder(db, io);
+        ba.addBookToDB();
+        assertEquals(true, io.testHasBeenPrinted());
+    }
+
+    @Test
+    public void emptyBookReferenceCannotBeAdded() {
+        lines.add("7");
+        lines.add("9");
+        StubIO io = new StubIO(lines);
+        io.setTestString("Tallennus epäonnistui\n");
+        BookAdder ba = new BookAdder(db, io);
+        ba.addBookToDB();
+        assertEquals(true, io.testHasBeenPrinted());
+    }
+
+    @Test
+    public void userCanCheckTitleHasBeenAdded() {
+        lines.add("1");
+        lines.add("EkaNimi");
+        lines.add("6");
+        lines.add("9");
+        StubIO io = new StubIO(lines);
+        io.setTestString("Nimi: EkaNimi");
         BookAdder ba = new BookAdder(db, io);
         ba.addBookToDB();
         assertEquals(true, io.testHasBeenPrinted());

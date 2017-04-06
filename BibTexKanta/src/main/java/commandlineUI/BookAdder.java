@@ -2,10 +2,11 @@ package commandlineUI;
 
 import database.Database;
 import database.BookDAO;
+import database.DAO;
 import reference.BookRef;
 import io.IO;
 
-public class BookAdder extends AbstractAdder {
+public class BookAdder extends AbstractAdder<BookRef> {
 
     private String authors;
     private String publisher;
@@ -13,9 +14,9 @@ public class BookAdder extends AbstractAdder {
     private int year;
     private String title;
 
-    public BookAdder(Database db, IO io) {
+    public BookAdder(DAO<BookRef> bookDao, IO io) {
 
-        super(db, io);
+        super(bookDao, io);
 
         options = new String[10];
         options[0] = "Kirjaviitteen lisääminen:\n";
@@ -54,8 +55,7 @@ public class BookAdder extends AbstractAdder {
 
         try {
             BookRef book = new BookRef(authors, title, publisher, Integer.toString(year), address);
-            BookDAO bd = new BookDAO(db);
-            bd.add(book);
+            dao.add(book);
             io.print("Viite lisätty onnistuneesti\n");
             return false;
         } catch (Exception e) {
@@ -92,10 +92,10 @@ public class BookAdder extends AbstractAdder {
         String response, command;
         boolean responseValid;
         boolean again = true;
-        this.listOptions();
 
         while (again) {
 
+            this.listOptions();
             command = io.readLine("Valitse toiminto (1-9)");
 
             if (command.isEmpty()) {

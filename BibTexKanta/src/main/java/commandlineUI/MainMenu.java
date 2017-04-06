@@ -1,18 +1,20 @@
 package commandlineUI;
 
+import database.DAO;
 import database.Database;
 import io.IO;
 import io.ConsoleIO;
+import reference.BookRef;
 
 public class MainMenu {
     
     private final IO io;
-    private final Database db;
+    private final DAO<BookRef> bookDAO;
     private final String[] options = new String[3];
     
-    public MainMenu(Database db) {
+    public MainMenu(DAO<BookRef> dao) {
         this.io = new ConsoleIO();
-        this.db = db;
+        this.bookDAO = dao;
         this.options[0] = "Päävalikko:\n";
         this.options[1] = "1 Lisää kirja viiteluetteloon";
         this.options[2] = "Q Lopeta ohjelma";
@@ -29,7 +31,7 @@ public class MainMenu {
             
             switch (command) {
                 case "1":
-                    BookAdder newbook = new BookAdder(db, io);
+                    BookAdder newbook = new BookAdder(bookDAO, io);
                     newbook.addBookToDB();
                     break;
                     
@@ -40,6 +42,8 @@ public class MainMenu {
                 case "Q":
                     again = false;
                     break;
+                default:
+                    io.print("Virheellinen komento");
             }
         }
     }

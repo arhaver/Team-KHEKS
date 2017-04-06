@@ -1,5 +1,6 @@
 package commandlineUI;
 
+import database.DAO;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -8,7 +9,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import io.StubIO;
 import database.Database;
+import database.InMemoryDAO;
 import java.util.ArrayList;
+import reference.BookRef;
 
 /**
  *
@@ -17,7 +20,9 @@ import java.util.ArrayList;
 public class BookAdderTest {
 
     ArrayList<String> lines;
-    Database db;
+    DAO<BookRef> bookDAO;
+    StubIO io;
+    BookAdder bookAdder;
 
     public BookAdderTest() {
     }
@@ -33,7 +38,9 @@ public class BookAdderTest {
     @Before
     public void setUp() {
         lines = new ArrayList<>();
-        db = new Database("SD");
+        bookDAO = new InMemoryDAO<>();
+        io = new StubIO(lines);
+        bookAdder = new BookAdder(bookDAO, io);
     }
 
     @After
@@ -52,9 +59,7 @@ public class BookAdderTest {
         lines.add("Otava");
         lines.add("7");
 
-        StubIO io = new StubIO(lines);
-        BookAdder ba = new BookAdder(db, io);
-        ba.addBookToDB();
+        bookAdder.addBookToDB();
         assertEquals("Viite lisätty onnistuneesti\n", io.getLastPrint());
     }
 
@@ -63,10 +68,10 @@ public class BookAdderTest {
         lines.add("1");
         lines.add("K");
         lines.add("9");
-        StubIO io = new StubIO(lines);
+        
         io.setTestString("Lisäys 'K' virheellinen\n");
-        BookAdder ba = new BookAdder(db, io);
-        ba.addBookToDB();
+        
+        bookAdder.addBookToDB();
         assertEquals(true, io.testHasBeenPrinted());
     }
 
@@ -75,10 +80,10 @@ public class BookAdderTest {
         lines.add("3");
         lines.add("-1");
         lines.add("9");
-        StubIO io = new StubIO(lines);
+        
         io.setTestString("Lisäys '-1' virheellinen\n");
-        BookAdder ba = new BookAdder(db, io);
-        ba.addBookToDB();
+        
+        bookAdder.addBookToDB();
         assertEquals(true, io.testHasBeenPrinted());
     }
 
@@ -87,10 +92,10 @@ public class BookAdderTest {
         lines.add("2");
         lines.add("A");
         lines.add("9");
-        StubIO io = new StubIO(lines);
+        
         io.setTestString("Lisäys 'A' virheellinen\n");
-        BookAdder ba = new BookAdder(db, io);
-        ba.addBookToDB();
+        
+        bookAdder.addBookToDB();
         assertEquals(true, io.testHasBeenPrinted());
     }
 
@@ -99,10 +104,10 @@ public class BookAdderTest {
         lines.add("4");
         lines.add("P");
         lines.add("9");
-        StubIO io = new StubIO(lines);
+        
         io.setTestString("Lisäys 'P' virheellinen\n");
-        BookAdder ba = new BookAdder(db, io);
-        ba.addBookToDB();
+        
+        bookAdder.addBookToDB();
         assertEquals(true, io.testHasBeenPrinted());
     }
 
@@ -111,10 +116,10 @@ public class BookAdderTest {
         lines.add("5");
         lines.add("A");
         lines.add("9");
-        StubIO io = new StubIO(lines);
+        
         io.setTestString("Lisäys 'A' virheellinen\n");
-        BookAdder ba = new BookAdder(db, io);
-        ba.addBookToDB();
+        
+        bookAdder.addBookToDB();
         assertEquals(true, io.testHasBeenPrinted());
     }
 
@@ -122,10 +127,10 @@ public class BookAdderTest {
     public void emptyBookReferenceCannotBeAdded() {
         lines.add("7");
         lines.add("9");
-        StubIO io = new StubIO(lines);
+        
         io.setTestString("Tallennus epäonnistui\n");
-        BookAdder ba = new BookAdder(db, io);
-        ba.addBookToDB();
+        
+        bookAdder.addBookToDB();
         assertEquals(true, io.testHasBeenPrinted());
     }
 
@@ -135,10 +140,10 @@ public class BookAdderTest {
         lines.add("EkaNimi");
         lines.add("6");
         lines.add("9");
-        StubIO io = new StubIO(lines);
+        
         io.setTestString("Nimi: EkaNimi");
-        BookAdder ba = new BookAdder(db, io);
-        ba.addBookToDB();
+        
+        bookAdder.addBookToDB();
         assertEquals(true, io.testHasBeenPrinted());
     }
 }

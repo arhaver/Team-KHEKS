@@ -1,6 +1,5 @@
 import io.ConsoleIO;
 import commandlineUI.MainMenu;
-import database.Database;
 import database.InMemoryDAO;
 import reference.BookRef;
 

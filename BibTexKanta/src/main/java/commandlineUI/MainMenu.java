@@ -10,8 +10,8 @@ public class MainMenu {
     private final Database db;
     private final String[] options = new String[3];
     
-    public MainMenu(Database db) {
-        this.io = new ConsoleIO();
+    public MainMenu(Database db, IO io) {
+        this.io = io;
         this.db = db;
         this.options[0] = "Päävalikko:\n";
         this.options[1] = "1 Lisää kirja viiteluetteloon";

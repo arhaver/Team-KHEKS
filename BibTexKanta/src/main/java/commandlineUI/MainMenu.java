@@ -12,8 +12,8 @@ public class MainMenu {
     private final DAO<BookRef> bookDAO;
     private final String[] options = new String[3];
     
-    public MainMenu(DAO<BookRef> dao) {
-        this.io = new ConsoleIO();
+    public MainMenu(DAO<BookRef> dao, IO io) {
+        this.io = io;
         this.bookDAO = dao;
         this.options[0] = "Päävalikko:\n";
         this.options[1] = "1 Lisää kirja viiteluetteloon";

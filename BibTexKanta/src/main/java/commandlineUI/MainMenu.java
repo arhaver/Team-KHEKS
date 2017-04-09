@@ -8,14 +8,17 @@ public class MainMenu {
     
     private final IO io;
     private final DAO<BookRef> bookDAO;
-    private final String[] options = new String[3];
+    private final String[] options = new String[6];
     
     public MainMenu(DAO<BookRef> dao, IO io) {
         this.io = io;
         this.bookDAO = dao;
         this.options[0] = "Päävalikko:\n";
         this.options[1] = "1 Lisää kirja viiteluetteloon";
-        this.options[2] = "Q Lopeta ohjelma";
+        this.options[2] = "2 Lisää artikkeli viiteluetteloon";
+        this.options[3] = "3 Listaa viitteet luettavassa muodossa";
+        this.options[4] = "4 Listaa viitteet BibTeX-muodossa";
+        this.options[options.length - 1] = "Q Lopeta ohjelma";
     }
     
     public void loop() {
@@ -32,7 +35,18 @@ public class MainMenu {
                     BookAdder newbook = new BookAdder(bookDAO, io);
                     newbook.addBookToDB();
                     break;
+/**                    
+                case "2":
+                    ArticleAdder newarticle = new ArticleAdder(articleDAO, io);
+                    newarticle.addArticleToDB();
+                    break;
                     
+                case "3":
+                    break;
+                    
+                case "4":
+                    break;
+**/                    
                 case "q":
                     again = false;
                     break;
@@ -42,7 +56,7 @@ public class MainMenu {
                     break;
                     
                 default:
-                    io.print("Virheellinen komento");
+                    io.print("\nVirheellinen komento");
             }
         }
     }
@@ -56,8 +70,8 @@ public class MainMenu {
     
     private void listOptions() {
         io.print("");
-        for (int a = 0; a < this.options.length; a++) {
-            io.print(options[a]);
+        for (String option : this.options) {
+            io.print(option);
         }        
     }
 }

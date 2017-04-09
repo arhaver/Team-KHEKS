@@ -1,19 +1,7 @@
-# language: en
-# Source: http://github.com/aslakhellesoy/cucumber/blob/master/examples/i18n/en/features/addition.feature
-# Updated: Tue May 25 15:51:43 +0200 2010
-Feature: Addition
-  In order to avoid silly mistakes
-  As a math idiot
-  I want to be told the sum of two numbers
+Feature: As a user I want to be able to add new book reference
 
-  Scenario Outline: Add two numbers
-    Given I have entered <input_1> into the calculator
-    And I have entered <input_2> into the calculator
-    When I press <button>
-    Then the result should be <output> on the screen
+  Scenario: add book reference
+    Given BibTextKanta is running
+    When User adds valid book reference
+    Then book will be added
 
-    Examples: 
-      | input_1 | input_2 | button | output |
-      | 20      | 30      | add    | 50     |
-      | 2       | 5       | add    | 7      |
-      | 0       | 40      | add    | 40     |

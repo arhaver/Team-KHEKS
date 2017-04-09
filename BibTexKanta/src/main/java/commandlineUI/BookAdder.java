@@ -2,10 +2,11 @@ package commandlineUI;
 
 import database.Database;
 import database.BookDAO;
+import database.DAO;
 import reference.BookRef;
 import io.IO;
 
-public class BookAdder extends AbstractAdder {
+public class BookAdder extends AbstractAdder<BookRef> {
 
     private String authors;
     private String publisher;
@@ -13,11 +14,11 @@ public class BookAdder extends AbstractAdder {
     private int year;
     private String title;
 
-    public BookAdder(Database db, IO io) {
+    public BookAdder(DAO<BookRef> bookDao, IO io) {
 
-        super(db, io);
+        super(bookDao, io);
 
-        String[] options = new String[10];
+        options = new String[10];
         options[0] = "Kirjaviitteen lisääminen:\n";
         options[1] = "1 Teoksen nimi";
         options[2] = "2 Kirjoittaja(t)";
@@ -36,7 +37,7 @@ public class BookAdder extends AbstractAdder {
     public void addBookToDB() {
         loop();
     }
-        
+
     protected String addPublisher() {
         return io.readLine("Anna julkaisija:");
     }
@@ -45,15 +46,56 @@ public class BookAdder extends AbstractAdder {
         return io.readLine("Anna julkaisijan osoite:");
     }
 
+    protected boolean saveBookToDatabase() {
+        // Palauttaa true jos tallennus ei onnistu
+        if (!bookReadyForDb()) {
+            io.print("Tallennus epäonnistui\n");
+            return true; // HUOM!!
+        }
+
+        try {
+            BookRef book = new BookRef(authors, title, publisher, Integer.toString(year), address);
+            dao.add(book);
+            io.print("Viite lisätty onnistuneesti\n");
+            return false;
+        } catch (Exception e) {
+            io.print(e.getMessage());
+            return true;
+
+        }
+    }
+
+    protected void printBookStatus() {
+        if (this.title != null) {
+            io.print("Nimi: " + this.title);
+        }
+        if (this.authors != null) {
+            io.print("Tekijä(t): " + this.authors);
+        }
+        if (this.year > 0) {
+            io.print("Julkaisuvuosi: " + this.year);
+        }
+        if (this.publisher != null) {
+            io.print("Kustantaja: " + this.publisher);
+        }
+        if (this.address != null) {
+            io.print("Kustantajan osoite:" + this.address);
+        }
+    }
+
+    private boolean bookReadyForDb() {
+        return (isValidString(authors) && isValidString(title) && isValidYear(year) && isValidString(publisher));
+    }
+
     public void loop() {
 
         String response, command;
         boolean responseValid;
         boolean again = true;
-        this.listOptions();
 
         while (again) {
 
+            this.listOptions();
             command = io.readLine("Valitse toiminto (1-9)");
 
             if (command.isEmpty()) {
@@ -107,35 +149,11 @@ public class BookAdder extends AbstractAdder {
                     break;
 
                 case "6":
-                    if (this.title != null) {
-                        io.print("Nimi: " + this.title);
-                    }
-                    if (this.authors != null) {
-                        io.print("Tekijä(t): " + this.authors);
-                    }
-                    if (this.year > 0) {
-                        io.print("Julkaisuvuosi: " + this.year);
-                    }
-                    if (this.publisher != null) {
-                        io.print("Kustantaja: " + this.publisher);
-                    }
-                    if (this.address != null) {
-                        io.print("Kustantajan osoite:" + this.address);
-                    }
+                    printBookStatus();
                     break;
 
                 case "7":
-                    try {
-                        BookRef book = new BookRef(authors, title, publisher, Integer.toString(year), address);
-                        BookDAO bd = new BookDAO(db);
-                        bd.add(book);
-                        again = false;
-                        io.print("Viite lisätty onnistuneesti\n");
-                    } catch (Exception e) {
-                        io.print("Tallennus epäonnistui\n");
-                        io.print(e.getMessage());
-
-                    }
+                    again = saveBookToDatabase();
                     break;
 
                 case "8":

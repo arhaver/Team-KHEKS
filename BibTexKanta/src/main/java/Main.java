@@ -1,13 +1,14 @@
-
+import io.ConsoleIO;
 import commandlineUI.MainMenu;
-import database.Database;
+import database.InMemoryDAO;
+import reference.BookRef;
 
 public class Main {    
       
     public static void main(String[] args){
-        
-        Database db = new Database("SD");
-        MainMenu mm = new MainMenu(db);
+        InMemoryDAO<BookRef> bookDAO = new InMemoryDAO<>();
+        ConsoleIO io = new ConsoleIO();
+        MainMenu mm = new MainMenu(bookDAO, io);
         mm.openMainMenu();        
     }
 }

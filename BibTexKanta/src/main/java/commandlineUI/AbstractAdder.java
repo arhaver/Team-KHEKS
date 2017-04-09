@@ -1,17 +1,20 @@
 package commandlineUI;
 
+import database.BookDAO;
+import database.DAO;
 import io.IO;
 import database.Database;
+import reference.BookRef;
 
-public abstract class AbstractAdder {
+public abstract class AbstractAdder<T> {
     
     protected final int CURRENT_YEAR = 2017;
-    protected Database db;
+    protected DAO dao;
     protected IO io;
     protected String[] options;
 
-    public AbstractAdder(Database db, IO io) {
-        this.db = db;
+    public AbstractAdder(DAO<T> dao, IO io) {
+        this.dao = dao;
         this.io = io;
     }
     
@@ -54,7 +57,7 @@ public abstract class AbstractAdder {
 
     protected boolean isValidString(String input) {
 
-        if (input.length() > 2) {
+        if (input != null && input.length() > 2) {
             return true;
         }
         return false;

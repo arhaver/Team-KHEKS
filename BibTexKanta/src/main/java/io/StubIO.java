@@ -5,54 +5,39 @@ import java.util.List;
 
 public class StubIO implements IO {
 
-    private List<String> lines;
+    private List<String> linesToPrint;
     private int i;
-    private ArrayList<String> prints;
-    private String print;
-    private String testString;
-    private boolean testStringPrinted;
+    private ArrayList<String> printedLines;
 
-    public StubIO(List<String> values) {
-        this.lines = values;
-        prints = new ArrayList<>();
-        testStringPrinted = false;
-        this.testString = "";
-    }
-    
-    public void setTestString(String testString) {
-        this.testString = testString;
-    }
-    
-    public boolean testHasBeenPrinted() {
-        if (testStringPrinted)
-            return true;
-        return false;
+    public StubIO(List<String> lines) {
+        this.linesToPrint = lines;
+        printedLines = new ArrayList<>();
     }
 
+    @Override
     public void print(String toPrint) {
-        prints.add(toPrint);
-        print = toPrint;
-        if (toPrint.matches(testString))
-            testStringPrinted = true;
+        printedLines.add(toPrint);
     }
 
+    @Override
     public int readInt(String prompt) {
         print(prompt);
-        return Integer.parseInt(lines.get(i++));
+        return Integer.parseInt(linesToPrint.get(i++));
     }
 
-    public ArrayList<String> getPrints() {
-        return prints;
+    public List<String> getPrintedLines() {
+        return printedLines;
     }
 
     public String getLastPrint() {
-        return print;
+        return printedLines.get(printedLines.size()-1);
     }
 
+    @Override
     public String readLine(String prompt) {
         print(prompt);
-        if (i < lines.size()) {
-            return lines.get(i++);
+        if (i < linesToPrint.size()) {
+            return linesToPrint.get(i++);
         }
         return "";
     }

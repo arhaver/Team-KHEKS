@@ -25,7 +25,7 @@ public abstract class AbstractAdder<T> {
     protected void userFeedback(String input, boolean success) {
 
         if (!success) {
-            io.print("Lisäys '" + input + "' virheellinen\n");
+            io.print("Lisäys '" +input+ "' virheellinen\n");
         }
     }
 

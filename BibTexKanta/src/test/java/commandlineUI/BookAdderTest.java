@@ -69,10 +69,8 @@ public class BookAdderTest {
         lines.add("K");
         lines.add("9");
         
-        io.setTestString("Lisäys 'K' virheellinen\n");
-        
         bookAdder.addBookToDB();
-        assertEquals(true, io.testHasBeenPrinted());
+        assertEquals(true, io.getPrintedLines().contains("Lisäys 'K' virheellinen\n"));
     }
 
     @Test
@@ -81,10 +79,8 @@ public class BookAdderTest {
         lines.add("-1");
         lines.add("9");
         
-        io.setTestString("Lisäys '-1' virheellinen\n");
-        
         bookAdder.addBookToDB();
-        assertEquals(true, io.testHasBeenPrinted());
+        assertEquals(true, io.getPrintedLines().contains("Lisäys '-1' virheellinen\n"));
     }
 
     @Test
@@ -93,10 +89,8 @@ public class BookAdderTest {
         lines.add("A");
         lines.add("9");
         
-        io.setTestString("Lisäys 'A' virheellinen\n");
-        
         bookAdder.addBookToDB();
-        assertEquals(true, io.testHasBeenPrinted());
+        assertEquals(true, io.getPrintedLines().contains("Lisäys 'A' virheellinen\n"));
     }
 
     @Test
@@ -105,10 +99,8 @@ public class BookAdderTest {
         lines.add("P");
         lines.add("9");
         
-        io.setTestString("Lisäys 'P' virheellinen\n");
-        
         bookAdder.addBookToDB();
-        assertEquals(true, io.testHasBeenPrinted());
+        assertEquals(true, io.getPrintedLines().contains("Lisäys 'P' virheellinen\n"));
     }
 
     @Test
@@ -117,10 +109,8 @@ public class BookAdderTest {
         lines.add("A");
         lines.add("9");
         
-        io.setTestString("Lisäys 'A' virheellinen\n");
-        
         bookAdder.addBookToDB();
-        assertEquals(true, io.testHasBeenPrinted());
+        assertEquals(true, io.getPrintedLines().contains("Lisäys 'A' virheellinen\n"));
     }
 
     @Test
@@ -128,10 +118,8 @@ public class BookAdderTest {
         lines.add("7");
         lines.add("9");
         
-        io.setTestString("Tallennus epäonnistui\n");
-        
         bookAdder.addBookToDB();
-        assertEquals(true, io.testHasBeenPrinted());
+        assertEquals(true, io.getPrintedLines().contains("Tallennus epäonnistui\n"));
     }
 
     @Test
@@ -141,9 +129,7 @@ public class BookAdderTest {
         lines.add("6");
         lines.add("9");
         
-        io.setTestString("Nimi: EkaNimi");
-        
         bookAdder.addBookToDB();
-        assertEquals(true, io.testHasBeenPrinted());
+        assertEquals(true, io.getPrintedLines().contains("Nimi: EkaNimi"));
     }
 }

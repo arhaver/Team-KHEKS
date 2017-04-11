@@ -4,12 +4,14 @@ public class BookRef extends AbstractReference {
     
     private String publisher;
     private String address;
+    private static BookRef bookRef;
     
     public BookRef(String authors, String title, String publisher, String year, String address) {
         super(authors, title, year);
         
         this.publisher = publisher;
         this.address = address;
+        this.bookRef = this;
     }
 
     public String getPublisher() {
@@ -28,6 +30,9 @@ public class BookRef extends AbstractReference {
         this.address = address;
     }
     
+    public static BookRef getBookRef() {
+        return bookRef;
+    }
     
     
 }

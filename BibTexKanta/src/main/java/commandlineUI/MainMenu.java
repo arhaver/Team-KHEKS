@@ -35,18 +35,20 @@ public class MainMenu {
                     BookAdder newbook = new BookAdder(bookDAO, io);
                     newbook.addBookToDB();
                     break;
-/**                    
+/**
                 case "2":
                     ArticleAdder newarticle = new ArticleAdder(articleDAO, io);
                     newarticle.addArticleToDB();
                     break;
-                    
+
                 case "3":
                     break;
-                    
+**/
                 case "4":
+                    BibTexPrinter newbibprinter = new BibTexPrinter(io);
+                    newbibprinter.printLoop();
                     break;
-**/                    
+
                 case "q":
                     again = false;
                     break;

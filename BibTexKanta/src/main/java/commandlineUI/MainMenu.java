@@ -2,17 +2,17 @@ package commandlineUI;
 
 import database.DAO;
 import io.IO;
-import reference.BookRef;
+import reference.Reference;
 
 public class MainMenu {
     
     private final IO io;
-    private final DAO<BookRef> bookDAO;
+    private final DAO<Reference> dao;
     private final String[] options = new String[6];
     
-    public MainMenu(DAO<BookRef> dao, IO io) {
+    public MainMenu(DAO<Reference> dao, IO io) {
         this.io = io;
-        this.bookDAO = dao;
+        this.dao = dao;
         this.options[0] = "Päävalikko:\n";
         this.options[1] = "1 Lisää kirja viiteluetteloon";
         this.options[2] = "2 Lisää artikkeli viiteluetteloon";
@@ -32,15 +32,15 @@ public class MainMenu {
             
             switch (command) {
                 case "1":
-                    BookAdder newbook = new BookAdder(bookDAO, io);
+                    BookAdder newbook = new BookAdder(dao, io);
                     newbook.addBookToDB();
                     break;
-/**
+
                 case "2":
-                    ArticleAdder newarticle = new ArticleAdder(articleDAO, io);
+                    ArticleAdder newarticle = new ArticleAdder(dao, io);
                     newarticle.addArticleToDB();
                     break;
-
+/**
                 case "3":
                     break;
 **/

@@ -40,3 +40,9 @@ jacocoTestReport {
             html.enabled = true
     }
 }
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+        

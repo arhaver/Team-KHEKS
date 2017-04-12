@@ -42,6 +42,8 @@ public class MainMenu {
                     break;
 
                 case "3":
+                    PrintRef humanprint = new PrintRef(bookDAO, io);
+                    humanprint.printRef;
                     break;
 **/
                 case "4":

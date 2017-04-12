@@ -43,8 +43,8 @@ public class ArticleAdder extends AbstractAdder<Reference> {
         commands.put("11", new SaveToDbCommand(io));
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand(io));
-
-        super.setCommands(commands);
+        
+        commands.get("11").setDao(this.dao);
 
     }
 
@@ -54,9 +54,7 @@ public class ArticleAdder extends AbstractAdder<Reference> {
         boolean again = true;
         while (again) {
             this.listOptions();
-            command = io.readLine("Valitse toiminto (1-13)");
-            if (command.matches("11"))               
-                commands.get("11").setDao(this.dao);    
+            command = io.readLine("Valitse toiminto (1-13)"); 
             Command doNow = commands.getOrDefault(command, new NothingCommand(io));
             again = doNow.execute(ref);
         }

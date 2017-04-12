@@ -36,7 +36,7 @@ public class BookAdder extends AbstractAdder<Reference> {
         commands.put("8", new PrintStatusCommand(io));
         commands.put("9", new QuitCommand(io));
 
-        super.setCommands(commands);
+         commands.get("7").setDao(this.dao);  
 
     }
 
@@ -46,9 +46,7 @@ public class BookAdder extends AbstractAdder<Reference> {
         boolean again = true;
         while (again) {
             this.listOptions();
-            command = io.readLine("Valitse toiminto (1-9)");
-            if (command.matches("7"))               
-                commands.get("7").setDao(this.dao);    
+            command = io.readLine("Valitse toiminto (1-9)"); 
             Command doNow = commands.getOrDefault(command, new NothingCommand(io));
             again = doNow.execute(ref);
         }

@@ -11,7 +11,7 @@ import io.StubIO;
 import database.Database;
 import database.InMemoryDAO;
 import java.util.ArrayList;
-import reference.BookRef;
+import reference.Reference;
 
 /**
  *
@@ -20,7 +20,7 @@ import reference.BookRef;
 public class BookAdderTest {
 
     ArrayList<String> lines;
-    DAO<BookRef> bookDAO;
+    DAO<Reference> bookDAO;
     StubIO io;
     BookAdder bookAdder;
 
@@ -126,10 +126,10 @@ public class BookAdderTest {
     public void userCanCheckTitleHasBeenAdded() {
         lines.add("1");
         lines.add("EkaNimi");
-        lines.add("6");
+        lines.add("8");
         lines.add("9");
         
         bookAdder.addBookToDB();
-        assertEquals(true, io.getPrintedLines().contains("Nimi: EkaNimi"));
+        assertEquals(true, io.getPrintedLines().contains("title: EkaNimi\n"));
     }
 }

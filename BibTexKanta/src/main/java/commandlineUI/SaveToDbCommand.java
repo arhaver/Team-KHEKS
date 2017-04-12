@@ -12,7 +12,6 @@ public class SaveToDbCommand implements Command {
         this.io = io;
     }
     
-    @Override
     public void setDao (DAO dao) {
         this.dao = dao;
     }

@@ -19,11 +19,5 @@ public class PublisherCommand implements Command {
             return true;
         io.print("Lisäys '"+publisher+"' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee
-    }
-
-    @Override
-    public void setDao(DAO dao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-  
+    }  
 }

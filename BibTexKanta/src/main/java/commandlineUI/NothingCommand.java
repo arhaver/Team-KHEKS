@@ -17,10 +17,5 @@ public class NothingCommand implements Command {
     public boolean execute(Reference ref) {
         return true;
     }
-
-    @Override
-    public void setDao(DAO dao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

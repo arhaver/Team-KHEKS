@@ -64,22 +64,46 @@ public class ArticleAdderTest {
     }
 
     @Test
-    public void tooShortTitleCannotBeAdded() {
-        lines.add("1");
-        lines.add("K");
+    public void volumeCanBeAdded() {
+        lines.add("7");
+        lines.add("25");
+        lines.add("12");
         lines.add("13");
-        
+
         articleAdder.addArticleToDB();
-        assertEquals(true, io.getPrintedLines().contains("Lisäys 'K' virheellinen\n"));
+        assertEquals(true, io.getPrintedLines().contains("volume: 25\n"));
     }
 
     @Test
-    public void negativeYearCannotBeAdded() {
-        lines.add("3");
-        lines.add("-1");
+    public void numberCanBeAdded() {
+        lines.add("8");
+        lines.add("1b");
+        lines.add("12");
         lines.add("13");
-        
+
         articleAdder.addArticleToDB();
-        assertEquals(true, io.getPrintedLines().contains("Lisäys '-1' virheellinen\n"));
+        assertEquals(true, io.getPrintedLines().contains("number: 1b\n"));
+    }
+
+    @Test
+    public void pagesCanBeAdded() {
+        lines.add("10");
+        lines.add("112-145");
+        lines.add("12");
+        lines.add("13");
+
+        articleAdder.addArticleToDB();
+        assertEquals(true, io.getPrintedLines().contains("pages: 112-145\n"));
+    }
+
+    @Test
+    public void bibTexIdCanBeAdded() {
+        lines.add("6");
+        lines.add("guys2016");
+        lines.add("12");
+        lines.add("13");
+
+        articleAdder.addArticleToDB();
+        assertEquals(true, io.getPrintedLines().contains("BibTexId: guys2016\n"));
     }
 }

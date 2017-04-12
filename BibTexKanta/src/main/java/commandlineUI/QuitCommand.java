@@ -17,10 +17,4 @@ public class QuitCommand implements Command {
     public boolean execute(Reference ref) {
         return false; // Näin menee
     }
-
-    @Override
-    public void setDao(DAO dao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

@@ -1,4 +1,5 @@
 package commandlineUI;
+
 import database.DAO;
 import io.IO;
 import java.util.HashMap;
@@ -25,18 +26,18 @@ public class BookAdder extends AbstractAdder<Reference> {
         options[9] = "9 Lopeta tallentamatta";
 
         this.commands = new HashMap<>();
-        
+        SaveToDbCommand stdb = new SaveToDbCommand(io);
+        stdb.setDao(dao);
+
         commands.put("1", new TitleCommand(io));
         commands.put("2", new AuthorsCommand(io));
         commands.put("3", new YearCommand(io));
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
         commands.put("6", new BibTexIdCommand(io));
-        commands.put("7", new SaveToDbCommand(io));
+        commands.put("7", stdb);
         commands.put("8", new PrintStatusCommand(io));
         commands.put("9", new QuitCommand(io));
-
-         commands.get("7").setDao(this.dao);  
 
     }
 
@@ -46,7 +47,7 @@ public class BookAdder extends AbstractAdder<Reference> {
         boolean again = true;
         while (again) {
             this.listOptions();
-            command = io.readLine("Valitse toiminto (1-9)"); 
+            command = io.readLine("Valitse toiminto (1-9)");
             Command doNow = commands.getOrDefault(command, new NothingCommand(io));
             again = doNow.execute(ref);
         }

@@ -1,4 +1,5 @@
 package commandlineUI;
+
 import database.DAO;
 import io.IO;
 import java.util.HashMap;
@@ -23,13 +24,16 @@ public class ArticleAdder extends AbstractAdder<Reference> {
         options[7] = "7 Vuosikerta";
         options[8] = "8 Numero";
         options[9] = "9 Lehti";
-        options[10] = "10 Sivut";        
+        options[10] = "10 Sivut";
         options[11] = "11 Tallenna ja lopeta";
         options[12] = "12 Näytä syötetyt tiedot";
         options[13] = "13 Lopeta tallentamatta";
 
         this.commands = new HashMap<>();
-        
+
+        SaveToDbCommand stdb = new SaveToDbCommand(io);
+        stdb.setDao(dao);
+
         commands.put("1", new TitleCommand(io));
         commands.put("2", new AuthorsCommand(io));
         commands.put("3", new YearCommand(io));
@@ -40,11 +44,10 @@ public class ArticleAdder extends AbstractAdder<Reference> {
         commands.put("8", new NumberCommand(io));
         commands.put("9", new JournalCommand(io));
         commands.put("10", new PagesCommand(io));
-        commands.put("11", new SaveToDbCommand(io));
+        commands.put("11", stdb);
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand(io));
-        
-        commands.get("11").setDao(this.dao);
+
 
     }
 
@@ -54,7 +57,7 @@ public class ArticleAdder extends AbstractAdder<Reference> {
         boolean again = true;
         while (again) {
             this.listOptions();
-            command = io.readLine("Valitse toiminto (1-13)"); 
+            command = io.readLine("Valitse toiminto (1-13)");
             Command doNow = commands.getOrDefault(command, new NothingCommand(io));
             again = doNow.execute(ref);
         }

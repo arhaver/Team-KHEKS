@@ -109,11 +109,8 @@ public class Reference {
     }
 
     public boolean setVolume(String volume) {
-        if (isValidString(volume)) {
-            this.volume = volume;
-            return true;
-        }
-        return false;
+        this.volume = volume;
+        return true;
     }
 
     public String getNumber() {
@@ -121,11 +118,8 @@ public class Reference {
     }
 
     public boolean setNumber(String number) {
-        if (isValidString(number)) {
-            this.number = number;
-            return true;
-        }
-        return false;
+        this.number = number;
+        return true;
     }
 
     public String getBooktitle() {
@@ -213,7 +207,7 @@ public class Reference {
             response += "booktitle: " + this.booktitle + "\n";
         }
         if (this.bibTexId != null) {
-            response += "bibTexId: " + this.bibTexId + "\n";
+            response += "BibTexId: " + this.bibTexId + "\n";
         }
         if (this.volume != null) {
             response += "volume: " + this.volume + "\n";
@@ -225,6 +219,10 @@ public class Reference {
 
         if (this.journal != null) {
             response += "journal: " + this.journal + "\n";
+        }
+
+        if (this.pages != null) {
+            response += "pages: " + this.pages + "\n";
         }
 
         if (this.year > 0) {

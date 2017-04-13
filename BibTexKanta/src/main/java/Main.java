@@ -10,7 +10,7 @@ public class Main {
         InMemoryDAO<BookRef> bdao = new InMemoryDAO<>();
         InMemoryDAO<ArticleRef> adao = new InMemoryDAO<>();
         ConsoleIO io = new ConsoleIO();
-        MainMenu mm = new MainMenu(adao, bdao, io);
+        MainMenu mm = new MainMenu(adao, bdao, io, null, null);
         mm.openMainMenu();        
     }
 }

@@ -28,7 +28,7 @@ public class Stepdefs {
         
         bdao = new InMemoryDAO<>();
         io = new StubIO(inputs);
-        menu = new MainMenu(adao, bdao, io);
+        menu = new MainMenu(adao, bdao, io, null, null);
     }
 
     @When("^User chooses to add book reference$")

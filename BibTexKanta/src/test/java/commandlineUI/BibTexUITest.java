@@ -55,7 +55,7 @@ public class BibTexUITest {
     public void setUp() {
         komennot = new ArrayList<>();
         io = new StubIO(komennot);
-        ui = new BibTexUI(t, w, io, new InMemoryDAO<>());
+        ui = new BibTexUI(t, w, io, new InMemoryDAO<>(), new InMemoryDAO<>());
     }
     
     @Test

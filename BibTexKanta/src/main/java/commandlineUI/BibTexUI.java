@@ -5,6 +5,7 @@ import database.DAO;
 import io.IFilewriter;
 import io.IO;
 import java.util.List;
+import reference.ArticleRef;
 import reference.BookRef;
 
 /*
@@ -17,10 +18,13 @@ public class BibTexUI {
     
     private final IO io;
     private final DAO<BookRef> bookDAO;
+    private final DAO<ArticleRef> articleDAO;
     
-    public BibTexUI(IBibtexTranslator translator, IFilewriter filewriter, IO io, DAO<BookRef> bookDAO){
+    public BibTexUI(IBibtexTranslator translator, IFilewriter filewriter, IO io, 
+            DAO<BookRef> bookDAO, DAO<ArticleRef> articleDAO){
         this.io = io;
         this.bookDAO = bookDAO;
+        this.articleDAO = articleDAO;
         
         this.translator = translator;
         this.filewriter = filewriter;
@@ -55,7 +59,7 @@ public class BibTexUI {
     }
     
     private void printBibTex(String filename) throws Exception{
-        List<String> lines = translator.bibTex(bookDAO);
+        List<String> lines = translator.bibTex(bookDAO, articleDAO);
         filewriter.write(filename, lines);
     }
 }

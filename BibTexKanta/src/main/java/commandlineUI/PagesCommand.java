@@ -13,7 +13,7 @@ public class PagesCommand implements Command {
     @Override
     public boolean execute(Reference ref) {
         String pages =  io.readLine("Anna sivut, joilla artikkeli on:");
-        if (ref.setPages(pages))
+        if (ref.setField("pages", pages))
             return true;
         io.print("Lisäys '" +pages+ "' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee

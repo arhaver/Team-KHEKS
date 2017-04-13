@@ -11,7 +11,8 @@ import io.StubIO;
 import database.Database;
 import database.InMemoryDAO;
 import java.util.ArrayList;
-import reference.Reference;
+import reference.AbstractReference;
+import reference.BookRef;
 
 /**
  *
@@ -20,7 +21,7 @@ import reference.Reference;
 public class BookAdderTest {
 
     ArrayList<String> lines;
-    DAO<Reference> bookDAO;
+    DAO<BookRef> bookDAO;
     StubIO io;
     BookAdder bookAdder;
 

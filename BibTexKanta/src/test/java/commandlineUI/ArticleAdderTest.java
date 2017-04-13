@@ -11,7 +11,8 @@ import io.StubIO;
 import database.Database;
 import database.InMemoryDAO;
 import java.util.ArrayList;
-import reference.Reference;
+import reference.AbstractReference;
+import reference.ArticleRef;
 
 /**
  *
@@ -20,7 +21,7 @@ import reference.Reference;
 public class ArticleAdderTest {
 
     ArrayList<String> lines;
-    DAO<Reference> articleDAO;
+    DAO<ArticleRef> articleDAO;
     StubIO io;
     ArticleAdder articleAdder;
 

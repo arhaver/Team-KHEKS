@@ -3,13 +3,14 @@ package commandlineUI;
 import database.DAO;
 import io.IO;
 import java.util.HashMap;
+import reference.ArticleRef;
 import reference.Reference;
 
-public class ArticleAdder extends AbstractAdder<Reference> {
+public class ArticleAdder extends AbstractAdder<ArticleRef> {
 
-    private Reference ref;
+    private ArticleRef ref;
 
-    public ArticleAdder(DAO<Reference> dao, IO io) {
+    public ArticleAdder(DAO<ArticleRef> dao, IO io) {
 
         super(dao, io);
 
@@ -52,14 +53,7 @@ public class ArticleAdder extends AbstractAdder<Reference> {
     }
 
     public void addArticleToDB() {
-        ref = new Reference("article");
-        String command;
-        boolean again = true;
-        while (again) {
-            this.listOptions();
-            command = io.readLine("Valitse toiminto (1-13)");
-            Command doNow = commands.getOrDefault(command, new NothingCommand(io));
-            again = doNow.execute(ref);
-        }
+        ref = new ArticleRef();
+        loop("Valitse toiminto (1-13)", ref);
     }
 }

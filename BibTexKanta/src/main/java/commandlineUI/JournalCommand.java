@@ -13,7 +13,7 @@ public class JournalCommand implements Command {
     @Override
     public boolean execute(Reference ref) {
         String journal =  io.readLine("Anna lehti, jossa artikkeli julkaistu:");
-        if (ref.setJournal(journal))
+        if (ref.setField("journal", journal))
             return true;
         io.print("Lisäys '" +journal+ "' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee

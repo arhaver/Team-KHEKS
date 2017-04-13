@@ -13,7 +13,7 @@ public class VolumeCommand implements Command {
     @Override
     public boolean execute(Reference ref) {
         String volume =  io.readLine("Anna vuosikerta:");
-        if (ref.setVolume(volume))
+        if (ref.setField("volume", volume))
             return true;
         io.print("Lisäys '" +volume+ "' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee

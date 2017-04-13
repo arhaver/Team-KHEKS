@@ -13,7 +13,7 @@ public class BibTexIdCommand implements Command {
     @Override
     public boolean execute(Reference ref) {
         String bibTex =  io.readLine("Anna viitteelle BibTex -tunniste:");
-        if (ref.setBibTexId(bibTex))
+        if (ref.setField("bibTexId", bibTex))
             return true;
         io.print("Lisäys '" +bibTex+ "' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee

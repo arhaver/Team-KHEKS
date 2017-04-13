@@ -9,23 +9,26 @@ import database.DAO;
 import database.InMemoryDAO;
 import java.util.List;
 import static org.junit.Assert.*;
-import reference.Reference;
+import reference.AbstractReference;
+import reference.ArticleRef;
+import reference.BookRef;
 
 public class Stepdefs {
     private List<String> inputs;
     private String latestInput;
     
     private StubIO io;
-    private DAO<Reference> dao;
+    private DAO<BookRef> bdao;
+    private DAO<ArticleRef> adao;
     private MainMenu menu;
   
     @Given("^BibTextKanta is set up$")
     public void bibtextkanta_is_set_up() throws Throwable {
         inputs = new ArrayList<>();
         
-        dao = new InMemoryDAO<>();
+        bdao = new InMemoryDAO<>();
         io = new StubIO(inputs);
-        menu = new MainMenu(dao, io);
+        menu = new MainMenu(adao, bdao, io);
     }
 
     @When("^User chooses to add book reference$")

@@ -14,7 +14,7 @@ public class AddressCommand implements Command {
     public boolean execute(Reference ref) {   
         
         String address = io.readLine("Anna julkaisijan osoite:");
-        if (ref.setAddress(address))
+        if (ref.setField("address", address))
             return true;
         io.print("Lisäys '" +address+ "' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee

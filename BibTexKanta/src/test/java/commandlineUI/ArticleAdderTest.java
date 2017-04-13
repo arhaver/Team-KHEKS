@@ -11,7 +11,8 @@ import io.StubIO;
 import database.Database;
 import database.InMemoryDAO;
 import java.util.ArrayList;
-import reference.Reference;
+import reference.AbstractReference;
+import reference.ArticleRef;
 
 /**
  *
@@ -20,7 +21,7 @@ import reference.Reference;
 public class ArticleAdderTest {
 
     ArrayList<String> lines;
-    DAO<Reference> articleDAO;
+    DAO<ArticleRef> articleDAO;
     StubIO io;
     ArticleAdder articleAdder;
 
@@ -57,6 +58,10 @@ public class ArticleAdderTest {
         lines.add("1970");
         lines.add("9");
         lines.add("J. of Big Time Science");
+        lines.add("7");
+        lines.add("123");
+        lines.add("8");
+        lines.add("12b");
         lines.add("11");
 
         articleAdder.addArticleToDB();
@@ -66,23 +71,23 @@ public class ArticleAdderTest {
     @Test
     public void volumeCanBeAdded() {
         lines.add("7");
-        lines.add("25");
+        lines.add("25b");
         lines.add("12");
         lines.add("13");
 
         articleAdder.addArticleToDB();
-        assertEquals(true, io.getPrintedLines().contains("volume: 25\n"));
+        assertEquals(true, io.getPrintedLines().contains("volume: 25b\n"));
     }
 
     @Test
     public void numberCanBeAdded() {
         lines.add("8");
-        lines.add("1b");
+        lines.add("11b");
         lines.add("12");
         lines.add("13");
 
         articleAdder.addArticleToDB();
-        assertEquals(true, io.getPrintedLines().contains("number: 1b\n"));
+        assertEquals(true, io.getPrintedLines().contains("number: 11b\n"));
     }
 
     @Test

@@ -4,12 +4,13 @@ import database.DAO;
 import io.IO;
 import java.util.HashMap;
 import reference.Reference;
+import reference.BookRef;
 
-public class BookAdder extends AbstractAdder<Reference> {
+public class BookAdder extends AbstractAdder<BookRef> {
 
     private Reference ref;
 
-    public BookAdder(DAO<Reference> dao, IO io) {
+    public BookAdder(DAO<BookRef> dao, IO io) {
 
         super(dao, io);
 
@@ -42,14 +43,7 @@ public class BookAdder extends AbstractAdder<Reference> {
     }
 
     public void addBookToDB() {
-        ref = new Reference("book");
-        String command;
-        boolean again = true;
-        while (again) {
-            this.listOptions();
-            command = io.readLine("Valitse toiminto (1-9)");
-            Command doNow = commands.getOrDefault(command, new NothingCommand(io));
-            again = doNow.execute(ref);
-        }
+        ref = new BookRef();
+        loop("Valitse toiminto (1-9)", ref);
     }
 }

@@ -15,7 +15,7 @@ public class PublisherCommand implements Command {
         
         
         String publisher = io.readLine("Anna julkaisija:");
-        if (ref.setPublisher(publisher))
+        if (ref.setField("publisher", publisher))
             return true;
         io.print("Lisäys '"+publisher+"' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee

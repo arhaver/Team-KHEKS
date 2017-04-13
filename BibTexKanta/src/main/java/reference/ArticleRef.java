@@ -8,10 +8,11 @@ public class ArticleRef extends AbstractReference implements Reference {
         fields.put("journal", null);
         fields.put("number", null);
         fields.put("volume", null);
+        fields.put("pages", null);
 
     }
 
-    public ArticleRef(String authors, String title, String journal, String year, String volume, String number, String publisher, String address) {
+    public ArticleRef(String authors, String title, String journal, String year, String volume, String number, String publisher, String address, String pages) {
         fields.put("authors", authors);
         fields.put("title", title);
         fields.put("journal", journal);
@@ -19,6 +20,7 @@ public class ArticleRef extends AbstractReference implements Reference {
         fields.put("number", number);
         fields.put("journal", publisher);  
         fields.put("address", publisher);
+        fields.put("pages", pages);
         
         try {
             this.year = Integer.getInteger(year);

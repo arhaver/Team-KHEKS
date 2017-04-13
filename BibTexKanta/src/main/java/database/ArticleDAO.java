@@ -21,8 +21,9 @@ public class ArticleDAO extends AbstractDAO<ArticleRef> {
         String volume = rs.getString("volume");
         String journal = rs.getString("journal");
         String number = rs.getString("number");
+        String pages = rs.getString("number");
 
-        return new ArticleRef(authors, title, journal, year, volume, number, publisher, address);
+        return new ArticleRef(authors, title, journal, year, volume, number, publisher, address, pages);
     }
 
     @Override

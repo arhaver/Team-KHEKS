@@ -5,9 +5,9 @@ import java.util.List;
 
 public class StubIO implements IO {
 
-    private List<String> linesToPrint;
+    private final List<String> linesToPrint;
+    private final ArrayList<String> printedLines;
     private int i;
-    private ArrayList<String> printedLines;
 
     public StubIO(List<String> lines) {
         this.linesToPrint = lines;
@@ -31,6 +31,14 @@ public class StubIO implements IO {
 
     public String getLastPrint() {
         return printedLines.get(printedLines.size()-1);
+    }
+    
+    public int howManyInputsRead(){
+        return i;
+    }
+    
+    public boolean outputsContainsLine(String line){
+        return printedLines.contains(line);
     }
 
     @Override

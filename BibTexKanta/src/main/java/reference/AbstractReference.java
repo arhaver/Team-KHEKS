@@ -1,11 +1,12 @@
 package reference;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class AbstractReference implements Reference {
 
     private final int CURRENT_YEAR = 2017;
-    protected HashMap<String, String> fields;
+    protected Map<String, String> fields;
     protected int year;
 
     public AbstractReference() {
@@ -45,7 +46,7 @@ public abstract class AbstractReference implements Reference {
     public abstract boolean readyForDb();
 
     @Override
-    public HashMap<String, String> getAllFields() {
+    public Map<String, String> getAllFields() {
         return fields;
     }
 

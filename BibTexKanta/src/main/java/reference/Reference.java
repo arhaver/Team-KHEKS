@@ -5,7 +5,7 @@
  */
 package reference;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public interface Reference {
 
-    public HashMap<String, String> getAllFields();
+    public Map<String, String> getAllFields();
     public String getField(String fieldName);
     public boolean setField(String fieldName, String value);
     public int getYear();

@@ -37,7 +37,7 @@ public abstract class AbstractAdder<T> {
     }
     
     protected void loop (String prompt, Reference ref) {
-             String command;
+        String command;
         boolean again = true;
         while (again) {
             this.listOptions();

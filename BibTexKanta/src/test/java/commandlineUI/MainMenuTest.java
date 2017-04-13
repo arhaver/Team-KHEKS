@@ -11,12 +11,14 @@ import static org.junit.Assert.*;
 import io.StubIO;
 import database.InMemoryDAO;
 import java.util.ArrayList;
-import reference.Reference;
+import reference.ArticleRef;
+import reference.BookRef;
 
 public class MainMenuTest {
     
     ArrayList<String> lines;
-    DAO<Reference> bookDAO;
+    DAO<BookRef> bookDAO;
+    DAO<ArticleRef> articleDAO;
     StubIO io;
     MainMenu mainMenu;
     
@@ -35,8 +37,9 @@ public class MainMenuTest {
     public void setUp() {
         lines = new ArrayList<>();
         bookDAO = new InMemoryDAO<>();
+        articleDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        mainMenu = new MainMenu(bookDAO, io);
+        mainMenu = new MainMenu(articleDAO, bookDAO, io);
     }
     
     @After

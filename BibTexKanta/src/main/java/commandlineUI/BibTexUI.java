@@ -1,13 +1,29 @@
 package commandlineUI;
 
+import bibtex.IBibtexTranslator;
+import database.DAO;
+import io.IFilewriter;
 import io.IO;
+import java.util.List;
+import reference.BookRef;
 
-public class BibTexPrinter {
+/*
+Käyttöliittymäluokka joka hoitaa bibtex-tiedoston tulostamisen
+*/
+public class BibTexUI {
+    
+    private final IBibtexTranslator translator;
+    private final IFilewriter filewriter;
     
     private final IO io;
+    private final DAO<BookRef> bookDAO;
     
-    public BibTexPrinter(IO io){
+    public BibTexUI(IBibtexTranslator translator, IFilewriter filewriter, IO io, DAO<BookRef> bookDAO){
         this.io = io;
+        this.bookDAO = bookDAO;
+        
+        this.translator = translator;
+        this.filewriter = filewriter;
     }
     
     public void printLoop(){
@@ -30,7 +46,7 @@ public class BibTexPrinter {
         String filename = io.readLine("Anna tiedostonimi ");
         try{
             printBibTex(filename);
-            io.print("BibText tulostettu tiedostoon "+filename);
+            io.print("BibTex tulostettu tiedostoon: "+filename);
             return true;
         }catch(Exception e){
             io.print("Virhe BibTex-tiedostoa luodessa: "+e.getMessage());
@@ -39,6 +55,7 @@ public class BibTexPrinter {
     }
     
     private void printBibTex(String filename) throws Exception{
-        
+        List<String> lines = translator.bibTex(bookDAO);
+        filewriter.write(filename, lines);
     }
 }

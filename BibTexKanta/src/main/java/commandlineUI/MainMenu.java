@@ -17,7 +17,7 @@ public class MainMenu {
         this.options[1] = "1 Lisää kirja viiteluetteloon";
         this.options[2] = "2 Lisää artikkeli viiteluetteloon";
         this.options[3] = "3 Listaa viitteet luettavassa muodossa";
-        this.options[4] = "4 Listaa viitteet BibTeX-muodossa";
+        this.options[4] = "4 Tulosta viitteet tiedostoon BibTeX-muodossa";
         this.options[options.length - 1] = "Q Lopeta ohjelma";
     }
     
@@ -60,7 +60,7 @@ public class MainMenu {
                     break;
                     
                 default:
-                    io.print("\nVirheellinen komento");
+                    io.print("\nVirheellinen komento!");
             }
         }
     }

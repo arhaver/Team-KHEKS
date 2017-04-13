@@ -43,15 +43,6 @@ public class MainMenuTest {
     public void tearDown() {
     }
 
-/**    @Test
-    public void testLoop() {
-        System.out.println("loop");
-        MainMenu instance = null;
-        instance.loop();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-**/
     @Test
     public void startingProgramPrintsWelcomeMessage() {
         lines.add("q");
@@ -60,4 +51,21 @@ public class MainMenuTest {
         assertEquals(true, io.getPrintedLines().contains("\nTERVETULOA!"));
     }
     
+    @Test
+    public void openMainMenuCallsLoop() {
+        lines.add("q");
+        
+        mainMenu.openMainMenu();
+        assertEquals(true, io.getPrintedLines().contains("Päävalikko:\n"));
+    }
+    
+    @Test
+    public void selectOneOpensBookAdder() {
+        lines.add("1");
+        lines.add("9");
+        lines.add("q");
+        
+        mainMenu.openMainMenu();
+        assertEquals(true, io.getPrintedLines().contains("Kirjaviitteen lisääminen:\n"));
+    }
 }

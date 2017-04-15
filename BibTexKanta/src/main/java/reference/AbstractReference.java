@@ -39,7 +39,18 @@ public abstract class AbstractReference implements Reference {
 
     @Override
     public boolean isValidString(String field, String input) {
-        return input != null && input.length() > 2;
+        int minLength;
+        switch (field) {
+            case "volume":
+                minLength = 0;
+                break;
+            case "number":
+                minLength = 0;
+                break;
+            default:
+                minLength = 2;
+        }
+        return input != null && input.length() > minLength;
     }
 
     @Override
@@ -66,11 +77,11 @@ public abstract class AbstractReference implements Reference {
         }
         return false;
     }
-    
+
     @Override
     public String toString() {
-        
-    String response = "";
+
+        String response = "";
         if (fields.get("title") != null) {
             response += "title: " + fields.get("title") + "\n";
         }
@@ -109,7 +120,7 @@ public abstract class AbstractReference implements Reference {
             response += "year: " + this.year + "\n";
         }
         return response;
-        
+
     }
 
 }

@@ -1,6 +1,8 @@
 package commandlineUI;
 
+import bibtex.IBibtexTranslator;
 import database.DAO;
+import io.IFilewriter;
 import io.IO;
 import reference.ArticleRef;
 import reference.BookRef;
@@ -9,12 +11,19 @@ import reference.Reference;
 public class MainMenu {
     
     private final IO io;
+    private final IBibtexTranslator translator;
+    private final IFilewriter filewriter;
+    
     private final DAO<ArticleRef> adao;
     private final DAO<BookRef> bdao;
     private final String[] options = new String[6];
     
-    public MainMenu(DAO<ArticleRef> adao, DAO<BookRef> bdao, IO io) {
+    public MainMenu(DAO<ArticleRef> adao, DAO<BookRef> bdao, IO io, 
+            IFilewriter filewriter, IBibtexTranslator translator) {
         this.io = io;
+        this.translator = translator;
+        this.filewriter = filewriter;
+        
         this.adao = adao;
         this.bdao = bdao;
         
@@ -52,7 +61,7 @@ public class MainMenu {
                     break;
 **/
                 case "4":
-                    BibTexPrinter newbibprinter = new BibTexPrinter(io);
+                    BibTexUI newbibprinter = new BibTexUI(translator, filewriter, io, bdao, adao);
                     newbibprinter.printLoop();
                     break;
 

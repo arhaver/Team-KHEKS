@@ -28,7 +28,7 @@ public class Stepdefs {
         
         bdao = new InMemoryDAO<>();
         io = new StubIO(inputs);
-        menu = new MainMenu(adao, bdao, io);
+        menu = new MainMenu(adao, bdao, io, null, null);
     }
 
     @When("^User chooses to add book reference$")
@@ -94,16 +94,9 @@ public class Stepdefs {
         user_types_valid_publishing_year(year);
     }
 
-
-
     @Then("^Name isn't added$")
     public void name_isn_t_added() throws Throwable {
         run("9");
-        
-        
-        for(String line : io.getPrintedLines()){
-            System.out.println(line);
-        }
         
         assertTrue(isOutput("Lisäys '"+ latestInput +"' virheellinen\n"));
     }

@@ -96,7 +96,7 @@ public class MainMenuTest {
     public void optionFourOpensBibTexPrinter() {
         lines.add("4");
         lines.add("q");
-        lines.add("q");
+        lines.add("Q");
 
         mainMenu.openMainMenu();
         assertEquals(true, io.getPrintedLines().contains("\nBibText-tiedoston tulostus:"));

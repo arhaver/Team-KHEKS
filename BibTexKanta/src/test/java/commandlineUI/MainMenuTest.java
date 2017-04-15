@@ -39,7 +39,7 @@ public class MainMenuTest {
         bookDAO = new InMemoryDAO<>();
         articleDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        mainMenu = new MainMenu(articleDAO, bookDAO, io);
+        mainMenu = new MainMenu(articleDAO, bookDAO, io, null, null);
     }
     
     @After

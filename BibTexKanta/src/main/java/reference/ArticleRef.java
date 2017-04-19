@@ -18,8 +18,8 @@ public class ArticleRef extends AbstractReference implements Reference {
         fields.put("journal", journal);
         fields.put("volume", volume);
         fields.put("number", number);
-        fields.put("journal", publisher);  
-        fields.put("address", publisher);
+        fields.put("publisher", publisher);  
+        fields.put("address", address);
         fields.put("pages", pages);
         
         try {

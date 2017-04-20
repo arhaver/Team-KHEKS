@@ -2,3 +2,5 @@
 *.tmp
 /BibTexKanta/.nb-gradle/
 **/.gradle/**
+/Ohtu/nbproject/private/
+/BibTexKanta/Ohtu/nbproject/private/

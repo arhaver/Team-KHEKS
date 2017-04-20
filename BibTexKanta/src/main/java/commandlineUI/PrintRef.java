@@ -20,37 +20,38 @@ public class PrintRef {
     }
     
     public void printRef() {
-        List<Reference> adaos = adao.findAll();
-        List<Reference> bdaos = bdao.findAll();
-        if(!adaos.isEmpty()) printArticles(adaos);
-        if(!bdaos.isEmpty()) printBooks(bdaos);
+        List<Reference> artcls = adao.findAll();
+        List<Reference> books = bdao.findAll();
+        if(!artcls.isEmpty()) printArticles(artcls);
+        if(!books.isEmpty()) printBooks(books);
         }
     
-    private void printArticles(List<Reference> adaos) {
-        for(Reference ref : adaos) {
-            Map<String, String> refs = ref.getAllFields();
-            io.print("Publisher: " +refs.get("publisher"));
-            io.print("Address: " +refs.get("address"));
-            io.print("Journal: " +refs.get("journal"));
-            io.print("Number: " +refs.get("number"));
-            io.print("Volume: " +refs.get("volume"));
-            io.print("Pages: " +refs.get("pages"));
+    private void printArticles(List<Reference> articles) {
+        for(Reference article : articles) {
+            io.print("Title: " +article.getField("title"));
+            io.print("Author(s): " +article.getField("authors"));
+            io.print("Year: " +article.getYear());
+            io.print("Publisher: " +article.getField("publisher"));
+            io.print("Address: " +article.getField("address"));
+            io.print("Volume: " +article.getField("volume"));
+            io.print("Journal: " +article.getField("journal"));
+            io.print("Number: " +article.getField("number"));
+            io.print("Pages: " +article.getField("pages"));
             io.print("");
         }
     }
     
-    private void printBooks(List<Reference> bdaos) {
-        for(Reference ref : bdaos) {
-            Map<String, String> refs = ref.getAllFields();
-            io.print("Title: " +refs.get("title"));
-            io.print("Author(s): " +refs.get("authors"));
-            io.print("Year: " +refs.get("Year"));
-            io.print("Publisher: " +refs.get("publisher"));
-            io.print("Address: " +refs.get("address"));
-            io.print("Volume: " +refs.get("volume"));
-            io.print("Journal: " +refs.get("journal"));
-            io.print("Number: " +refs.get("number"));
-            io.print("Pages: " +refs.get("pages"));
+    private void printBooks(List<Reference> books) {
+        for(Reference book : books) {
+            io.print("Title: " +book.getField("title"));
+            io.print("Author(s): " +book.getField("authors"));
+            io.print("Year: " +book.getYear());
+            io.print("Publisher: " +book.getField("publisher"));
+            io.print("Address: " +book.getField("address"));
+            io.print("Volume: " +book.getField("volume"));
+            io.print("Journal: " +book.getField("journal"));
+            io.print("Number: " +book.getField("number"));
+            io.print("Pages: " +book.getField("pages"));
             io.print("");
         }
     }

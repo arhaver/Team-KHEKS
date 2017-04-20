@@ -27,6 +27,8 @@ public class Stepdefs {
         inputs = new ArrayList<>();
         
         bdao = new InMemoryDAO<>();
+        adao = new InMemoryDAO<>();
+        
         io = new StubIO(inputs);
         menu = new MainMenu(adao, bdao, io, null, null);
     }
@@ -94,16 +96,9 @@ public class Stepdefs {
         user_types_valid_publishing_year(year);
     }
 
-
-
     @Then("^Name isn't added$")
     public void name_isn_t_added() throws Throwable {
         run("9");
-        
-        
-        for(String line : io.getPrintedLines()){
-            System.out.println(line);
-        }
         
         assertTrue(isOutput("Lisäys '"+ latestInput +"' virheellinen\n"));
     }
@@ -116,6 +111,48 @@ public class Stepdefs {
     @Then("^Year isn't added$")
     public void year_isn_t_added() throws Throwable {
         name_isn_t_added();
+    }
+    
+    @When("^User chooses to add article reference$")
+    public void user_chooses_to_add_article_reference() throws Throwable {
+        inputs.add("2");
+    }
+    
+    @When("^User types valid volume \"([^\"]*)\"$")
+    public void user_types_valid_volume(String volume) throws Throwable {
+        add_choice_input(7, volume);
+    }
+    
+    @When("^User types valid number \"([^\"]*)\"$")
+    public void user_types_valid_number(String number) throws Throwable {
+        add_choice_input(8, number);
+    }
+    
+    @When("^User types valid journal name \"([^\"]*)\"$")
+    public void user_types_valid_journal_name(String journalName) throws Throwable {
+        add_choice_input(9, journalName);
+    }
+    
+    @When("^User types valid pages \"([^\"]*)\"$")
+    public void user_types_valid_pages(String pages) throws Throwable {
+        add_choice_input(10, pages);
+    }
+    
+    @When("^User confirms the article information$")
+    public void user_confirms_the_article_information() throws Throwable {
+        inputs.add("11");
+    }
+    
+    @Then("^article will be added$")
+    public void article_will_be_added() throws Throwable {
+        run();
+        assertTrue(isOutput("Viite lisätty onnistuneesti\n"));
+    }
+    
+    @Then("^article won't be added$")
+    public void article_won_t_be_added() throws Throwable {
+        run("13");
+        assertTrue(isOutput("Tallennus epäonnistui\n"));
     }
 
     

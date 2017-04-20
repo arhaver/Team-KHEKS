@@ -42,10 +42,15 @@ public class PrintRef {
     private void printBooks(List<Reference> bdaos) {
         for(Reference ref : bdaos) {
             Map<String, String> refs = ref.getAllFields();
+            io.print("Title: " +refs.get("title"));
+            io.print("Author(s): " +refs.get("authors"));
+            io.print("Year: " +refs.get("Year"));
             io.print("Publisher: " +refs.get("publisher"));
             io.print("Address: " +refs.get("address"));
-            io.print("Title: " +refs.get("title"));
-            io.print("Year: " +refs.get("Year"));
+            io.print("Volume: " +refs.get("volume"));
+            io.print("Journal: " +refs.get("journal"));
+            io.print("Number: " +refs.get("number"));
+            io.print("Pages: " +refs.get("pages"));
             io.print("");
         }
     }

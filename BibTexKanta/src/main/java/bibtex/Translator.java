@@ -15,13 +15,15 @@ public class Translator implements IBibtexTranslator {
 
     
     @Override
-    public List<String> bibTex(DAO... daos) {
+    public List<String> bibTex(DAO... daos) throws Exception{
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < daos.length; i++) {
             DAO dao = daos[i];
             if(dao instanceof BookDAO) list = makeBookRef(list, dao);
-            if(dao instanceof ArticleDAO) list = makeArticleRef(list, dao);
+            else if(dao instanceof ArticleDAO) list = makeArticleRef(list, dao);
+            else throw new Exception("Tyhjä lista");
         }
+  
         return list;
     }
     

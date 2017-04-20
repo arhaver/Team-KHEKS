@@ -54,12 +54,12 @@ public class MainMenu {
                     ArticleAdder newarticle = new ArticleAdder(adao, io);
                     newarticle.addArticleToDB();
                     break;
-/**
+
                 case "3":
-                    PrintRef humanprint = new PrintRef(bookDAO, io);
-                    humanprint.printRef;
+                    PrintRef humanprint = new PrintRef(bdao, adao, io);
+                    humanprint.printRef();
                     break;
-**/
+
                 case "4":
                     BibTexUI newbibprinter = new BibTexUI(translator, filewriter, io, bdao, adao);
                     newbibprinter.printLoop();

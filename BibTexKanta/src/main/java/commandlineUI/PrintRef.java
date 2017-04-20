@@ -48,10 +48,6 @@ public class PrintRef {
             io.print("Year: " +book.getYear());
             io.print("Publisher: " +book.getField("publisher"));
             io.print("Address: " +book.getField("address"));
-            io.print("Volume: " +book.getField("volume"));
-            io.print("Journal: " +book.getField("journal"));
-            io.print("Number: " +book.getField("number"));
-            io.print("Pages: " +book.getField("pages"));
             io.print("");
         }
     }

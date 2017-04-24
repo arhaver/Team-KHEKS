@@ -1,5 +1,4 @@
 import commandlineUI.menu.MainMenu;
-import cucumber.api.PendingException;
 import io.StubIO;
 import java.util.ArrayList;
 import cucumber.api.java.en.Given;
@@ -10,7 +9,6 @@ import database.InMemoryDAO;
 import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.*;
-import reference.AbstractReference;
 import reference.ArticleRef;
 import reference.BookRef;
 

@@ -4,9 +4,9 @@ import commandlineUI.menu.adder.ArticleAdder;
 import commandlineUI.menu.adder.BookAdder;
 import bibtex.IBibtexTranslator;
 import commandlineUI.Command;
-import commandlineUI.PredefinedPrintCommand;
+import commandlineUI.common.PredefinedPrintCommand;
 import commandlineUI.PrintRef;
-import commandlineUI.QuitCommand;
+import commandlineUI.common.QuitCommand;
 import database.DAO;
 import io.IFilewriter;
 import io.IO;
@@ -15,13 +15,6 @@ import reference.ArticleRef;
 import reference.BookRef;
 
 public class MainMenu extends Menu{
-    
-    private final IO io;
-    private final IBibtexTranslator translator;
-    private final IFilewriter filewriter;
-    
-    private final DAO<ArticleRef> adao;
-    private final DAO<BookRef> bdao;
     
     public MainMenu(DAO<ArticleRef> adao, DAO<BookRef> bdao, IO io, 
             IFilewriter filewriter, IBibtexTranslator translator) {
@@ -42,23 +35,14 @@ public class MainMenu extends Menu{
                     "Valitse toiminto"
                 });
         
-        this.io = io;
-        this.translator = translator;
-        this.filewriter = filewriter;
+        Map<String, Command> menuCommandMap = super.getCommands();
         
-        this.adao = adao;
-        this.bdao = bdao;
-        
-        addCommandsToMenu(super.getCommands());
-        setDefaultCommand(new PredefinedPrintCommand("\nVirheellinen komento!", io));
-    }
-
-    @Override
-    protected void addCommandsToMenu(Map<String, Command> menuCommandMap) {
         menuCommandMap.put("1", new BookAdder(bdao, io));
         menuCommandMap.put("2", new ArticleAdder(adao, io));
         menuCommandMap.put("3", new PrintRef(bdao, adao, io));
         menuCommandMap.put("4", new BibTexUI(translator, filewriter, io, bdao, adao));
         menuCommandMap.put("q", new QuitCommand());
+        
+        setDefaultCommand(new PredefinedPrintCommand("\nVirheellinen komento!", io));
     }
 }

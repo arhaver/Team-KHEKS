@@ -33,8 +33,6 @@ public abstract class Menu implements Command{
         this.defaultCommand = command;
     }
     
-    protected abstract void addCommandsToMenu(Map<String,Command> menuCommandMap);
-    
     protected Reference referenceToGiveToCommands(){
         return givenRef;
     }

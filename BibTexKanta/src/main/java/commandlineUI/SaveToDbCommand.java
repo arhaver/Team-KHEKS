@@ -8,14 +8,10 @@ public class SaveToDbCommand implements Command {
     IO io;
     DAO dao;
     
-    public SaveToDbCommand(IO io) {
+    public SaveToDbCommand(IO io, DAO dao) {
         this.io = io;
-    }
-    
-    public void setDao (DAO dao) {
         this.dao = dao;
     }
-        
 
     @Override
     public boolean execute(Reference ref) {

@@ -9,7 +9,7 @@ import commandlineUI.NumberCommand;
 import commandlineUI.PagesCommand;
 import commandlineUI.PrintStatusCommand;
 import commandlineUI.PublisherCommand;
-import commandlineUI.QuitCommand;
+import commandlineUI.common.QuitCommand;
 import commandlineUI.SaveToDbCommand;
 import commandlineUI.TitleCommand;
 import commandlineUI.VolumeCommand;
@@ -43,15 +43,8 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
                     "13 Lopeta tallentamatta"
                 }
                 );
-
-        addCommandsToMenu(super.getCommands());
-    }
-
-    @Override
-    protected void addCommandsToMenu(Map<String, Command> commands) {
-        SaveToDbCommand stdb = new SaveToDbCommand(io);
-        stdb.setDao(dao);
         
+        Map<String, Command> commands = super.getCommands();
         commands.put("1", new TitleCommand(io));
         commands.put("2", new AuthorsCommand(io));
         commands.put("3", new YearCommand(io));
@@ -62,7 +55,7 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
         commands.put("8", new NumberCommand(io));
         commands.put("9", new JournalCommand(io));
         commands.put("10", new PagesCommand(io));
-        commands.put("11", stdb);
+        commands.put("11", new SaveToDbCommand(io,dao));
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
     }

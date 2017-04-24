@@ -1,5 +1,6 @@
-package commandlineUI;
+package commandlineUI.common;
 
+import commandlineUI.Command;
 import reference.Reference;
 
 public class QuitCommand implements Command {

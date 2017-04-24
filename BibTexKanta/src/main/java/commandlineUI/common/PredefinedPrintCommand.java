@@ -1,5 +1,6 @@
-package commandlineUI;
+package commandlineUI.common;
 
+import commandlineUI.Command;
 import io.IO;
 import reference.Reference;
 

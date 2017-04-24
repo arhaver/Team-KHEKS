@@ -6,7 +6,7 @@ import commandlineUI.BibTexIdCommand;
 import commandlineUI.Command;
 import commandlineUI.PrintStatusCommand;
 import commandlineUI.PublisherCommand;
-import commandlineUI.QuitCommand;
+import commandlineUI.common.QuitCommand;
 import commandlineUI.SaveToDbCommand;
 import commandlineUI.TitleCommand;
 import commandlineUI.YearCommand;
@@ -17,8 +17,6 @@ import reference.Reference;
 import reference.BookRef;
 
 public class BookAdder extends AbstractAdder<BookRef> {
-
-    private Reference ref;
 
     public BookAdder(DAO<BookRef> dao, IO io) {
         super(dao, io, new String[]{},
@@ -36,21 +34,15 @@ public class BookAdder extends AbstractAdder<BookRef> {
                     "9 Lopeta tallentamatta"
                 });
 
-        addCommandsToMenu(super.getCommands());
-    }
-
-    @Override
-    protected void addCommandsToMenu(Map<String, Command> commands) {
-        SaveToDbCommand stdb = new SaveToDbCommand(io);
-        stdb.setDao(dao);
-
+        Map<String, Command> commands = super.getCommands();
+        
         commands.put("1", new TitleCommand(io));
         commands.put("2", new AuthorsCommand(io));
         commands.put("3", new YearCommand(io));
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
         commands.put("6", new BibTexIdCommand(io));
-        commands.put("7", stdb);
+        commands.put("7", new SaveToDbCommand(io,dao));
         commands.put("8", new PrintStatusCommand(io));
         commands.put("9", new QuitCommand());
     }

@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 import reference.ArticleRef;
 import reference.BookRef;
+import reference.InproceedingsRef;
 
 public class Stepdefs {
     private List<String> inputs;
@@ -19,6 +20,7 @@ public class Stepdefs {
     private StubIO io;
     private DAO<BookRef> bdao;
     private DAO<ArticleRef> adao;
+    private DAO<InproceedingsRef> idao;
     private MainMenu menu;
   
     @Given("^BibTextKanta is set up$")
@@ -29,7 +31,7 @@ public class Stepdefs {
         adao = new InMemoryDAO<>();
         
         io = new StubIO(inputs);
-        menu = new MainMenu(adao, bdao, io, null, null);
+        menu = new MainMenu(adao, bdao, idao, io, null, null);
     }
 
     @When("^User chooses to add book reference$")
@@ -166,7 +168,7 @@ public class Stepdefs {
 
     @When("^I list references$")
     public void i_list_references() throws Throwable {
-        inputs.add("3");
+        inputs.add("4");
     }
 
     @Then("^information of (\\d+) books is printed$")

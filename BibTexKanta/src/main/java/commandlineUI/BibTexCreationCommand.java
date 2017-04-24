@@ -7,54 +7,35 @@ import io.IO;
 import java.util.List;
 import reference.ArticleRef;
 import reference.BookRef;
+import reference.Reference;
 
-/*
-Käyttöliittymäluokka joka hoitaa bibtex-tiedoston tulostamisen
-*/
-public class BibTexUI {
-    
+public class BibTexCreationCommand implements Command{
+
     private final IBibtexTranslator translator;
     private final IFilewriter filewriter;
     
     private final IO io;
     private final DAO<BookRef> bookDAO;
     private final DAO<ArticleRef> articleDAO;
-    
-    public BibTexUI(IBibtexTranslator translator, IFilewriter filewriter, IO io, 
-            DAO<BookRef> bookDAO, DAO<ArticleRef> articleDAO){
+
+    public BibTexCreationCommand(IBibtexTranslator translator, IFilewriter filewriter, IO io, DAO<BookRef> bookDAO, DAO<ArticleRef> articleDAO) {
+        this.translator = translator;
+        this.filewriter = filewriter;
         this.io = io;
         this.bookDAO = bookDAO;
         this.articleDAO = articleDAO;
-        
-        this.translator = translator;
-        this.filewriter = filewriter;
     }
     
-    public void printLoop(){
-        io.print("\nBibText-tiedoston tulostus:");
-        
-        while(true){
-            switch(io.readLine("\nVaihtoehdot:\n1.Tulosta\nQ.Peruuta").toLowerCase()){
-                case "1":
-                    if(printOption()) return;
-                    break;
-                case "q":
-                    return;
-                default:
-                    io.print("Epävalidi operaatio");
-            }
-        }
-    }
-    
-    private boolean printOption(){
+    @Override
+    public boolean execute(Reference ref) {
         String filename = io.readLine("Anna tiedostonimi ");
         try{
             printBibTex(filename);
             io.print("BibTex tulostettu tiedostoon: "+filename);
-            return true;
+            return false;
         }catch(Exception e){
             io.print("Virhe BibTex-tiedostoa luodessa: "+e.getMessage());
-            return false;
+            return true;
         }
     }
     
@@ -62,4 +43,5 @@ public class BibTexUI {
         List<String> lines = translator.bibTex(bookDAO, articleDAO);
         filewriter.write(filename, lines);
     }
+    
 }

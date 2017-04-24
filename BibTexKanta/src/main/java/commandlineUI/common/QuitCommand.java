@@ -1,17 +1,9 @@
-package commandlineUI;
+package commandlineUI.common;
 
-import database.DAO;
-import io.IO;
+import commandlineUI.Command;
 import reference.Reference;
 
 public class QuitCommand implements Command {
-
-    private IO io;
-    
-    public QuitCommand (IO io) {
-        this.io = io;
-    
-}
 
     @Override
     public boolean execute(Reference ref) {

@@ -5,21 +5,17 @@
  */
 package commandlineUI;
 
+import commandlineUI.menu.BibTexUI;
 import bibtex.IBibtexTranslator;
 import database.DAO;
 import database.InMemoryDAO;
 import io.IFilewriter;
-import io.IO;
 import io.StubIO;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import reference.BookRef;
 
 /**
  *
@@ -64,7 +60,7 @@ public class BibTexUITest {
         komennot.add("oikea");
         komennot.add("q");
         
-        ui.printLoop();
+        ui.execute(null);
         
         assertTrue(io.outputsContainsLine("BibTex tulostettu tiedostoon: oikea"));
         assertEquals(io.howManyInputsRead(), 2);
@@ -76,7 +72,7 @@ public class BibTexUITest {
         komennot.add("virhe");
         komennot.add("q");
         
-        ui.printLoop();
+        ui.execute(null);
         
         assertTrue(io.outputsContainsLine("Virhe BibTex-tiedostoa luodessa: testivirhe"));
         assertEquals(io.howManyInputsRead(), 3);
@@ -87,7 +83,7 @@ public class BibTexUITest {
         komennot.add("1231231");
         komennot.add("q");
         
-        ui.printLoop();
+        ui.execute(null);
         
         assertTrue(io.outputsContainsLine("Epävalidi operaatio"));
     }

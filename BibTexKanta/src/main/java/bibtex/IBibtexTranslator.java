@@ -8,6 +8,6 @@ Rajapinta Stringijonon luomiseen DAOista
 */
 public interface IBibtexTranslator {
     
-    public List<String> bibTex(DAO... daos);
+    public List<String> bibTex(DAO... daos) throws Exception;
     
 }

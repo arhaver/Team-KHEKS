@@ -28,4 +28,11 @@ public class ConsoleIO implements IO {
         return scanner.nextLine();
     }
 
+    @Override
+    public void printLines(String[] lines) {
+        for(String line : lines){
+            print(line);
+        }
+    }
+
 }

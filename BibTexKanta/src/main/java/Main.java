@@ -1,6 +1,6 @@
 import bibtex.Translator;
 import io.ConsoleIO;
-import commandlineUI.MainMenu;
+import commandlineUI.menu.MainMenu;
 import database.InMemoryDAO;
 import io.FileWriter;
 import reference.ArticleRef;
@@ -14,7 +14,8 @@ public class Main {
         ConsoleIO io = new ConsoleIO();
         FileWriter writer = new FileWriter();
         Translator trans = new Translator();
+        
         MainMenu mm = new MainMenu(adao, bdao, io, writer, trans);
-        mm.openMainMenu();        
+        mm.execute(null);
     }
 }

@@ -1,6 +1,7 @@
 package commandlineUI;
 
 
+import commandlineUI.menu.MainMenu;
 import database.DAO;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -50,7 +51,7 @@ public class MainMenuTest {
     public void startingProgramPrintsWelcomeMessage() {
         lines.add("q");
         
-        mainMenu.openMainMenu();
+        mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("\nTERVETULOA!"));
     }
     
@@ -58,7 +59,7 @@ public class MainMenuTest {
     public void openMainMenuCallsLoop() {
         lines.add("q");
         
-        mainMenu.openMainMenu();
+        mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Päävalikko:\n"));
     }
     
@@ -68,7 +69,7 @@ public class MainMenuTest {
         lines.add("9");
         lines.add("q");
         
-        mainMenu.openMainMenu();
+        mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Kirjaviitteen lisääminen:\n"));
     }
 
@@ -78,7 +79,7 @@ public class MainMenuTest {
         lines.add("13");
         lines.add("q");
 
-        mainMenu.openMainMenu();
+        mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Artikkeliviitteen lisääminen:\n"));
     }
 /*
@@ -98,7 +99,7 @@ public class MainMenuTest {
         lines.add("q");
         lines.add("Q");
 
-        mainMenu.openMainMenu();
+        mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("\nBibText-tiedoston tulostus:"));
     }
 
@@ -107,7 +108,7 @@ public class MainMenuTest {
         lines.add("0");
         lines.add("q");
 
-        mainMenu.openMainMenu();
+        mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("\nVirheellinen komento!"));
     }
 }

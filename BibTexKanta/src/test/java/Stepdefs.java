@@ -1,4 +1,4 @@
-import commandlineUI.MainMenu;
+import commandlineUI.menu.MainMenu;
 import cucumber.api.PendingException;
 import io.StubIO;
 import java.util.ArrayList;
@@ -231,7 +231,7 @@ public class Stepdefs {
             inputs.add(quit);
         }
         inputs.add("q");
-        menu.openMainMenu();
+        menu.execute(null);
     }
     
     private void add_choice_input(int choice, String input){

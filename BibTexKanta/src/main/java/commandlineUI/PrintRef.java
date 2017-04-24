@@ -8,10 +8,10 @@ import reference.Reference;
 /*
 Luokka joka tulostaa ihmisluettavasti tallennettavat referenssit
 */
-public class PrintRef {
+public class PrintRef implements Command{
     
-    private DAO adao, bdao;
-    private IO io;
+    private final DAO adao, bdao;
+    private final IO io;
     
     public PrintRef(DAO bdao, DAO adao, IO io) {
         this.adao = adao;
@@ -50,5 +50,12 @@ public class PrintRef {
             io.print("Address: " +book.getField("address"));
             io.print("");
         }
+    }
+
+    @Override
+    public boolean execute(Reference ref) {
+        printRef();
+        
+        return true;
     }
 }

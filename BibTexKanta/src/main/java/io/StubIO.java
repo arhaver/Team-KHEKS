@@ -49,4 +49,11 @@ public class StubIO implements IO {
         }
         return "";
     }
+
+    @Override
+    public void printLines(String[] lines) {
+        for(String line : lines){
+            print(line);
+        }
+    }
 }

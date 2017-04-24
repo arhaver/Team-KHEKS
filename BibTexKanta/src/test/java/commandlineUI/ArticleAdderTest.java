@@ -1,5 +1,6 @@
 package commandlineUI;
 
+import commandlineUI.menu.adder.ArticleAdder;
 import database.DAO;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -8,10 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import io.StubIO;
-import database.Database;
 import database.InMemoryDAO;
 import java.util.ArrayList;
-import reference.AbstractReference;
 import reference.ArticleRef;
 
 /**
@@ -25,27 +24,12 @@ public class ArticleAdderTest {
     StubIO io;
     ArticleAdder articleAdder;
 
-    public ArticleAdderTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
     @Before
     public void setUp() {
         lines = new ArrayList<>();
         articleDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
         articleAdder = new ArticleAdder(articleDAO, io);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test
@@ -64,7 +48,7 @@ public class ArticleAdderTest {
         lines.add("12b");
         lines.add("11");
 
-        articleAdder.addArticleToDB();
+        articleAdder.execute(null);
         assertEquals("Viite lisätty onnistuneesti\n", io.getLastPrint());
     }
 
@@ -75,7 +59,7 @@ public class ArticleAdderTest {
         lines.add("12");
         lines.add("13");
 
-        articleAdder.addArticleToDB();
+        articleAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("volume: 25b\n"));
     }
 
@@ -86,7 +70,7 @@ public class ArticleAdderTest {
         lines.add("12");
         lines.add("13");
 
-        articleAdder.addArticleToDB();
+        articleAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("number: 11b\n"));
     }
 
@@ -97,7 +81,7 @@ public class ArticleAdderTest {
         lines.add("12");
         lines.add("13");
 
-        articleAdder.addArticleToDB();
+        articleAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("pages: 112-145\n"));
     }
 
@@ -108,7 +92,7 @@ public class ArticleAdderTest {
         lines.add("12");
         lines.add("13");
 
-        articleAdder.addArticleToDB();
+        articleAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("BibTexId: guys2016\n"));
     }
 }

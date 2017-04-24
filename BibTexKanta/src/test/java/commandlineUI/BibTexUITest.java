@@ -5,6 +5,7 @@
  */
 package commandlineUI;
 
+import commandlineUI.menu.BibTexUI;
 import bibtex.IBibtexTranslator;
 import database.DAO;
 import database.InMemoryDAO;

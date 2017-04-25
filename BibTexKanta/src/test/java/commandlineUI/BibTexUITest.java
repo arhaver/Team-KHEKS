@@ -16,6 +16,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import reference.ArticleRef;
+import reference.BookRef;
 
 /**
  *
@@ -36,6 +38,16 @@ public class BibTexUITest {
     private class StubBibtexTranslator implements IBibtexTranslator{
         @Override
         public List<String> bibTex(DAO... daos) {
+            return null;
+        }
+
+        @Override
+        public List<String> makeBookBibTex(DAO<BookRef> bookDAO, List<String> lines) {
+            return null;
+        }
+
+        @Override
+        public List<String> makeArticleBibTex(DAO<ArticleRef> articleDAO, List<String> lines) {
             return null;
         }
     }

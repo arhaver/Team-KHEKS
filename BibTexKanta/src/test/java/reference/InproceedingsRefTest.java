@@ -21,6 +21,15 @@ public class InproceedingsRefTest {
     InproceedingsRef noParam;
     InproceedingsRef withPram;
     
+    String title;
+    String authors;
+    String booktitle;
+    String publisher;
+    String address;
+    String pages;
+    String bibTexId;
+    int year;
+    
     public InproceedingsRefTest() {
     }
     
@@ -35,6 +44,7 @@ public class InproceedingsRefTest {
     @Before
     public void setUp() {
         noParam = new InproceedingsRef();
+        title = "Artikkelin nimi";
     }
     
     @After
@@ -85,16 +95,16 @@ public class InproceedingsRefTest {
     public void constructorWithoutParametersWithOutSettingIsNotDbReady() {
         assertEquals(false, noParam.readyForDb());
     }
-/*
+    
     @Test
-    public void testReadyForDb() {
-        System.out.println("readyForDb");
-        InproceedingsRef instance = new InproceedingsRef();
-        boolean expResult = false;
-        boolean result = instance.readyForDb();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void setterSetsFieldCorrect() {
+        noParam.setField("title", title);
+        assertEquals(title, noParam.getField("title"));
     }
-*/
+    
+    @Test
+    public void getterGivesNullIfFieldNameDoesNotExsist() {
+        noParam.setField("title", title);
+        assertEquals(null, noParam.getField("otsikko"));
+    }
 }

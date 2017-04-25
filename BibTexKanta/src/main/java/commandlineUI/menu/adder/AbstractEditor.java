@@ -8,14 +8,14 @@ import reference.Reference;
 
 public class AbstractEditor extends AbstractAdder{
 
-    private ArticleRef trueRef;
-    private ArticleRef editRef;
+    private Reference trueRef;
+    private Reference editRef;
     
     public AbstractEditor(DAO dao, IO io, String[] startLines, String[] askPrompts) {
         super(dao, io, startLines, askPrompts);
     }
 
-    public void setRef(ArticleRef ref){
+    public void setRef(Reference ref){
         this.trueRef = ref;
         this.editRef = new ArticleRef();
         
@@ -24,13 +24,15 @@ public class AbstractEditor extends AbstractAdder{
         for(String fieldName : allFields.keySet()){
             editRef.setField(fieldName, allFields.get(fieldName));
         }
+        
+        editRef.setYear(trueRef.getYear());
     }
 
-    public ArticleRef getTrueRef() {
+    public Reference getTrueRef() {
         return trueRef;
     }
 
-    public ArticleRef getEditRef() {
+    public Reference getEditRef() {
         return editRef;
     }
 

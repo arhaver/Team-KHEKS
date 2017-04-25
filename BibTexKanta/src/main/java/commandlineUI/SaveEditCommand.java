@@ -30,6 +30,8 @@ public class SaveEditCommand implements Command{
             real.setField(field, fields.get(field));
         }
         
+        real.setYear(edited.getYear());
+        
         return false;
     }
     

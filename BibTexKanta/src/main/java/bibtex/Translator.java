@@ -1,8 +1,6 @@
 
 package bibtex;
 
-import database.ArticleDAO;
-import database.BookDAO;
 import database.DAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +17,9 @@ public class Translator implements IBibtexTranslator {
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < daos.length; i++) {
             DAO dao = daos[i];
-            if(dao instanceof BookDAO) list = makeBookRef(list, dao);
-            else if(dao instanceof ArticleDAO) list = makeArticleRef(list, dao);
-            else throw new Exception("Tyhjä lista");
+//            if(dao instanceof BookDAO) list = makeBookRef(list, dao);
+//            else if(dao instanceof ArticleDAO) list = makeArticleRef(list, dao);
+//            else throw new Exception("Tyhjä lista");
         }
   
         return list;

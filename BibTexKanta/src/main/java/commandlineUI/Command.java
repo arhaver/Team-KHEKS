@@ -1,6 +1,5 @@
 package commandlineUI;
 
-import database.DAO;
 import reference.Reference;
 
 public interface Command {

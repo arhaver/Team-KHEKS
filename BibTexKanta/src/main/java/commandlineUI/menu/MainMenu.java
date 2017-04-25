@@ -8,6 +8,7 @@ import commandlineUI.common.PredefinedPrintCommand;
 import commandlineUI.PrintRef;
 import commandlineUI.common.QuitCommand;
 import commandlineUI.menu.adder.InproceedingsAdder;
+import commandlineUI.menu.editing.ListerCommand;
 import database.DAO;
 import io.IFilewriter;
 import io.IO;
@@ -34,6 +35,7 @@ public class MainMenu extends Menu{
                     "3 Lisää konferenssijulkaisu viiteluetteloon",
                     "4 Listaa viitteet luettavassa muodossa",
                     "5 Tulosta viitteet tiedostoon BibTeX-muodossa",
+                    "6 Muokkaa viitettä tai poista viite",
                     "Q Lopeta ohjelma\n",
                     "Valitse toiminto"
                 });
@@ -45,6 +47,7 @@ public class MainMenu extends Menu{
         menuCommandMap.put("3", new InproceedingsAdder(idao, io));
         menuCommandMap.put("4", new PrintRef(bdao, adao, io));
         menuCommandMap.put("5", new BibTexUI(translator, filewriter, io, bdao, adao));
+        menuCommandMap.put("6", new ListerCommand(io, bdao, adao));
         menuCommandMap.put("q", new QuitCommand());
         
         setDefaultCommand(new PredefinedPrintCommand("\nVirheellinen komento!", io));

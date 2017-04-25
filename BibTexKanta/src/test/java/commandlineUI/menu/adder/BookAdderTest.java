@@ -1,4 +1,4 @@
-package commandlineUI;
+package commandlineUI.menu.adder;
 
 import commandlineUI.menu.adder.BookAdder;
 import database.DAO;

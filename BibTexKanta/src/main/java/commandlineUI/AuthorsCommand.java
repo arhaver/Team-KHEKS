@@ -12,7 +12,8 @@ public class AuthorsCommand implements Command {
 
     @Override
     public boolean execute(Reference ref) {
-        String authors =  io.readLine("Anna tekijä(t):");
+        String authors =  io.readLine("Anna tekijä(t):\n"
+                + "Jos useita, erota kirjoittajat pilkulla \",\" tai andilla \"and\"");
         if (ref.setField("authors", authors))
             return true;
         io.print("Lisäys '" +authors+ "' virheellinen\n");

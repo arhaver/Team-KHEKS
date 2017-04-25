@@ -1,4 +1,4 @@
-package commandlineUI;
+package commandlineUI.menu;
 
 
 import commandlineUI.menu.MainMenu;

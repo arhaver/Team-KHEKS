@@ -16,20 +16,22 @@ import static org.junit.Assert.*;
  *
  * @author Arto
  */
-public class InproceedingsRefTest {
+public class ArticleRefTest {
 
-    InproceedingsRef ref;
+    ArticleRef ref;
 
     String title;
     String authors;
-    String booktitle;
+    String volume;
     String publisher;
     String address;
+    String journal;
+    String number;
     String pages;
     String bibTexId;
     int year;
 
-    public InproceedingsRefTest() {
+    public ArticleRefTest() {
     }
 
     @BeforeClass
@@ -42,11 +44,13 @@ public class InproceedingsRefTest {
 
     @Before
     public void setUp() {
-        ref = new InproceedingsRef();
+        ref = new ArticleRef();
         title = "Artikkelin nimi";
         authors = "Kirjoittajat";
-        booktitle = "Julkaisun nimi";
+        journal = "Julkaisun nimi";
         year = 1999;
+        volume = "34 vk.";
+        number = "3b";        
     }
 
     @After
@@ -69,7 +73,7 @@ public class InproceedingsRefTest {
     }
 
     @Test
-    public void constructorWithoutParametersSetsBooktitleNull() {
+    public void constructorWithoutParametersSetsJournalNull() {
         assertEquals(null, ref.getField("booktitle"));
     }
 
@@ -87,6 +91,16 @@ public class InproceedingsRefTest {
     public void constructorWithoutParametersSetsAddressNull() {
         assertEquals(null, ref.getField("address"));
     }
+    
+    @Test
+    public void constructorWithoutParametersSetsVolumeNull() {
+        assertEquals(null, ref.getField("volume"));
+    }
+    
+    @Test
+    public void constructorWithoutParametersSetsNumberNull() {
+        assertEquals(null, ref.getField("Number"));
+    }
 
     @Test
     public void constructorWithoutParametersSetsYearMinusOne() {
@@ -99,23 +113,13 @@ public class InproceedingsRefTest {
     }
 
     @Test
-    public void setFieldSetsFieldCorrectWithValidInput() {
+    public void setterSetsFieldCorrect() {
         ref.setField("title", title);
         assertEquals(title, ref.getField("title"));
     }
-    
-    @Test
-    public void setFieldDoesNotSetsFieldWithInvalidFieldname() {
-        assertFalse(ref.setField("otsikko", title));
-    }
-    
-    @Test
-    public void setFieldDoesNotSetsFieldWithInvalidValue() {
-        assertFalse(ref.setField("title", "ok"));
-    }
 
     @Test
-    public void getFieldGivesNullIfFieldNameDoesNotExsist() {
+    public void getterGivesNullIfFieldNameDoesNotExsist() {
         ref.setField("title", title);
         assertEquals(null, ref.getField("otsikko"));
     }
@@ -124,7 +128,9 @@ public class InproceedingsRefTest {
     public void isNotReadyForDbWithoutTitle() {
         ref.setField("authors", authors);
         ref.setYear(year);
-        ref.setField("booktitle", booktitle);
+        ref.setField("volume", volume);
+        ref.setField("journal", journal);
+        ref.setField("number", number);
         assertTrue(!ref.readyForDb());
     }
     
@@ -132,15 +138,39 @@ public class InproceedingsRefTest {
     public void isNotReadyForDbWithoutAuthors() {
         ref.setField("title", title);
         ref.setYear(year);
-        ref.setField("booktitle", booktitle);
+        ref.setField("volume", volume);
+        ref.setField("journal", journal);
+        ref.setField("number", number);
         assertTrue(!ref.readyForDb());
     }
     
     @Test
-    public void isNotReadyForDbWithoutBookTitle() {
+    public void isNotReadyForDbWithoutVolume() {
         ref.setField("authors", authors);
         ref.setYear(year);
         ref.setField("title", title);
+        ref.setField("journal", journal);
+        ref.setField("number", number);
+        assertTrue(!ref.readyForDb());
+    }
+    
+    @Test
+    public void isNotReadyForDbWithoutJournal() {
+        ref.setField("authors", authors);
+        ref.setYear(year);
+        ref.setField("title", title);
+        ref.setField("volume", volume);
+        ref.setField("number", number);
+        assertTrue(!ref.readyForDb());
+    }
+    
+    @Test
+    public void isNotReadyForDbWithoutNumber() {
+        ref.setField("authors", authors);
+        ref.setYear(year);
+        ref.setField("title", title);
+        ref.setField("journal", journal);
+        ref.setField("volume", volume);
         assertTrue(!ref.readyForDb());
     }
     
@@ -148,16 +178,20 @@ public class InproceedingsRefTest {
     public void isNotReadyForDbWithoutYear() {
         ref.setField("authors", authors);
         ref.setField("title", title);
-        ref.setField("booktitle", booktitle);
+        ref.setField("volume", volume);
+        ref.setField("journal", journal);
+        ref.setField("number", number);
         assertTrue(!ref.readyForDb());
     }
     
     @Test
-    public void isReadyForDbWithTitleAuthorsPublisherYearAndBooktitle() {
-        ref.setField("title", title);
+    public void isReadyForDbWithTitleAuthorsYearJournalVolumeAndNumber() {
         ref.setField("authors", authors);
+        ref.setField("title", title);
+        ref.setField("volume", volume);
+        ref.setField("journal", journal);
+        ref.setField("number", number);
         ref.setYear(year);
-        ref.setField("booktitle", booktitle);
         assertTrue(ref.readyForDb());
     }
 }

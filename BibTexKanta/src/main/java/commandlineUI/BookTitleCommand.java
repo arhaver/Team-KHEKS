@@ -12,10 +12,10 @@ public class BookTitleCommand implements Command {
 
     @Override
     public boolean execute(Reference ref) {
-                String title =  io.readLine("Anna teoksen nimi:");
-        if (ref.setField("title", title))
+        String booktitle =  io.readLine("Anna konferenssijulkaisun nimi:");
+        if (ref.setField("booktitle", booktitle))
             return true;
-        io.print("Lisäys '" +title+ "' virheellinen\n");
+        io.print("Lisäys '" +booktitle+ "' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee
     }
 }

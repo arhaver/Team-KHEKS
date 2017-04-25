@@ -14,12 +14,14 @@ import database.InMemoryDAO;
 import java.util.ArrayList;
 import reference.ArticleRef;
 import reference.BookRef;
+import reference.InproceedingsRef;
 
 public class MainMenuTest {
     
     ArrayList<String> lines;
     DAO<BookRef> bookDAO;
     DAO<ArticleRef> articleDAO;
+    DAO<InproceedingsRef> inproceedingsDAO;
     StubIO io;
     MainMenu mainMenu;
     
@@ -40,7 +42,7 @@ public class MainMenuTest {
         bookDAO = new InMemoryDAO<>();
         articleDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        mainMenu = new MainMenu(articleDAO, bookDAO, io, null, null);
+        mainMenu = new MainMenu(articleDAO, bookDAO, inproceedingsDAO, io, null, null);
     }
     
     @After
@@ -82,20 +84,20 @@ public class MainMenuTest {
         mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Artikkeliviitteen lisääminen:\n"));
     }
-/*
+    
     @Test
-    public void optionTreeOpensReferenceLister() {
+    public void optionThreeOpensInproceedingsAdder() {
         lines.add("3");
-        lines.add("13");
+        lines.add("11");
         lines.add("q");
 
-        mainMenu.openMainMenu();
-        assertEquals(true, io.getPrintedLines().contains("Artikkeliviitteen lisääminen:\n"));
+        mainMenu.execute(null);
+        assertEquals(true, io.getPrintedLines().contains("Konferenssijulkaisuviitteen lisääminen:\n"));
     }
-*/
+
     @Test
     public void optionFourOpensBibTexPrinter() {
-        lines.add("4");
+        lines.add("5");
         lines.add("q");
         lines.add("Q");
 

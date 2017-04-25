@@ -11,7 +11,7 @@ public class ArticleRef extends AbstractReference implements Reference {
         fields.put("pages", null);
 
     }
-
+/*
     public ArticleRef(String authors, String title, String journal, String year, String volume, String number, String publisher, String address, String pages) {
         fields.put("authors", authors);
         fields.put("title", title);
@@ -28,7 +28,7 @@ public class ArticleRef extends AbstractReference implements Reference {
 
         }
     }
-
+*/
     @Override
     public boolean readyForDb() {
         return (isValidString("title", fields.get("title")) && isValidString("authors", fields.get("authors")) && isValidYear(year) && isValidString("volume", fields.get("volume")) && isValidString("journal", fields.get("journal")) && isValidString("number", fields.get("number")));

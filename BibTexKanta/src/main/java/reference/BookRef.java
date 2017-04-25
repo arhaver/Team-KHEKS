@@ -7,7 +7,7 @@ public class BookRef extends AbstractReference implements Reference {
         fields.put("address", null);
 
     }
-
+/*
     public BookRef(String authors, String title, String publisher, String year, String address) {
         fields.put("publisher", publisher);
         fields.put("address", address);
@@ -18,7 +18,7 @@ public class BookRef extends AbstractReference implements Reference {
 
         }
     }
-
+*/
     @Override
     public boolean readyForDb() {
         return (isValidString("title", fields.get("title")) && isValidString("authors", fields.get("authors")) && isValidYear(year) && isValidString("publisher", fields.get("publisher")));

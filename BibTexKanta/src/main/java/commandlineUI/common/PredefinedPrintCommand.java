@@ -4,8 +4,8 @@ import commandlineUI.Command;
 import io.IO;
 import reference.Reference;
 
-public class PredefinedPrintCommand implements Command{
-    
+public class PredefinedPrintCommand implements Command {
+
     private final String toPrint;
     private final IO io;
 
@@ -19,6 +19,5 @@ public class PredefinedPrintCommand implements Command{
         io.print(toPrint);
         return true;
     }
-    
-    
+
 }

@@ -1,13 +1,14 @@
 package commandlineUI;
+
 import database.DAO;
 import io.IO;
 import reference.Reference;
 
 public class SaveToDbCommand implements Command {
-    
+
     IO io;
     DAO dao;
-    
+
     public SaveToDbCommand(IO io, DAO dao) {
         this.io = io;
         this.dao = dao;
@@ -33,4 +34,3 @@ public class SaveToDbCommand implements Command {
         }
     }
 }
-

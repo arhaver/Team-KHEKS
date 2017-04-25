@@ -8,8 +8,7 @@ import reference.Reference;
 public class NothingCommand implements Command {
 
     private final IO io;
-    
-        
+
     public NothingCommand(IO io) {
         this.io = io;
     }
@@ -18,5 +17,5 @@ public class NothingCommand implements Command {
     public boolean execute(Reference ref) {
         return true;
     }
-    
+
 }

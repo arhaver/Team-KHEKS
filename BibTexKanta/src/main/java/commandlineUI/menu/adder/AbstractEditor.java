@@ -6,25 +6,25 @@ import java.util.Map;
 import reference.ArticleRef;
 import reference.Reference;
 
-public class AbstractEditor extends AbstractAdder{
+public class AbstractEditor extends AbstractAdder {
 
     private Reference trueRef;
     private Reference editRef;
-    
+
     public AbstractEditor(DAO dao, IO io, String[] startLines, String[] askPrompts) {
         super(dao, io, startLines, askPrompts);
     }
 
-    public void setRef(Reference ref){
+    public void setRef(Reference ref) {
         this.trueRef = ref;
         this.editRef = new ArticleRef();
-        
+
         Map<String, String> allFields = trueRef.getAllFields();
-        
-        for(String fieldName : allFields.keySet()){
+
+        for (String fieldName : allFields.keySet()) {
             editRef.setField(fieldName, allFields.get(fieldName));
         }
-        
+
         editRef.setYear(trueRef.getYear());
     }
 
@@ -40,5 +40,5 @@ public class AbstractEditor extends AbstractAdder{
     protected Reference createReferenceSkeleton() {
         return editRef;
     }
-    
+
 }

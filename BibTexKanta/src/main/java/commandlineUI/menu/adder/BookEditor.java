@@ -12,12 +12,11 @@ import database.DAO;
 import io.IO;
 import java.util.Map;
 
-public class BookEditor extends AbstractEditor{
-    
+public class BookEditor extends AbstractEditor {
+
     public BookEditor(DAO dao, IO io) {
-        super(dao, io, new String[0], 
-                new String[]
-                {
+        super(dao, io, new String[0],
+                new String[]{
                     "Kirjaviitteen muokkaaminen:\n",
                     "1 Teoksen nimi",
                     "2 Kirjoittaja(t)",
@@ -29,9 +28,9 @@ public class BookEditor extends AbstractEditor{
                     "8 Näytä syötetyt tiedot",
                     "9 Lopeta tallentamatta"
                 });
-        
+
         Map<String, Command> commands = super.getCommands();
-        
+
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
         commands.put("6", new BibTexIdCommand(io));
@@ -39,5 +38,5 @@ public class BookEditor extends AbstractEditor{
         commands.put("8", new PrintStatusCommand(io));
         commands.put("9", new QuitCommand());
     }
-    
+
 }

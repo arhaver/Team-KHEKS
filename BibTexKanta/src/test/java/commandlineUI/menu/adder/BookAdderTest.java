@@ -53,7 +53,7 @@ public class BookAdderTest {
         lines.add("1");
         lines.add("K");
         lines.add("9");
-        
+
         bookAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Lisäys 'K' virheellinen\n"));
     }
@@ -63,7 +63,7 @@ public class BookAdderTest {
         lines.add("3");
         lines.add("-1");
         lines.add("9");
-        
+
         bookAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Lisäys '-1' virheellinen\n"));
     }
@@ -73,7 +73,7 @@ public class BookAdderTest {
         lines.add("2");
         lines.add("A");
         lines.add("9");
-        
+
         bookAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Lisäys 'A' virheellinen\n"));
     }
@@ -83,7 +83,7 @@ public class BookAdderTest {
         lines.add("4");
         lines.add("P");
         lines.add("9");
-        
+
         bookAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Lisäys 'P' virheellinen\n"));
     }
@@ -93,7 +93,7 @@ public class BookAdderTest {
         lines.add("5");
         lines.add("A");
         lines.add("9");
-        
+
         bookAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Lisäys 'A' virheellinen\n"));
     }
@@ -102,7 +102,7 @@ public class BookAdderTest {
     public void emptyBookReferenceCannotBeAdded() {
         lines.add("7");
         lines.add("9");
-        
+
         bookAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Tallennus epäonnistui\n"));
     }
@@ -113,7 +113,7 @@ public class BookAdderTest {
         lines.add("EkaNimi");
         lines.add("8");
         lines.add("9");
-        
+
         bookAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("title: EkaNimi\n"));
     }

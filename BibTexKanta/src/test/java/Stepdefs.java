@@ -1,3 +1,4 @@
+
 import commandlineUI.menu.MainMenu;
 import io.StubIO;
 import java.util.ArrayList;
@@ -14,22 +15,23 @@ import reference.BookRef;
 import reference.InproceedingsRef;
 
 public class Stepdefs {
+
     private List<String> inputs;
     private String latestInput;
-    
+
     private StubIO io;
     private DAO<BookRef> bdao;
     private DAO<ArticleRef> adao;
     private DAO<InproceedingsRef> idao;
     private MainMenu menu;
-  
+
     @Given("^BibTextKanta is set up$")
     public void bibtextkanta_is_set_up() throws Throwable {
         inputs = new ArrayList<>();
-        
+
         bdao = new InMemoryDAO<>();
         adao = new InMemoryDAO<>();
-        
+
         io = new StubIO(inputs);
         menu = new MainMenu(adao, bdao, idao, io, null, null);
     }
@@ -75,18 +77,18 @@ public class Stepdefs {
         run("9");
         assertTrue(isOutput("Tallennus epäonnistui\n"));
     }
-    
+
     @Then("^Name is added$")
     public void name_is_added() throws Throwable {
         run("9");
-        assertTrue(!isOutput("Lisäys '"+ latestInput +"' virheellinen\n"));
+        assertTrue(!isOutput("Lisäys '" + latestInput + "' virheellinen\n"));
     }
 
     @When("^User types invalid title \"([^\"]*)\"$")
     public void user_types_invalid_title(String title) throws Throwable {
         user_types_valid_title(title);
     }
-    
+
     @When("^User types valid publishing year \"([^\"]*)\"$")
     public void user_types_valid_publishing_year(String year) throws Throwable {
         add_choice_input(3, year);
@@ -100,8 +102,8 @@ public class Stepdefs {
     @Then("^Name isn't added$")
     public void name_isn_t_added() throws Throwable {
         run("9");
-        
-        assertTrue(isOutput("Lisäys '"+ latestInput +"' virheellinen\n"));
+
+        assertTrue(isOutput("Lisäys '" + latestInput + "' virheellinen\n"));
     }
 
     @Then("^Year is added$")
@@ -113,49 +115,49 @@ public class Stepdefs {
     public void year_isn_t_added() throws Throwable {
         name_isn_t_added();
     }
-    
+
     @When("^User chooses to add article reference$")
     public void user_chooses_to_add_article_reference() throws Throwable {
         inputs.add("2");
     }
-    
+
     @When("^User types valid volume \"([^\"]*)\"$")
     public void user_types_valid_volume(String volume) throws Throwable {
         add_choice_input(7, volume);
     }
-    
+
     @When("^User types valid number \"([^\"]*)\"$")
     public void user_types_valid_number(String number) throws Throwable {
         add_choice_input(8, number);
     }
-    
+
     @When("^User types valid journal name \"([^\"]*)\"$")
     public void user_types_valid_journal_name(String journalName) throws Throwable {
         add_choice_input(9, journalName);
     }
-    
+
     @When("^User types valid pages \"([^\"]*)\"$")
     public void user_types_valid_pages(String pages) throws Throwable {
         add_choice_input(10, pages);
     }
-    
+
     @When("^User confirms the article information$")
     public void user_confirms_the_article_information() throws Throwable {
         inputs.add("11");
     }
-    
+
     @Then("^article will be added$")
     public void article_will_be_added() throws Throwable {
         run();
         assertTrue(isOutput("Viite lisätty onnistuneesti\n"));
     }
-    
+
     @Then("^article won't be added$")
     public void article_won_t_be_added() throws Throwable {
         run("13");
         assertTrue(isOutput("Tallennus epäonnistui\n"));
     }
-    
+
     @Given("^I've added a book with title \"([^\"]*)\", author \"([^\"]*)\", publishing year \"([^\"]*)\" and publisher name \"([^\"]*)\"$")
     public void i_ve_added_a_book_with_title_author_publishing_year_and_publisher_name(String title, String author, String year, String publisher_name) throws Throwable {
         inputs.add("1");
@@ -174,31 +176,30 @@ public class Stepdefs {
     @Then("^information of (\\d+) books is printed$")
     public void information_of_books_is_printed(int books) throws Throwable {
         run();
-        
+
         List<String> outputs = io.getPrintedLines();
         List<String> beginnings = new ArrayList<>();
         beginnings.addAll(Arrays.asList("Title:", "Author(s):", "Year:", "Publisher:",
                 "Address:"));
-        
+
         int foundBooks = find_amount_of_given_start_combinations(outputs, beginnings);
-        
+
         assertEquals(books, foundBooks);
     }
-    
+
     @Then("^information of (\\d+) articles is printed$")
     public void information_of_articles_is_printed(int articles) throws Throwable {
         run();
-        
+
         List<String> outputs = io.getPrintedLines();
         List<String> beginnings = new ArrayList<>();
         beginnings.addAll(Arrays.asList("Title:", "Author(s):", "Year:", "Publisher:",
                 "Address:", "Volume:", "Journal:", "Number:", "Pages:"));
-        
+
         int foundArticles = find_amount_of_given_start_combinations(outputs, beginnings);
-        
+
         assertEquals(articles, foundArticles);
     }
-
 
     @Given("^I've added an article with title \"([^\"]*)\", author \"([^\"]*)\", publishing year \"([^\"]*)\", journal name \"([^\"]*)\", volume \"([^\"]*)\" and number \"([^\"]*)\"$")
     public void i_ve_added_an_article_with_title_author_publishing_year_journal_name_volume_and_number(String title, String author, String year, String journal, String volume, String number) throws Throwable {
@@ -222,54 +223,52 @@ public class Stepdefs {
         inputs.add("9");
     }
 
-    
     /**/
-    
     //Käynnistää menun ja varmistaa että ohjelma sammuu eikä jää ikuiseen looppiin
-    private void run(String... quitPromt){
-        for(String quit : quitPromt){
+    private void run(String... quitPromt) {
+        for (String quit : quitPromt) {
             inputs.add(quit);
         }
         inputs.add("q");
         menu.execute(null);
     }
-    
-    private void add_choice_input(int choice, String input){
-        inputs.add(""+choice);
+
+    private void add_choice_input(int choice, String input) {
+        inputs.add("" + choice);
         inputs.add(input);
-        
+
         latestInput = input;
     }
-    
-    private boolean isOutput(String output){
+
+    private boolean isOutput(String output) {
         return io.getPrintedLines().contains(output);
     }
-    
-    private int find_amount_of_given_start_combinations(List<String> lines, List<String> beginnings){
+
+    private int find_amount_of_given_start_combinations(List<String> lines, List<String> beginnings) {
         int found = 0;
         int current_beginning = 0;
         boolean almostReady = false;
-        for(int i = 0 ; i < lines.size() ; i++){
-            
-            if(almostReady){
-                if(lines.get(i).equals("")){
+        for (int i = 0; i < lines.size(); i++) {
+
+            if (almostReady) {
+                if (lines.get(i).equals("")) {
                     found++;
                 }
                 almostReady = false;
             }
-            
-            if(lines.get(i).startsWith(beginnings.get(current_beginning))){
-                current_beginning ++;
-                if(current_beginning == beginnings.size()){
+
+            if (lines.get(i).startsWith(beginnings.get(current_beginning))) {
+                current_beginning++;
+                if (current_beginning == beginnings.size()) {
                     almostReady = true;
                     current_beginning = 0;
                 }
-            }else{
+            } else {
                 current_beginning = 0;
             }
         }
-        
+
         return found;
     }
-    
+
 }

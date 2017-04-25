@@ -15,12 +15,11 @@ import database.DAO;
 import io.IO;
 import java.util.Map;
 
-public class ArticleEditor extends AbstractEditor{
-    
+public class ArticleEditor extends AbstractEditor {
+
     public ArticleEditor(DAO dao, IO io) {
         super(dao, io, new String[0],
-                new String[]
-                {
+                new String[]{
                     "Artikkeliviitteen muokkaaminen:\n",
                     "1 Artikkelin nimi",
                     "2 Kirjoittaja(t)",
@@ -36,9 +35,9 @@ public class ArticleEditor extends AbstractEditor{
                     "12 Näytä syötetyt tiedot",
                     "13 Lopeta tallentamatta"
                 });
-        
+
         Map<String, Command> commands = super.getCommands();
-        
+
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
         commands.put("6", new BibTexIdCommand(io));
@@ -50,5 +49,5 @@ public class ArticleEditor extends AbstractEditor{
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
     }
-    
+
 }

@@ -17,21 +17,21 @@ import static org.junit.Assert.*;
  * @author klint
  */
 public class InMemoryDAOTest {
-    
+
     InMemoryDAO dao;
-    
+
     @Before
     public void setUp() {
         dao = new InMemoryDAO();
     }
-    
+
     @Test
-    public void InitializingWorks(){
+    public void InitializingWorks() {
         assertTrue(dao.findAll() != null);
     }
-    
+
     @Test
-    public void AddingWorks(){
+    public void AddingWorks() {
         assertTrue(dao.add("teststring"));
         assertEquals(dao.findAll().size(), 1);
     }

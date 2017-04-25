@@ -22,8 +22,7 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
     public ArticleAdder(DAO<ArticleRef> dao, IO io) {
 
         super(dao, io, new String[]{},
-                new String[]
-                {
+                new String[]{
                     "Artikkeliviitteen lisääminen:\n",
                     "1 Artikkelin nimi",
                     "2 Kirjoittaja(t)",
@@ -39,8 +38,8 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
                     "12 Näytä syötetyt tiedot",
                     "13 Lopeta tallentamatta"
                 }
-                );
-        
+        );
+
         Map<String, Command> commands = super.getCommands();
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
@@ -49,7 +48,7 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
         commands.put("8", new NumberCommand(io));
         commands.put("9", new JournalCommand(io));
         commands.put("10", new PagesCommand(io));
-        commands.put("11", new SaveToDbCommand(io,dao));
+        commands.put("11", new SaveToDbCommand(io, dao));
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
     }

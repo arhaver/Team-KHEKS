@@ -7,8 +7,8 @@ import reference.ArticleRef;
 import reference.BookRef;
 import reference.Reference;
 
-public class ListerCommand implements Command{
-    
+public class ListerCommand implements Command {
+
     private DAO<BookRef> bdao;
     private DAO<ArticleRef> adao;
     private IO io;

@@ -10,11 +10,11 @@ import reference.ArticleRef;
 import reference.BookRef;
 import reference.Reference;
 
-public class BibTexCreationCommand implements Command{
+public class BibTexCreationCommand implements Command {
 
     private final IBibtexTranslator translator;
     private final IFilewriter filewriter;
-    
+
     private final IO io;
     private final DAO<BookRef> bookDAO;
     private final DAO<ArticleRef> articleDAO;
@@ -26,25 +26,25 @@ public class BibTexCreationCommand implements Command{
         this.bookDAO = bookDAO;
         this.articleDAO = articleDAO;
     }
-    
+
     @Override
     public boolean execute(Reference ref) {
         String filename = io.readLine("Anna tiedostonimi ");
-        try{
+        try {
             printBibTex(filename);
-            io.print("BibTex tulostettu tiedostoon: "+filename);
+            io.print("BibTex tulostettu tiedostoon: " + filename);
             return false;
-        }catch(Exception e){
-            io.print("Virhe BibTex-tiedostoa luodessa: "+e.getMessage());
+        } catch (Exception e) {
+            io.print("Virhe BibTex-tiedostoa luodessa: " + e.getMessage());
             return true;
         }
     }
-    
-    private void printBibTex(String filename) throws Exception{
+
+    private void printBibTex(String filename) throws Exception {
         List<String> lines = new ArrayList<String>();
         lines = translator.makeBookBibTex(bookDAO, lines);
         lines = translator.makeArticleBibTex(articleDAO, lines);
         filewriter.write(filename, lines);
     }
-    
+
 }

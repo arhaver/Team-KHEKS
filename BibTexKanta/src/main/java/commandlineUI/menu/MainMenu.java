@@ -7,16 +7,18 @@ import commandlineUI.Command;
 import commandlineUI.common.PredefinedPrintCommand;
 import commandlineUI.PrintRef;
 import commandlineUI.common.QuitCommand;
+import commandlineUI.menu.adder.InproceedingsAdder;
 import database.DAO;
 import io.IFilewriter;
 import io.IO;
 import java.util.Map;
 import reference.ArticleRef;
 import reference.BookRef;
+import reference.InproceedingsRef;
 
 public class MainMenu extends Menu{
     
-    public MainMenu(DAO<ArticleRef> adao, DAO<BookRef> bdao, IO io, 
+    public MainMenu(DAO<ArticleRef> adao, DAO<BookRef> bdao, DAO<InproceedingsRef> idao, IO io, 
             IFilewriter filewriter, IBibtexTranslator translator) {
         super(io, 
                 new String[]
@@ -29,8 +31,9 @@ public class MainMenu extends Menu{
                     "Päävalikko:\n",
                     "1 Lisää kirja viiteluetteloon",
                     "2 Lisää artikkeli viiteluetteloon",
-                    "3 Listaa viitteet luettavassa muodossa",
-                    "4 Tulosta viitteet tiedostoon BibTeX-muodossa",
+                    "3 Lisää konferenssijulkaisu viiteluetteloon",
+                    "4 Listaa viitteet luettavassa muodossa",
+                    "5 Tulosta viitteet tiedostoon BibTeX-muodossa",
                     "Q Lopeta ohjelma\n",
                     "Valitse toiminto"
                 });
@@ -39,8 +42,9 @@ public class MainMenu extends Menu{
         
         menuCommandMap.put("1", new BookAdder(bdao, io));
         menuCommandMap.put("2", new ArticleAdder(adao, io));
-        menuCommandMap.put("3", new PrintRef(bdao, adao, io));
-        menuCommandMap.put("4", new BibTexUI(translator, filewriter, io, bdao, adao));
+        menuCommandMap.put("3", new InproceedingsAdder(idao, io));
+        menuCommandMap.put("4", new PrintRef(bdao, adao, io));
+        menuCommandMap.put("5", new BibTexUI(translator, filewriter, io, bdao, adao));
         menuCommandMap.put("q", new QuitCommand());
         
         setDefaultCommand(new PredefinedPrintCommand("\nVirheellinen komento!", io));

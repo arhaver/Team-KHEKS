@@ -4,6 +4,7 @@ import bibtex.IBibtexTranslator;
 import database.DAO;
 import io.IFilewriter;
 import io.IO;
+import java.util.ArrayList;
 import java.util.List;
 import reference.ArticleRef;
 import reference.BookRef;
@@ -40,7 +41,9 @@ public class BibTexCreationCommand implements Command{
     }
     
     private void printBibTex(String filename) throws Exception{
-        List<String> lines = translator.bibTex(bookDAO, articleDAO);
+        List<String> lines = new ArrayList<String>();
+        lines = translator.makeBookBibTex(bookDAO, lines);
+        lines = translator.makeArticleBibTex(articleDAO, lines);
         filewriter.write(filename, lines);
     }
     

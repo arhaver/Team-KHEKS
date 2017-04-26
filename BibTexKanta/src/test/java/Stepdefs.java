@@ -31,6 +31,7 @@ public class Stepdefs {
 
         bdao = new InMemoryDAO<>();
         adao = new InMemoryDAO<>();
+        idao = new InMemoryDAO<>();
 
         io = new StubIO(inputs);
         menu = new MainMenu(adao, bdao, idao, io, null, null);
@@ -39,6 +40,11 @@ public class Stepdefs {
     @When("^User chooses to add book reference$")
     public void user_chooses_to_add_book_reference() throws Throwable {
         inputs.add("1");
+    }
+    
+    @When("^User chooses to add inproceedings reference$")
+    public void user_chooses_to_add_inproceedings_reference() throws Throwable {
+        inputs.add("3");
     }
 
     @When("^User types valid title \"([^\"]*)\"$")
@@ -64,6 +70,11 @@ public class Stepdefs {
     @When("^User confirms the information$")
     public void user_confirms_the_information() throws Throwable {
         inputs.add("7");
+    }
+    
+    @When("^User types valid booktitle \"([^\"]*)\"$")
+    public void user_types_valid_booktitle(String booktitle) throws Throwable {
+        add_choice_input(7, booktitle);
     }
 
     @Then("^book will be added$")
@@ -140,10 +151,20 @@ public class Stepdefs {
     public void user_types_valid_pages(String pages) throws Throwable {
         add_choice_input(10, pages);
     }
+    
+    @When("^User types valid inproceeding pages \"([^\"]*)\"$")
+    public void user_types_valid_inprociiding_pages(String pages) throws Throwable {
+        add_choice_input(8, pages);
+    }
 
     @When("^User confirms the article information$")
     public void user_confirms_the_article_information() throws Throwable {
         inputs.add("11");
+    }
+    
+    @When("^User confirms the inproceedings information$")
+    public void user_confirms_the_inproceedings_information() throws Throwable {
+        inputs.add("9");
     }
 
     @Then("^article will be added$")
@@ -151,10 +172,22 @@ public class Stepdefs {
         run();
         assertTrue(isOutput("Viite lisätty onnistuneesti\n"));
     }
+    
+    @Then("^inproceedings will be added$")
+    public void inproceedings_will_be_added() throws Throwable {
+        run();
+        assertTrue(isOutput("Viite lisätty onnistuneesti\n"));
+    }
 
     @Then("^article won't be added$")
     public void article_won_t_be_added() throws Throwable {
         run("13");
+        assertTrue(isOutput("Tallennus epäonnistui\n"));
+    }
+    
+    @Then("^inproceedings won't be added$")
+    public void inproceedings_won_t_be_added() throws Throwable {
+        run("11");
         assertTrue(isOutput("Tallennus epäonnistui\n"));
     }
 

@@ -1,11 +1,7 @@
 package commandlineUI.menu.adder;
 
-import commandlineUI.menu.adder.ArticleAdder;
 import database.DAO;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import io.StubIO;

@@ -29,6 +29,7 @@ public class Stepdefs {
         
         bdao = new InMemoryDAO<>();
         adao = new InMemoryDAO<>();
+        idao = new InMemoryDAO<>();
         
         io = new StubIO(inputs);
         menu = new MainMenu(adao, bdao, idao, io, null, null);
@@ -178,7 +179,7 @@ public class Stepdefs {
         List<String> outputs = io.getPrintedLines();
         List<String> beginnings = new ArrayList<>();
         beginnings.addAll(Arrays.asList("Title:", "Author(s):", "Year:", "Publisher:",
-                "Address:"));
+                "Address:", "Tex Id: "));
         
         int foundBooks = find_amount_of_given_start_combinations(outputs, beginnings);
         
@@ -192,7 +193,7 @@ public class Stepdefs {
         List<String> outputs = io.getPrintedLines();
         List<String> beginnings = new ArrayList<>();
         beginnings.addAll(Arrays.asList("Title:", "Author(s):", "Year:", "Publisher:",
-                "Address:", "Volume:", "Journal:", "Number:", "Pages:"));
+                "Address:", "Volume:", "Journal:", "Number:", "Pages:", "Tex Id: "));
         
         int foundArticles = find_amount_of_given_start_combinations(outputs, beginnings);
         

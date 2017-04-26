@@ -1,4 +1,5 @@
 
+import bibtex.Translator;
 import commandlineUI.menu.MainMenu;
 import io.StubIO;
 import java.util.ArrayList;
@@ -7,6 +8,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import database.DAO;
 import database.InMemoryDAO;
+import io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.*;
@@ -23,7 +28,10 @@ public class Stepdefs {
     private DAO<BookRef> bdao;
     private DAO<ArticleRef> adao;
     private DAO<InproceedingsRef> idao;
+    private FileWriter writer;
+    private Translator trans;
     private MainMenu menu;
+    private Path testfile;
 
     @Given("^BibTextKanta is set up$")
     public void bibtextkanta_is_set_up() throws Throwable {
@@ -32,9 +40,11 @@ public class Stepdefs {
         bdao = new InMemoryDAO<>();
         adao = new InMemoryDAO<>();
         idao = new InMemoryDAO<>();
+        writer = new FileWriter();
+        trans = new Translator();
 
         io = new StubIO(inputs);
-        menu = new MainMenu(adao, bdao, idao, io, null, null);
+        menu = new MainMenu(adao, bdao, idao, io, writer, trans);
     }
 
     @When("^User chooses to add book reference$")
@@ -243,6 +253,16 @@ public class Stepdefs {
         add_choice_input(9, journal);
         inputs.add("11");
     }
+    
+    @Given("^I've added an inproceedings with title \"([^\"]*)\", author \"([^\"]*)\", publishing year \"([^\"]*)\", booktitle name \"([^\"]*)\"")
+    public void i_ve_added_an_inproceedings_with_title_author_publishing_year_booktitle(String title, String author, String year, String booktitle) throws Throwable {
+        inputs.add("3");
+        add_choice_input(1, title);
+        add_choice_input(2, author);
+        add_choice_input(3, year);
+        add_choice_input(7, booktitle);
+        inputs.add("9");
+    }
 
     @Given("^I've tried to add a book with title \"([^\"]*)\", author \"([^\"]*)\", publishing year \"([^\"]*)\" but without publisher name$")
     public void i_ve_tried_to_add_a_book_with_title_author_publishing_year_but_without_publisher_name(String title, String author, String year) throws Throwable {
@@ -252,6 +272,18 @@ public class Stepdefs {
         add_choice_input(3, year);
         inputs.add("7");
         inputs.add("9");
+    }
+    
+    @When("^I print references to BibTex file \"([^\"]*)\"")
+    public void i_print_references_to_bibtex_file(String filename) throws Throwable {
+        inputs.add("5"); 
+        add_choice_input(1, filename);
+    }
+    
+    @Then("^information of the book is printed to the file \"([^\"]*)\"")
+    public void book_is_printed_to_file(String filename) throws Throwable {
+        testfile = Paths.get(filename);
+        assertTrue(!Files.exists(testfile));
     }
 
     /**/

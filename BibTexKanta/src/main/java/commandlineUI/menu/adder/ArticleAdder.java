@@ -44,7 +44,7 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
         Map<String, Command> commands = super.getCommands();
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
-        commands.put("6", new BibTexIdCommand(io));
+        commands.put("6", new BibTexIdCommand(io, dao));
         commands.put("7", new VolumeCommand(io));
         commands.put("8", new NumberCommand(io));
         commands.put("9", new JournalCommand(io));

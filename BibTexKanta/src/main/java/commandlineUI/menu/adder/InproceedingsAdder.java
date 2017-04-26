@@ -46,7 +46,7 @@ public class InproceedingsAdder extends AbstractAdder<InproceedingsRef> {
         commands.put("3", new YearCommand(io));
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
-        commands.put("6", new BibTexIdCommand(io));
+        commands.put("6", new BibTexIdCommand(io, dao));
         commands.put("7", new BookTitleCommand(io));
         commands.put("8", new PagesCommand(io));
         commands.put("9", new SaveToDbCommand(io,dao));

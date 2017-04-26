@@ -34,7 +34,7 @@ public class BookEditor extends AbstractEditor{
         
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
-        commands.put("6", new BibTexIdCommand(io));
+        commands.put("6", new BibTexIdCommand(io, dao));
         commands.put("7", new SaveEditCommand(this, io));
         commands.put("8", new PrintStatusCommand(io));
         commands.put("9", new QuitCommand());

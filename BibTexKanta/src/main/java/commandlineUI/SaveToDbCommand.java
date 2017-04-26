@@ -1,7 +1,7 @@
 package commandlineUI;
 
 import database.DAO;
-import database.DaoService;
+import service.BibTexIdService;
 import io.IO;
 import reference.Reference;
 
@@ -22,8 +22,11 @@ public class SaveToDbCommand implements Command {
             io.print("Tallennus epäonnistui\n");
             return true; // HUOM!!
         }
-        
-        checkBibTx(ref);
+
+        if (ref.getField("bibTexId") == null) {
+           BibTexIdService btids = dao.getDaoService().getBibTexIdService();
+           btids.generateId(ref);
+        }
 
         try {
             dao.add(ref);
@@ -35,18 +38,5 @@ public class SaveToDbCommand implements Command {
             return true; //Näin tää nyt menee
 
         }
-    }
-   
-    private void checkBibTx(Reference ref) { 
-        DaoService ds = dao.getDaoService();        
-        String bibidCandidate = ref.getField("bibTexId");
-        if (bibidCandidate == null) 
-            bibidCandidate = generateBibIdCandidate(ref);      
-        ref.setField("bibTexId", ds.verifyBibTexId(bibidCandidate));
-    }
-    
-    private String generateBibIdCandidate(Reference ref) {
-        String athrs = ref.getField("authors");
-        return athrs.substring(0, 2) + ref.getYear();
     }
 }

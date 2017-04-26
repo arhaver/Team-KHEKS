@@ -2,7 +2,7 @@ package commandlineUI.menu.adder;
 
 import commandlineUI.menu.adder.ArticleAdder;
 import database.DAO;
-import database.DaoService;
+import service.BibTexIdService;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,6 +13,7 @@ import io.StubIO;
 import database.InMemoryDAO;
 import java.util.ArrayList;
 import reference.ArticleRef;
+import service.DaoService;
 
 /**
  *

@@ -5,7 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import database.DAO;
-import database.DaoService;
+import service.BibTexIdService;
 import database.InMemoryDAO;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 import reference.ArticleRef;
 import reference.BookRef;
 import reference.InproceedingsRef;
+import service.DaoService;
 
 public class Stepdefs {
     private List<String> inputs;

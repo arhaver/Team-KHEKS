@@ -8,25 +8,14 @@ import java.util.List;
 //import java.util.ArrayList;
 //import java.util.List;
 //
-public abstract class AbstractDAO<T> implements DAO<T> {
-
-    DaoService ds;
-    
-    @Override
-    public abstract boolean add(T t);
-    
-    @Override
-    public abstract List<T> findAll();
-    
-    @Override
-    public void setDaoService(DaoService newDs) {
-        ds = newDs;
-    }
-    
-    @Override
-    public DaoService getDaoService() {
-        return ds;
-    }
+//public abstract class AbstractDAO<T> implements DAO<T> {
+//
+//    @Override
+//    public abstract boolean add(T t);
+//    
+//    @Override
+//    public abstract List<T> findAll();
+//    }
 
 //
 //    private final String tableName;
@@ -137,4 +126,4 @@ public abstract class AbstractDAO<T> implements DAO<T> {
 //    private void printError(Exception e){
 //        
 //    }
-}
+//}

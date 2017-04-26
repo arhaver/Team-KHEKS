@@ -1,18 +1,14 @@
 package commandlineUI.menu.adder;
 
-import commandlineUI.menu.adder.BookAdder;
 import database.DAO;
-import service.BibTexIdService;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import io.StubIO;
 import database.InMemoryDAO;
 import java.util.ArrayList;
 import reference.BookRef;
+import service.BibTexIdService;
 import service.DaoService;
 
 /**
@@ -31,9 +27,7 @@ public class BookAdderTest {
         lines = new ArrayList<>();
         bookDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        DaoService ds = new DaoService(bookDAO);
-        bookDAO.setDaoService(ds);
-        bookAdder = new BookAdder(bookDAO, io);
+        bookAdder = new BookAdder(bookDAO, io, new BibTexIdService());
     }
 
     @Test

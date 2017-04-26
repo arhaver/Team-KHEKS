@@ -5,10 +5,7 @@
  */
 package database;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import reference.BookRef;
@@ -26,8 +23,6 @@ public class InMemoryDAOTest {
     @Before
     public void setUp() {       
         dao = new InMemoryDAO();
-        DaoService ds = new DaoService();
-        dao.setDaoService(ds);
     }
     
     @Test

@@ -7,12 +7,14 @@ import reference.Reference;
 
 public class SaveToDbCommand implements Command {
 
-    IO io;
-    DAO dao;
+    private IO io;
+    private DAO dao;
+    private BibTexIdService btids;
 
-    public SaveToDbCommand(IO io, DAO dao) {
+    public SaveToDbCommand(IO io, DAO dao, BibTexIdService bibtexservice) {
         this.io = io;
         this.dao = dao;
+        this.btids = bibtexservice;
     }
 
     @Override
@@ -24,7 +26,6 @@ public class SaveToDbCommand implements Command {
         }
 
         if (ref.getField("bibTexId") == null) {
-           BibTexIdService btids = dao.getDaoService().getBibTexIdService();
            btids.generateId(ref);
         }
 

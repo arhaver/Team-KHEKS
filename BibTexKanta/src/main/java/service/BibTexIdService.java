@@ -2,6 +2,7 @@ package service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import reference.Reference;
 
@@ -9,7 +10,11 @@ public class BibTexIdService {
 
     private Set<String> idset;
 
-    public BibTexIdService(ArrayList<Reference> references) {
+    public BibTexIdService(){
+        this(new ArrayList<>());
+    }
+    
+    public BibTexIdService(List<Reference> references) {
         idset = new HashSet<>();
         buildIdSet(references);
     }
@@ -39,7 +44,7 @@ public class BibTexIdService {
         ref.setField("bibTexId", candidate);
     }
 
-    private void buildIdSet(ArrayList<Reference> references) {
+    private void buildIdSet(List<Reference> references) {
         if (references != null) {
             for (Reference ref : references) {
                 idset.add(ref.getField("bibTexId"));

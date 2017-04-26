@@ -6,15 +6,15 @@ import commandlineUI.Command;
 import commandlineUI.PrintStatusCommand;
 import commandlineUI.PublisherCommand;
 import commandlineUI.SaveEditCommand;
-import commandlineUI.SaveToDbCommand;
 import commandlineUI.common.QuitCommand;
 import database.DAO;
 import io.IO;
 import java.util.Map;
+import service.BibTexIdService;
 
 public class BookEditor extends AbstractEditor{
     
-    public BookEditor(DAO dao, IO io) {
+    public BookEditor(DAO dao, IO io, BibTexIdService service) {
         super(dao, io, new String[0], 
                 new String[]
                 {
@@ -34,7 +34,7 @@ public class BookEditor extends AbstractEditor{
         
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
-        commands.put("6", new BibTexIdCommand(io, dao));
+        commands.put("6", new BibTexIdCommand(io, dao, service));
         commands.put("7", new SaveEditCommand(this, io));
         commands.put("8", new PrintStatusCommand(io));
         commands.put("9", new QuitCommand());

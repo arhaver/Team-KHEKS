@@ -2,10 +2,8 @@ package database;
 
 import java.util.ArrayList;
 import java.util.List;
-import reference.Reference;
-import service.DaoService;
 
-public class InMemoryDAO<T> extends AbstractDAO<T> implements DAO<T>{
+public class InMemoryDAO<T> implements DAO<T>{
 
     private List<T> ts;
     
@@ -20,10 +18,7 @@ public class InMemoryDAO<T> extends AbstractDAO<T> implements DAO<T>{
 
     @Override
     public boolean add(T t){
-        boolean success = ts.add(t);
-        if (success)
-            ds.addReference((Reference) t);
-        return success;
+        return ts.add(t);
     }
     
 }

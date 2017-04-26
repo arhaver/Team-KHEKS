@@ -1,18 +1,14 @@
 package commandlineUI.menu.adder;
 
-import commandlineUI.menu.adder.ArticleAdder;
 import database.DAO;
-import service.BibTexIdService;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import io.StubIO;
 import database.InMemoryDAO;
 import java.util.ArrayList;
 import reference.ArticleRef;
+import service.BibTexIdService;
 import service.DaoService;
 
 /**
@@ -31,9 +27,7 @@ public class ArticleAdderTest {
         lines = new ArrayList<>();
         articleDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        DaoService ds = new DaoService(articleDAO);
-        articleDAO.setDaoService(ds);
-        articleAdder = new ArticleAdder(articleDAO, io);
+        articleAdder = new ArticleAdder(articleDAO, io, new BibTexIdService());
     }
 
     @Test

@@ -10,8 +10,4 @@ public interface DAO<T> {
     
     //Lisää tietokantaan annetun T:n
     public boolean add(T t); 
-    
-    public void setDaoService(DaoService newDs);
-    
-    public DaoService getDaoService();
 }

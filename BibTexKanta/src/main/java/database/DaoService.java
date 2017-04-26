@@ -12,20 +12,26 @@ import reference.Reference;
 
 public class DaoService {
         private Set<String> bibtexids;
+        DAO[] daos;
     
-    public DaoService (DAO... daos) {
+    public DaoService (DAO... newDaos) {
         
         bibtexids = new HashSet<>();
-        bibtexids.add("hello");
-        for (DAO dao : daos) {           
+        daos = newDaos;
+    }
+    
+    private void updateDaos() {
+            for (DAO dao : daos) {           
             List<Reference> refs = dao.findAll();
             for (Reference ref : refs)
                 bibtexids.add(ref.getField("bibTexId"));
-        }    
-
+        }
+        
     }
     
     public String verifyBibTexId(String candidate) {
+        
+        updateDaos();        
         if (bibtexids.contains(candidate))
             return autoGenerate(candidate);
         return candidate;

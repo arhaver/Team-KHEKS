@@ -2,6 +2,7 @@ package commandlineUI.menu.adder;
 
 import commandlineUI.menu.adder.ArticleAdder;
 import database.DAO;
+import database.DaoService;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +30,8 @@ public class ArticleAdderTest {
         lines = new ArrayList<>();
         articleDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
+        DaoService ds = new DaoService(articleDAO);
+        articleDAO.setDaoService(ds);
         articleAdder = new ArticleAdder(articleDAO, io);
     }
 

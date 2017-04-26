@@ -1,6 +1,7 @@
 import bibtex.Translator;
 import io.ConsoleIO;
 import commandlineUI.menu.MainMenu;
+import database.DaoService;
 import database.InMemoryDAO;
 import io.FileWriter;
 import reference.ArticleRef;
@@ -13,6 +14,12 @@ public class Main {
         InMemoryDAO<BookRef> bdao = new InMemoryDAO<>();
         InMemoryDAO<ArticleRef> adao = new InMemoryDAO<>();
         InMemoryDAO<InproceedingsRef> idao = new InMemoryDAO<>();
+        
+        DaoService ds = new DaoService(bdao, adao, idao);
+        bdao.setDaoService(ds);
+        adao.setDaoService(ds);
+        idao.setDaoService(ds);      
+        
         ConsoleIO io = new ConsoleIO();
         FileWriter writer = new FileWriter();
         Translator trans = new Translator();

@@ -3,7 +3,7 @@ package database;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryDAO<T> implements DAO<T>{
+public class InMemoryDAO<T> extends AbstractDAO<T> implements DAO<T>{
 
     private List<T> ts;
     

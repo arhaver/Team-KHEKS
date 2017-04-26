@@ -2,6 +2,7 @@ package commandlineUI.menu.adder;
 
 import commandlineUI.menu.adder.BookAdder;
 import database.DAO;
+import database.DaoService;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +30,8 @@ public class BookAdderTest {
         lines = new ArrayList<>();
         bookDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
+        DaoService ds = new DaoService(bookDAO);
+        bookDAO.setDaoService(ds);
         bookAdder = new BookAdder(bookDAO, io);
     }
 

@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import database.DAO;
+import database.DaoService;
 import database.InMemoryDAO;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +30,12 @@ public class Stepdefs {
         
         bdao = new InMemoryDAO<>();
         adao = new InMemoryDAO<>();
+        idao = new InMemoryDAO<>();
+        
+        DaoService ds = new DaoService(bdao, adao, idao);
+        bdao.setDaoService(ds);
+        adao.setDaoService(ds);
+        idao.setDaoService(ds);  
         
         io = new StubIO(inputs);
         menu = new MainMenu(adao, bdao, idao, io, null, null);

@@ -1,13 +1,35 @@
-//package database;
-//
+package database;
+
 //import java.sql.Connection;
+
+import java.util.List;
+
 //import java.sql.PreparedStatement;
 //import java.sql.ResultSet;
 //import java.sql.Timestamp;
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//public abstract class AbstractDAO<T> implements DAO<T>{
+public abstract class AbstractDAO<T> implements DAO<T> {
+
+    DaoService ds;
+    
+    @Override
+    public abstract boolean add(T t);
+    
+    @Override
+    public abstract List<T> findAll();
+    
+    @Override
+    public void setDaoService(DaoService newDs) {
+        ds = newDs;
+    }
+    
+    @Override
+    public DaoService getDaoService() {
+        return ds;
+    }
+
 //
 //    private final String tableName;
 //    private final String columns;
@@ -117,5 +139,4 @@
 //    private void printError(Exception e){
 //        
 //    }
-//    
-//}
+}

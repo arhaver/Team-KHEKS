@@ -18,6 +18,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import reference.ArticleRef;
 import reference.BookRef;
+import reference.InproceedingsRef;
 
 /**
  *
@@ -37,12 +38,7 @@ public class BibTexUITest {
         }
     }
 
-    private class StubBibtexTranslator implements IBibtexTranslator {
-
-        @Override
-        public List<String> bibTex(DAO... daos) {
-            return null;
-        }
+    private class StubBibtexTranslator implements IBibtexTranslator{
 
         @Override
         public List<String> makeBookBibTex(DAO<BookRef> bookDAO, List<String> lines) {
@@ -51,6 +47,11 @@ public class BibTexUITest {
 
         @Override
         public List<String> makeArticleBibTex(DAO<ArticleRef> articleDAO, List<String> lines) {
+            return null;
+        }
+
+        @Override
+        public List<String> makeInproceedingsBibTex(DAO<InproceedingsRef> inDAO, List<String> lines) {
             return null;
         }
     }
@@ -66,7 +67,7 @@ public class BibTexUITest {
     public void setUp() {
         komennot = new ArrayList<>();
         io = new StubIO(komennot);
-        ui = new BibTexUI(t, w, io, new InMemoryDAO<>(), new InMemoryDAO<>());
+        ui = new BibTexUI(t, w, io, new InMemoryDAO<>(), new InMemoryDAO<>(), new InMemoryDAO<>());
     }
 
     @Test

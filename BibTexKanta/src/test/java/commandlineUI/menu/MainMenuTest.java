@@ -1,7 +1,5 @@
 package commandlineUI.menu;
 
-
-import commandlineUI.menu.MainMenu;
 import database.DAO;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -42,7 +40,7 @@ public class MainMenuTest {
         bookDAO = new InMemoryDAO<>();
         articleDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        mainMenu = new MainMenu(articleDAO, bookDAO, inproceedingsDAO, io, null, null);
+        mainMenu = new MainMenu(articleDAO, bookDAO, inproceedingsDAO, io, null, null, null);
     }
     
     @After

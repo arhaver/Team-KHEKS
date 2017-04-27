@@ -14,10 +14,13 @@ import commandlineUI.common.QuitCommand;
 import database.DAO;
 import io.IO;
 import java.util.Map;
+import reference.ArticleRef;
+import reference.Reference;
+import service.BibTexIdService;
 
 public class ArticleEditor extends AbstractEditor{
     
-    public ArticleEditor(DAO dao, IO io) {
+    public ArticleEditor(DAO dao, IO io, BibTexIdService service) {
         super(dao, io, new String[0],
                 new String[]
                 {
@@ -41,7 +44,7 @@ public class ArticleEditor extends AbstractEditor{
         
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
-        commands.put("6", new BibTexIdCommand(io));
+        commands.put("6", new BibTexIdCommand(io, dao, service));
         commands.put("7", new VolumeCommand(io));
         commands.put("8", new NumberCommand(io));
         commands.put("9", new JournalCommand(io));
@@ -49,6 +52,11 @@ public class ArticleEditor extends AbstractEditor{
         commands.put("11", new SaveEditCommand(this, io));
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
+    }
+
+    @Override
+    protected Reference createReference() {
+        return new ArticleRef();
     }
     
 }

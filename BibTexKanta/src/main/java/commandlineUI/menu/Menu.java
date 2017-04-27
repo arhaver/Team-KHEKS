@@ -13,7 +13,7 @@ public abstract class Menu implements Command{
     private String[] startLines;
     private Command defaultCommand;
     
-    private IO io;
+    protected IO io;
     
     private Reference givenRef;
     

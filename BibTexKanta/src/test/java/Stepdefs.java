@@ -12,6 +12,8 @@ import static org.junit.Assert.*;
 import reference.ArticleRef;
 import reference.BookRef;
 import reference.InproceedingsRef;
+import service.BibTexIdService;
+import service.DaoService;
 
 public class Stepdefs {
     private List<String> inputs;
@@ -32,7 +34,7 @@ public class Stepdefs {
         idao = new InMemoryDAO<>();
         
         io = new StubIO(inputs);
-        menu = new MainMenu(adao, bdao, idao, io, null, null);
+        menu = new MainMenu(adao, bdao, idao, io, null, null, new BibTexIdService());
     }
 
     @When("^User chooses to add book reference$")

@@ -1,16 +1,20 @@
 package commandlineUI;
+
 import database.DAO;
+import service.BibTexIdService;
 import io.IO;
 import reference.Reference;
 
 public class SaveToDbCommand implements Command {
-    
-    IO io;
-    DAO dao;
-    
-    public SaveToDbCommand(IO io, DAO dao) {
+
+    private IO io;
+    private DAO dao;
+    private BibTexIdService btids;
+
+    public SaveToDbCommand(IO io, DAO dao, BibTexIdService bibtexservice) {
         this.io = io;
         this.dao = dao;
+        this.btids = bibtexservice;
     }
 
     @Override
@@ -19,6 +23,10 @@ public class SaveToDbCommand implements Command {
         if (!ref.readyForDb()) {
             io.print("Tallennus epäonnistui\n");
             return true; // HUOM!!
+        }
+
+        if (ref.getField("bibTexId") == null) {
+           btids.generateId(ref);
         }
 
         try {
@@ -33,4 +41,3 @@ public class SaveToDbCommand implements Command {
         }
     }
 }
-

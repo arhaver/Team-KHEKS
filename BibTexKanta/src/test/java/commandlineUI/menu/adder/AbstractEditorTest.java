@@ -16,7 +16,7 @@ public class AbstractEditorTest {
     
     @Before
     public void setUp() {
-        editor = new AbstractEditor(null, null, null, null);
+        editor = new BookEditor(null, null, null);
         
         book1 = new BookRef();
         book1.setField("title", "asdasd");

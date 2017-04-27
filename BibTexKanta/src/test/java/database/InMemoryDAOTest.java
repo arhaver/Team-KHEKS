@@ -5,12 +5,12 @@
  */
 package database;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import reference.BookRef;
+import reference.Reference;
+import service.DaoService;
 
 /**
  *
@@ -21,7 +21,7 @@ public class InMemoryDAOTest {
     InMemoryDAO dao;
     
     @Before
-    public void setUp() {
+    public void setUp() {       
         dao = new InMemoryDAO();
     }
     
@@ -32,7 +32,12 @@ public class InMemoryDAOTest {
     
     @Test
     public void AddingWorks(){
-        assertTrue(dao.add("teststring"));
+        Reference ref = new BookRef();
+        ref.setField("title", "title");
+        ref.setField("authors", "title");
+        ref.setField("publisher", "title");
+        ref.setYear(1999);
+        assertTrue(dao.add(ref));
         assertEquals(dao.findAll().size(), 1);
     }
 }

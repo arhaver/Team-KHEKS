@@ -16,10 +16,11 @@ import io.IO;
 import java.util.Map;
 import reference.ArticleRef;
 import reference.Reference;
+import service.BibTexIdService;
 
 public class ArticleAdder extends AbstractAdder<ArticleRef> {
 
-    public ArticleAdder(DAO<ArticleRef> dao, IO io) {
+    public ArticleAdder(DAO<ArticleRef> dao, IO io, BibTexIdService service) {
 
         super(dao, io, new String[]{},
                 new String[]
@@ -44,12 +45,12 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
         Map<String, Command> commands = super.getCommands();
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
-        commands.put("6", new BibTexIdCommand(io));
+        commands.put("6", new BibTexIdCommand(io, dao, service));
         commands.put("7", new VolumeCommand(io));
         commands.put("8", new NumberCommand(io));
         commands.put("9", new JournalCommand(io));
         commands.put("10", new PagesCommand(io));
-        commands.put("11", new SaveToDbCommand(io,dao));
+        commands.put("11", new SaveToDbCommand(io,dao, service));
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
     }

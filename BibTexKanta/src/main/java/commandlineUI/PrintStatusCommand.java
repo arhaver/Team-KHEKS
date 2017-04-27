@@ -16,8 +16,8 @@ public class PrintStatusCommand implements Command {
 
     @Override
     public boolean execute(Reference ref) {
-        
+
         io.print(ref.toString());
         return true;
-  }
+    }
 }

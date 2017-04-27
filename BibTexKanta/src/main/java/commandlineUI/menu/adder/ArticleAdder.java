@@ -23,8 +23,7 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
     public ArticleAdder(DAO<ArticleRef> dao, IO io, BibTexIdService service) {
 
         super(dao, io, new String[]{},
-                new String[]
-                {
+                new String[]{
                     "Artikkeliviitteen lisääminen:\n",
                     "1 Artikkelin nimi",
                     "2 Kirjoittaja(t)",
@@ -40,8 +39,8 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
                     "12 Näytä syötetyt tiedot",
                     "13 Lopeta tallentamatta"
                 }
-                );
-        
+        );
+
         Map<String, Command> commands = super.getCommands();
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));

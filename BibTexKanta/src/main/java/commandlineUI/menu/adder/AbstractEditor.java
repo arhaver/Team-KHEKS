@@ -9,21 +9,21 @@ public abstract class AbstractEditor extends AbstractAdder{
 
     private Reference trueRef;
     private Reference editRef;
-    
+
     public AbstractEditor(DAO dao, IO io, String[] startLines, String[] askPrompts) {
         super(dao, io, startLines, askPrompts);
     }
 
-    public void setRef(Reference ref){
+    public void setRef(Reference ref) {
         this.trueRef = ref;
         this.editRef = createReference();
         
         Map<String, String> allFields = trueRef.getAllFields();
-        
-        for(String fieldName : allFields.keySet()){
+
+        for (String fieldName : allFields.keySet()) {
             editRef.setField(fieldName, allFields.get(fieldName));
         }
-        
+
         editRef.setYear(trueRef.getYear());
     }
 
@@ -41,5 +41,4 @@ public abstract class AbstractEditor extends AbstractAdder{
     }
     
     protected abstract Reference createReference();
-    
 }

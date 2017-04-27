@@ -24,8 +24,7 @@ public class InproceedingsAdder extends AbstractAdder<InproceedingsRef> {
     public InproceedingsAdder(DAO<InproceedingsRef> dao, IO io, BibTexIdService service) {
 
         super(dao, io, new String[]{},
-                new String[]
-                {
+                new String[]{
                     "Konferenssijulkaisuviitteen lisääminen:\n",
                     "1 Artikkelin nimi",
                     "2 Kirjoittaja(t)",
@@ -39,8 +38,8 @@ public class InproceedingsAdder extends AbstractAdder<InproceedingsRef> {
                     "10 Näytä syötetyt tiedot",
                     "11 Lopeta tallentamatta"
                 }
-                );
-        
+        );
+
         Map<String, Command> commands = super.getCommands();
         commands.put("1", new TitleCommand(io));
         commands.put("2", new AuthorsCommand(io));

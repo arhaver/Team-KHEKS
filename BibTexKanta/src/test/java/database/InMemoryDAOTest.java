@@ -17,19 +17,19 @@ import service.DaoService;
  * @author klint
  */
 public class InMemoryDAOTest {
-    
+
     InMemoryDAO dao;
-    
+
     @Before
     public void setUp() {       
         dao = new InMemoryDAO();
     }
-    
+
     @Test
-    public void InitializingWorks(){
+    public void InitializingWorks() {
         assertTrue(dao.findAll() != null);
     }
-    
+
     @Test
     public void AddingWorks(){
         Reference ref = new BookRef();

@@ -31,9 +31,9 @@ public class BookEditor extends AbstractEditor{
                     "8 Näytä syötetyt tiedot",
                     "9 Lopeta tallentamatta"
                 });
-        
+
         Map<String, Command> commands = super.getCommands();
-        
+
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
         commands.put("6", new BibTexIdCommand(io, dao, service));
@@ -46,5 +46,4 @@ public class BookEditor extends AbstractEditor{
     protected Reference createReference() {
         return new BookRef();
     }
-    
 }

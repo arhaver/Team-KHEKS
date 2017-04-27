@@ -85,5 +85,4 @@ public class ChooseEditedMenu extends Menu {
         return true;
 
     }
-
 }

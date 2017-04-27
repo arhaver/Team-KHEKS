@@ -1,4 +1,5 @@
 package commandlineUI;
+
 import database.DAO;
 import io.IO;
 import reference.Reference;
@@ -18,12 +19,12 @@ public class BibTexIdCommand implements Command {
 
     @Override
     public boolean execute(Reference ref) {
-        String bibTex =  io.readLine("Anna viitteelle BibTex -tunniste:\n"
+        String bibTex = io.readLine("Anna viitteelle BibTex -tunniste:\n"
                 + "Jos tyhjä, tämä generoidaan automaattisesti.");
-        
-        if (service.saveId(bibTex, ref))
+        if (service.saveId(bibTex, ref)){
             return true;
-        io.print("Lisäys '" +bibTex+ "' virheellinen\n");
+        }
+        io.print("Lisäys '" + bibTex + "' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee
     }
 }

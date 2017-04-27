@@ -30,14 +30,14 @@ public class StubIO implements IO {
     }
 
     public String getLastPrint() {
-        return printedLines.get(printedLines.size()-1);
+        return printedLines.get(printedLines.size() - 1);
     }
-    
-    public int howManyInputsRead(){
+
+    public int howManyInputsRead() {
         return i;
     }
-    
-    public boolean outputsContainsLine(String line){
+
+    public boolean outputsContainsLine(String line) {
         return printedLines.contains(line);
     }
 
@@ -52,7 +52,7 @@ public class StubIO implements IO {
 
     @Override
     public void printLines(String[] lines) {
-        for(String line : lines){
+        for (String line : lines) {
             print(line);
         }
     }

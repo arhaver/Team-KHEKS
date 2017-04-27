@@ -30,7 +30,7 @@ public class ConsoleIO implements IO {
 
     @Override
     public void printLines(String[] lines) {
-        for(String line : lines){
+        for (String line : lines) {
             print(line);
         }
     }

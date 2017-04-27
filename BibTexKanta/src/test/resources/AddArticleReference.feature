@@ -15,7 +15,7 @@ Feature: As a user I want to be able to add new article reference
     And User confirms the article information
     Then article will be added
 
-   Scenario: user can add article with only title, authors, year, journal, volume and number
+  Scenario: user can add article with only title, authors, year, journal, volume and number
     Given BibTextKanta is set up
     When User chooses to add article reference
     And User types valid title "Kaiken ABC"
@@ -27,7 +27,7 @@ Feature: As a user I want to be able to add new article reference
     And User confirms the article information
     Then article will be added
 
-   Scenario: user cannot add article without needed information
+  Scenario: user cannot add article without needed information
     Given BibTextKanta is set up
     When User chooses to add article reference
     And User confirms the article information

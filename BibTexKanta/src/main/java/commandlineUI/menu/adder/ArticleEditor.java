@@ -22,8 +22,7 @@ public class ArticleEditor extends AbstractEditor{
     
     public ArticleEditor(DAO dao, IO io, BibTexIdService service) {
         super(dao, io, new String[0],
-                new String[]
-                {
+                new String[]{
                     "Artikkeliviitteen muokkaaminen:\n",
                     "1 Artikkelin nimi",
                     "2 Kirjoittaja(t)",
@@ -39,9 +38,9 @@ public class ArticleEditor extends AbstractEditor{
                     "12 Näytä syötetyt tiedot",
                     "13 Lopeta tallentamatta"
                 });
-        
+
         Map<String, Command> commands = super.getCommands();
-        
+
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
         commands.put("6", new BibTexIdCommand(io, dao, service));
@@ -58,5 +57,4 @@ public class ArticleEditor extends AbstractEditor{
     protected Reference createReference() {
         return new ArticleRef();
     }
-    
 }

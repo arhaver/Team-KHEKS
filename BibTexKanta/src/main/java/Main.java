@@ -1,3 +1,4 @@
+
 import bibtex.Translator;
 import io.ConsoleIO;
 import commandlineUI.menu.MainMenu;
@@ -9,9 +10,9 @@ import reference.InproceedingsRef;
 import service.BibTexIdService;
 import service.DaoService;
 
-public class Main {    
-      
-    public static void main(String[] args){
+public class Main {
+
+    public static void main(String[] args) {
         InMemoryDAO<BookRef> bdao = new InMemoryDAO<>();
         InMemoryDAO<ArticleRef> adao = new InMemoryDAO<>();
         InMemoryDAO<InproceedingsRef> idao = new InMemoryDAO<>();   

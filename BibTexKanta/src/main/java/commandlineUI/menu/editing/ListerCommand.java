@@ -47,24 +47,24 @@ public class ListerCommand implements Command {
         for (Reference article : articles)
             returnable.put(Integer.toString(i++), article);
         
-        if (returnable.isEmpty())
-        {
-                    
-        BookRef myBook = new BookRef();
-        myBook.setField("title", "kirja1");
-        myBook.setField("authors", "jätkät");
-        myBook.setField("publisher", "otava");
-        myBook.setYear(1999);
-        
-        BookRef myBook2 = new BookRef();
-        myBook2.setField("title", "kirja2");
-        myBook2.setField("authors", "käpistäjät");
-        myBook2.setField("publisher", "tammi");
-        myBook2.setYear(2000);
-        
-        returnable.put("1", myBook);
-        returnable.put("2", myBook2);
-        }
+//        if (returnable.isEmpty())
+//        {
+//                    
+//        BookRef myBook = new BookRef();
+//        myBook.setField("title", "kirja1");
+//        myBook.setField("authors", "jätkät");
+//        myBook.setField("publisher", "otava");
+//        myBook.setYear(1999);
+//        
+//        BookRef myBook2 = new BookRef();
+//        myBook2.setField("title", "kirja2");
+//        myBook2.setField("authors", "käpistäjät");
+//        myBook2.setField("publisher", "tammi");
+//        myBook2.setYear(2000);
+//        
+//        returnable.put("1", myBook);
+//        returnable.put("2", myBook2);
+//        }
 
         returnable.put("0", null);
         return returnable;       

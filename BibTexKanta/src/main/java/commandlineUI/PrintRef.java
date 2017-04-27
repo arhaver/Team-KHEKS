@@ -4,6 +4,8 @@ import database.DAO;
 import io.IO;
 import java.util.List;
 import java.util.Map;
+import reference.ArticleRef;
+import reference.BookRef;
 import reference.Reference;
 /*
 Luokka joka tulostaa ihmisluettavasti tallennettavat referenssit
@@ -26,8 +28,14 @@ public class PrintRef implements Command{
         if(!books.isEmpty()) printBooks(books);
         }
     
-    private void printArticles(List<Reference> articles) {
-        for(Reference article : articles) {
+    public void printAnyRef(Reference newRef) {
+        if (newRef instanceof ArticleRef)
+            printArticle(newRef);
+        else if (newRef instanceof BookRef)
+            printBook(newRef);
+    }
+    
+    public void printArticle(Reference article) {
             io.print("Title: " +article.getField("title"));
             io.print("Author(s): " +article.getField("authors"));
             io.print("Year: " +article.getYear());
@@ -38,17 +46,26 @@ public class PrintRef implements Command{
             io.print("Number: " +article.getField("number"));
             io.print("Pages: " +article.getField("pages"));
             io.print("");
-        }
     }
     
-    private void printBooks(List<Reference> books) {
-        for(Reference book : books) {
+    public void printBook(Reference book) {
             io.print("Title: " +book.getField("title"));
             io.print("Author(s): " +book.getField("authors"));
             io.print("Year: " +book.getYear());
             io.print("Publisher: " +book.getField("publisher"));
             io.print("Address: " +book.getField("address"));
-            io.print("");
+            io.print("");        
+    }
+    
+    private void printArticles(List<Reference> articles) {
+        for(Reference article : articles) {
+            printArticle(article);
+        }
+    }
+    
+    private void printBooks(List<Reference> books) {
+        for(Reference book : books) {
+            printBook(book);
         }
     }
 

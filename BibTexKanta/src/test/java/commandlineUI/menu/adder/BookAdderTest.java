@@ -8,6 +8,8 @@ import io.StubIO;
 import database.InMemoryDAO;
 import java.util.ArrayList;
 import reference.BookRef;
+import service.BibTexIdService;
+import service.DaoService;
 
 /**
  *
@@ -25,7 +27,7 @@ public class BookAdderTest {
         lines = new ArrayList<>();
         bookDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        bookAdder = new BookAdder(bookDAO, io);
+        bookAdder = new BookAdder(bookDAO, io, new BibTexIdService());
     }
 
     @Test

@@ -3,10 +3,9 @@ package commandlineUI.menu.adder;
 import database.DAO;
 import io.IO;
 import java.util.Map;
-import reference.ArticleRef;
 import reference.Reference;
 
-public class AbstractEditor extends AbstractAdder {
+public abstract class AbstractEditor extends AbstractAdder{
 
     private Reference trueRef;
     private Reference editRef;
@@ -17,8 +16,8 @@ public class AbstractEditor extends AbstractAdder {
 
     public void setRef(Reference ref) {
         this.trueRef = ref;
-        this.editRef = new ArticleRef();
-
+        this.editRef = createReference();
+        
         Map<String, String> allFields = trueRef.getAllFields();
 
         for (String fieldName : allFields.keySet()) {
@@ -40,5 +39,6 @@ public class AbstractEditor extends AbstractAdder {
     protected Reference createReferenceSkeleton() {
         return editRef;
     }
-
+    
+    protected abstract Reference createReference();
 }

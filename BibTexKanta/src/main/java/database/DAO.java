@@ -1,5 +1,6 @@
 package database;
 
+import service.DaoService;
 import java.util.List;
 
 public interface DAO<T> {

@@ -8,6 +8,7 @@ import io.StubIO;
 import database.InMemoryDAO;
 import java.util.ArrayList;
 import reference.InproceedingsRef;
+import service.BibTexIdService;
 
 
 public class InproceedingsAdderTest {
@@ -16,13 +17,15 @@ public class InproceedingsAdderTest {
     DAO<InproceedingsRef> inproceedingsDAO;
     StubIO io;
     InproceedingsAdder inproceedingsAdder;
+    BibTexIdService service;
 
     @Before
     public void setUp() {
         lines = new ArrayList<>();
         inproceedingsDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        inproceedingsAdder = new InproceedingsAdder(inproceedingsDAO, io);
+        service = new BibTexIdService();
+        inproceedingsAdder = new InproceedingsAdder(inproceedingsDAO, io, service);
     }
 
     @Test

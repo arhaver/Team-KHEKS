@@ -18,6 +18,8 @@ import static org.junit.Assert.*;
 import reference.ArticleRef;
 import reference.BookRef;
 import reference.InproceedingsRef;
+import service.BibTexIdService;
+import service.DaoService;
 
 public class Stepdefs {
 
@@ -44,7 +46,7 @@ public class Stepdefs {
         trans = new Translator();
 
         io = new StubIO(inputs);
-        menu = new MainMenu(adao, bdao, idao, io, writer, trans);
+        menu = new MainMenu(adao, bdao, idao, io, writer, trans, new BibTexIdService());
     }
 
     @When("^User chooses to add book reference$")

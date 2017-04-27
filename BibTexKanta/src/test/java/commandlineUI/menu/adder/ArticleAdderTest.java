@@ -8,6 +8,8 @@ import io.StubIO;
 import database.InMemoryDAO;
 import java.util.ArrayList;
 import reference.ArticleRef;
+import service.BibTexIdService;
+import service.DaoService;
 
 /**
  *
@@ -25,7 +27,7 @@ public class ArticleAdderTest {
         lines = new ArrayList<>();
         articleDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        articleAdder = new ArticleAdder(articleDAO, io);
+        articleAdder = new ArticleAdder(articleDAO, io, new BibTexIdService());
     }
 
     @Test

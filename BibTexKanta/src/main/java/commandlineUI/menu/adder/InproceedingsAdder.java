@@ -17,10 +17,11 @@ import io.IO;
 import java.util.Map;
 import reference.InproceedingsRef;
 import reference.Reference;
+import service.BibTexIdService;
 
 public class InproceedingsAdder extends AbstractAdder<InproceedingsRef> {
 
-    public InproceedingsAdder(DAO<InproceedingsRef> dao, IO io) {
+    public InproceedingsAdder(DAO<InproceedingsRef> dao, IO io, BibTexIdService service) {
 
         super(dao, io, new String[]{},
                 new String[]{
@@ -45,10 +46,10 @@ public class InproceedingsAdder extends AbstractAdder<InproceedingsRef> {
         commands.put("3", new YearCommand(io));
         commands.put("4", new PublisherCommand(io));
         commands.put("5", new AddressCommand(io));
-        commands.put("6", new BibTexIdCommand(io));
+        commands.put("6", new BibTexIdCommand(io, dao, service));
         commands.put("7", new BookTitleCommand(io));
         commands.put("8", new PagesCommand(io));
-        commands.put("9", new SaveToDbCommand(io, dao));
+        commands.put("9", new SaveToDbCommand(io,dao, service));
         commands.put("10", new PrintStatusCommand(io));
         commands.put("11", new QuitCommand());
     }

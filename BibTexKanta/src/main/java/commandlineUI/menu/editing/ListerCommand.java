@@ -38,8 +38,18 @@ public class ListerCommand implements Command {
     private HashMap<String, Reference> buildList() {
         
         HashMap<String, Reference> returnable = new HashMap<>();
-        returnable.put("q", null);
+        List<BookRef> books = bdao.findAll();
+        List<ArticleRef> articles = adao.findAll();
         
+        int i = 1;
+        for (Reference book : books)
+            returnable.put(Integer.toString(i++), book);
+        for (Reference article : articles)
+            returnable.put(Integer.toString(i++), article);
+        
+        if (returnable.isEmpty())
+        {
+                    
         BookRef myBook = new BookRef();
         myBook.setField("title", "kirja1");
         myBook.setField("authors", "jätkät");
@@ -52,19 +62,11 @@ public class ListerCommand implements Command {
         myBook2.setField("publisher", "tammi");
         myBook2.setYear(2000);
         
-        returnable.put("8", myBook);
-        returnable.put("9", myBook2);
-  
-        List<BookRef> books = bdao.findAll();
-        List<ArticleRef> articles = adao.findAll();
-        
-        int i = 1;
-        for (Reference book : books)
-            returnable.put(Integer.toString(i++), book);
-        for (Reference article : articles)
-            returnable.put(Integer.toString(i++), article);
+        returnable.put("1", myBook);
+        returnable.put("2", myBook2);
+        }
 
-       
+        returnable.put("0", null);
         return returnable;       
     }
     

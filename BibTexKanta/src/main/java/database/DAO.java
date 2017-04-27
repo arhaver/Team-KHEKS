@@ -9,5 +9,7 @@ public interface DAO<T> {
     public List<T> findAll();
 
     //Lisää tietokantaan annetun T:n
-    public boolean add(T t);
+    public boolean add(T t); 
+    
+    public boolean remove(T t);
 }

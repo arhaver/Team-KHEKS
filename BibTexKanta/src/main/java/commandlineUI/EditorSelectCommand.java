@@ -41,12 +41,15 @@ public class EditorSelectCommand implements Command {
 
     @Override
     public boolean execute(Reference ignorable) {
+        
         if (this.ref instanceof BookRef) {
             be.setRef(this.ref);
             be.execute(this.ref);
         } else if (this.ref instanceof ArticleRef) {
             ae.setRef(this.ref);
             ae.execute(this.ref);
+        } else {
+            io.print("Valitse ensin viite!\n");
         }
         return true;
     }

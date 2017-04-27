@@ -44,10 +44,12 @@ public class PrintRef implements Command {
             printArticle(newRef);
         } else if (newRef instanceof BookRef) {
             printBook(newRef);
+        } else if (newRef instanceof InproceedingsRef) {
+            printInproceed(newRef);
         }
     }
 
-    public void printArticle(Reference article) {
+    private void printArticle(Reference article) {
         io.print("Title: " + article.getField("title"));
         io.print("Author(s): " + article.getField("authors"));
         io.print("Year: " + article.getYear());
@@ -61,7 +63,7 @@ public class PrintRef implements Command {
         io.print("");
     }
 
-    public void printBook(Reference book) {
+    private void printBook(Reference book) {
         io.print("Title: " + book.getField("title"));
         io.print("Author(s): " + book.getField("authors"));
         io.print("Year: " + book.getYear());
@@ -71,18 +73,15 @@ public class PrintRef implements Command {
         io.print("");
     }
 
-    private void printInproceedings(List<Reference> inproceedings) {
-        for (Reference inproceed : inproceedings) {
-            io.print("Title: " + inproceed.getField("title"));
-            io.print("Book Title: " + inproceed.getField("booktitle"));
-            io.print("Author(s): " + inproceed.getField("authors"));
-            io.print("Pages: " + inproceed.getField("pages"));
-            io.print("Publisher: " + inproceed.getField("publisher"));
-            io.print("Address: " + inproceed.getField("address"));
-            io.print("Tex Id: " + inproceed.getField("bibTexId"));
-            io.print("");
-            io.print("");
-        }
+    private void printInproceed(Reference inproceed) {
+        io.print("Title: " + inproceed.getField("title"));
+        io.print("Book Title: " + inproceed.getField("booktitle"));
+        io.print("Author(s): " + inproceed.getField("authors"));
+        io.print("Pages: " + inproceed.getField("pages"));
+        io.print("Publisher: " + inproceed.getField("publisher"));
+        io.print("Address: " + inproceed.getField("address"));
+        io.print("Tex Id: " + inproceed.getField("bibTexId"));
+        io.print("");
     }
 
     private void printArticles(List<Reference> articles) {
@@ -94,6 +93,12 @@ public class PrintRef implements Command {
     private void printBooks(List<Reference> books) {
         for (Reference book : books) {
             printBook(book);
+        }
+    }
+    
+    private void printInproceedings(List<Reference> inproceedings) {
+        for(Reference inproceed : inproceedings) {
+            printInproceed(inproceed);
         }
     }
 

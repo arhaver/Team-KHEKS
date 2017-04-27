@@ -10,4 +10,6 @@ public interface DAO<T> {
     
     //Lisää tietokantaan annetun T:n
     public boolean add(T t); 
+    
+    public boolean remove(T t);
 }

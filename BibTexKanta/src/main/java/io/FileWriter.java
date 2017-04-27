@@ -12,7 +12,7 @@ import java.util.List;
  * @author Arto
  */
 public class FileWriter implements IFilewriter {
-    
+
     Path file;
 
     @Override
@@ -21,9 +21,9 @@ public class FileWriter implements IFilewriter {
         try {
             Files.write(file, lines, Charset.forName("UTF-8"));
             return true;
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new Exception("tiedoston kirjoitus virhe.");
-        }catch(SecurityException e){
+        } catch (SecurityException e) {
             throw new Exception("tiedosto on kirjoitussuojattu.");
         }
     }

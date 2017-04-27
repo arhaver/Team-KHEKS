@@ -26,11 +26,10 @@ public class BibTexUI extends Menu{
                     "1.Tulosta",
                     "Q.Peruuta"
                 });
-        
+
         Map<String, Command> menuCommandMap = super.getCommands();
         menuCommandMap.put("q", new QuitCommand());
         menuCommandMap.put("1", new BibTexCreationCommand(translator, filewriter, io, bookDAO, articleDAO, inDAO));
-        
         super.setDefaultCommand(new PredefinedPrintCommand("Epävalidi operaatio", io));
     }
 }

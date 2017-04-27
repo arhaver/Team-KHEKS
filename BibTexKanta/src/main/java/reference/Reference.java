@@ -14,11 +14,18 @@ import java.util.Map;
 public interface Reference {
 
     public Map<String, String> getAllFields();
+
     public String getField(String fieldName);
+
     public boolean setField(String fieldName, String value);
+
     public int getYear();
+
     public boolean setYear(int year);
+
     public boolean readyForDb();
+
     public boolean isValidString(String fieldName, String value);
+
     public boolean isValidYear(int value);
 }

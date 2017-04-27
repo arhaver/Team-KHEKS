@@ -1,22 +1,25 @@
 package commandlineUI;
+
 import database.DAO;
 import io.IO;
 import reference.Reference;
 
 public class AuthorsCommand implements Command {
-    
+
     IO io;
+
     public AuthorsCommand(IO io) {
         this.io = io;
     }
 
     @Override
     public boolean execute(Reference ref) {
-        String authors =  io.readLine("Anna tekijä(t):\n"
+        String authors = io.readLine("Anna tekijä(t):\n"
                 + "Jos useita, erota kirjoittajat pilkulla \",\" tai andilla \"and\"");
-        if (ref.setField("authors", authors))
+        if (ref.setField("authors", authors)) {
             return true;
-        io.print("Lisäys '" +authors+ "' virheellinen\n");
+        }
+        io.print("Lisäys '" + authors + "' virheellinen\n");
         return true; // tää vaikuttaa oudolta mutta näin tää nyt menee
     }
 }

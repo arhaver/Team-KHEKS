@@ -11,5 +11,5 @@ public class NothingCommand implements Command {
     public boolean execute(Reference ref) {
         return true;
     }
-    
+
 }

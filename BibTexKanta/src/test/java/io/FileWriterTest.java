@@ -21,23 +21,23 @@ import static org.junit.Assert.*;
  * @author Arto
  */
 public class FileWriterTest {
-    
+
     List<String> lines;
     String address;
     FileWriter filewriter;
     Path testfile;
-    
+
     public FileWriterTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         lines = Arrays.asList("The first line.", "The second line.");
@@ -45,9 +45,9 @@ public class FileWriterTest {
         filewriter = new FileWriter();
         testfile = Paths.get(address);
     }
-    
+
     @After
-    public void tearDown(){
+    public void tearDown() {
         try {
             Files.deleteIfExists(testfile);
         } catch (IOException ex) {
@@ -57,10 +57,10 @@ public class FileWriterTest {
 
     @Test
     public void testWrite() throws Exception {
-        
+
         boolean expResult = true;
         boolean result = filewriter.write(address, lines);
         assertEquals(expResult, result);
     }
-    
+
 }

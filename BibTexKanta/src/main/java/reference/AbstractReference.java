@@ -123,29 +123,33 @@ public abstract class AbstractReference implements Reference {
         return response;
 
     }
-    
+
     @Override
-    public boolean equals(Object o){
-        if(o == null){
+    public boolean equals(Object o) {
+        if (o == null) {
             return false;
         }
-        
-        if(!(o instanceof AbstractReference)){
+
+        if (!(o instanceof AbstractReference)) {
             return false;
         }
-        
+
         AbstractReference ref = (AbstractReference) o;
-        
+
         Map<String, String> refValues = ref.getAllFields();
-        
-        for(String field : refValues.keySet()){
+
+        for (String field : refValues.keySet()) {
             String refValue = refValues.get(field);
             String thisValue = this.getField(field);
-            
-            if(refValue == null && thisValue == null) continue;
-            if(!thisValue.equals(refValue)) return false;
+
+            if (refValue == null && thisValue == null) {
+                continue;
+            }
+            if (!thisValue.equals(refValue)) {
+                return false;
+            }
         }
-        
+
         return ref.getYear() == this.year;
     }
 

@@ -17,7 +17,8 @@ public class InproceedingsRef extends AbstractReference implements Reference {
         fields.put("publisher", null);
         fields.put("address", null);
     }
-    
+
+    /*
     public InproceedingsRef(String authors, String title, String booktitle, String year, String publisher, String address, String pages, String bibtexid) {
         fields.put("authors", authors);
         fields.put("title", title);
@@ -33,11 +34,10 @@ public class InproceedingsRef extends AbstractReference implements Reference {
 
         }
     }
-    
-
+     */
     @Override
     public boolean readyForDb() {
         return (isValidString("title", fields.get("title")) && isValidString("authors", fields.get("authors")) && isValidYear(year) && isValidString("booktitle", fields.get("booktitle")));
     }
-    
+
 }

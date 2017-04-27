@@ -11,7 +11,7 @@ Feature: As a user I want to be able to add new book reference
     And User confirms the information
     Then book will be added
 
-   Scenario: user can add book without publisher address
+  Scenario: user can add book without publisher address
     Given BibTextKanta is set up
     When User chooses to add book reference
     And User types valid title "Kaiken ABC"
@@ -21,10 +21,8 @@ Feature: As a user I want to be able to add new book reference
     And User confirms the information
     Then book will be added
 
-   Scenario: user cannot add book without needed information
+  Scenario: user cannot add book without needed information
     Given BibTextKanta is set up
     When User chooses to add book reference
     And User confirms the information
     Then book won't be added
-
-

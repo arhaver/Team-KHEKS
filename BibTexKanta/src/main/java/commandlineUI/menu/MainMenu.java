@@ -16,19 +16,18 @@ import java.util.Map;
 import reference.ArticleRef;
 import reference.BookRef;
 import reference.InproceedingsRef;
+import service.BibTexIdService;
 
-public class MainMenu extends Menu{
-    
-    public MainMenu(DAO<ArticleRef> adao, DAO<BookRef> bdao, DAO<InproceedingsRef> idao, IO io, 
-            IFilewriter filewriter, IBibtexTranslator translator) {
-        super(io, 
-                new String[]
-                {
-                    "\nLähdeviitehallintaohjelma by Team-KHEKS.", 
+public class MainMenu extends Menu {
+
+    public MainMenu(DAO<ArticleRef> adao, DAO<BookRef> bdao, DAO<InproceedingsRef> idao, IO io,
+            IFilewriter filewriter, IBibtexTranslator translator, BibTexIdService service) {
+        super(io,
+                new String[]{
+                    "\nLähdeviitehallintaohjelma by Team-KHEKS.",
                     "\nTERVETULOA!"
-                }, 
-                new String[]
-                {
+                },
+                new String[]{
                     "Päävalikko:\n",
                     "1 Lisää kirja viiteluetteloon",
                     "2 Lisää artikkeli viiteluetteloon",
@@ -39,17 +38,17 @@ public class MainMenu extends Menu{
                     "Q Lopeta ohjelma\n",
                     "Valitse toiminto"
                 });
-        
+
         Map<String, Command> menuCommandMap = super.getCommands();
-        
-        menuCommandMap.put("1", new BookAdder(bdao, io));
-        menuCommandMap.put("2", new ArticleAdder(adao, io));
-        menuCommandMap.put("3", new InproceedingsAdder(idao, io));
+
+        menuCommandMap.put("1", new BookAdder(bdao, io, service));
+        menuCommandMap.put("2", new ArticleAdder(adao, io, service));
+        menuCommandMap.put("3", new InproceedingsAdder(idao, io, service));
         menuCommandMap.put("4", new PrintRef(bdao, adao, idao, io));
         menuCommandMap.put("5", new BibTexUI(translator, filewriter, io, bdao, adao, idao));
-        menuCommandMap.put("6", new ListerCommand(io, bdao, adao));
+        menuCommandMap.put("6", new ListerCommand(io, bdao, adao, service));
         menuCommandMap.put("q", new QuitCommand());
-        
+
         setDefaultCommand(new PredefinedPrintCommand("\nVirheellinen komento!", io));
     }
 }

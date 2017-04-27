@@ -17,84 +17,147 @@ import static org.junit.Assert.*;
  * @author Arto
  */
 public class InproceedingsRefTest {
-    
-    InproceedingsRef noParam;
-    InproceedingsRef withPram;
-    
+
+    InproceedingsRef ref;
+
+    String title;
+    String authors;
+    String booktitle;
+    String publisher;
+    String address;
+    String pages;
+    String bibTexId;
+    int year;
+
     public InproceedingsRefTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-        noParam = new InproceedingsRef();
+        ref = new InproceedingsRef();
+        title = "Artikkelin nimi";
+        authors = "Kirjoittajat";
+        booktitle = "Julkaisun nimi";
+        year = 1999;
     }
-    
+
     @After
     public void tearDown() {
     }
-    
+
     @Test
     public void constructorWithoutParametersSetsTitleNull() {
-        assertEquals(null, noParam.getField("title"));
+        assertEquals(null, ref.getField("title"));
     }
-    
+
     @Test
     public void constructorWithoutParametersSetsAuthorsNull() {
-        assertEquals(null, noParam.getField("authors"));
+        assertEquals(null, ref.getField("authors"));
     }
-    
+
     @Test
     public void constructorWithoutParametersSetsBibTexIdNull() {
-        assertEquals(null, noParam.getField("bibTexId"));
+        assertEquals(null, ref.getField("bibTexId"));
     }
-    
+
     @Test
     public void constructorWithoutParametersSetsBooktitleNull() {
-        assertEquals(null, noParam.getField("booktitle"));
+        assertEquals(null, ref.getField("booktitle"));
     }
-    
+
     @Test
     public void constructorWithoutParametersSetsPagesNull() {
-        assertEquals(null, noParam.getField("pages"));
+        assertEquals(null, ref.getField("pages"));
     }
-    
+
     @Test
     public void constructorWithoutParametersSetsPublisherNull() {
-        assertEquals(null, noParam.getField("publisher"));
+        assertEquals(null, ref.getField("publisher"));
     }
-    
+
     @Test
     public void constructorWithoutParametersSetsAddressNull() {
-        assertEquals(null, noParam.getField("address"));
+        assertEquals(null, ref.getField("address"));
     }
-    
+
     @Test
     public void constructorWithoutParametersSetsYearMinusOne() {
-        assertEquals(-1, noParam.getYear());
+        assertEquals(-1, ref.getYear());
+    }
+
+    @Test
+    public void constructorWithoutParametersWithOutSettingIsNotDbReady() {
+        assertTrue(!ref.readyForDb());
+    }
+
+    @Test
+    public void setFieldSetsFieldCorrectWithValidInput() {
+        ref.setField("title", title);
+        assertEquals(title, ref.getField("title"));
     }
     
     @Test
-    public void constructorWithoutParametersWithOutSettingIsNotDbReady() {
-        assertEquals(false, noParam.readyForDb());
+    public void setFieldDoesNotSetsFieldWithInvalidFieldname() {
+        assertFalse(ref.setField("otsikko", title));
     }
-/*
+    
     @Test
-    public void testReadyForDb() {
-        System.out.println("readyForDb");
-        InproceedingsRef instance = new InproceedingsRef();
-        boolean expResult = false;
-        boolean result = instance.readyForDb();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void setFieldDoesNotSetsFieldWithInvalidValue() {
+        assertFalse(ref.setField("title", "ok"));
     }
-*/
+
+    @Test
+    public void getFieldGivesNullIfFieldNameDoesNotExsist() {
+        ref.setField("title", title);
+        assertEquals(null, ref.getField("otsikko"));
+    }
+    
+    @Test
+    public void isNotReadyForDbWithoutTitle() {
+        ref.setField("authors", authors);
+        ref.setYear(year);
+        ref.setField("booktitle", booktitle);
+        assertTrue(!ref.readyForDb());
+    }
+    
+    @Test
+    public void isNotReadyForDbWithoutAuthors() {
+        ref.setField("title", title);
+        ref.setYear(year);
+        ref.setField("booktitle", booktitle);
+        assertTrue(!ref.readyForDb());
+    }
+    
+    @Test
+    public void isNotReadyForDbWithoutBookTitle() {
+        ref.setField("authors", authors);
+        ref.setYear(year);
+        ref.setField("title", title);
+        assertTrue(!ref.readyForDb());
+    }
+    
+    @Test
+    public void isNotReadyForDbWithoutYear() {
+        ref.setField("authors", authors);
+        ref.setField("title", title);
+        ref.setField("booktitle", booktitle);
+        assertTrue(!ref.readyForDb());
+    }
+    
+    @Test
+    public void isReadyForDbWithTitleAuthorsPublisherYearAndBooktitle() {
+        ref.setField("title", title);
+        ref.setField("authors", authors);
+        ref.setYear(year);
+        ref.setField("booktitle", booktitle);
+        assertTrue(ref.readyForDb());
+    }
 }

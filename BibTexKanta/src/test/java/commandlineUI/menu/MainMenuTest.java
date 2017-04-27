@@ -1,7 +1,5 @@
 package commandlineUI.menu;
 
-
-import commandlineUI.menu.MainMenu;
 import database.DAO;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,34 +15,34 @@ import reference.BookRef;
 import reference.InproceedingsRef;
 
 public class MainMenuTest {
-    
+
     ArrayList<String> lines;
     DAO<BookRef> bookDAO;
     DAO<ArticleRef> articleDAO;
     DAO<InproceedingsRef> inproceedingsDAO;
     StubIO io;
     MainMenu mainMenu;
-    
+
     public MainMenuTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         lines = new ArrayList<>();
         bookDAO = new InMemoryDAO<>();
         articleDAO = new InMemoryDAO<>();
         io = new StubIO(lines);
-        mainMenu = new MainMenu(articleDAO, bookDAO, inproceedingsDAO, io, null, null);
+        mainMenu = new MainMenu(articleDAO, bookDAO, inproceedingsDAO, io, null, null, null);
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -52,25 +50,25 @@ public class MainMenuTest {
     @Test
     public void startingProgramPrintsWelcomeMessage() {
         lines.add("q");
-        
+
         mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("\nTERVETULOA!"));
     }
-    
+
     @Test
     public void openMainMenuCallsLoop() {
         lines.add("q");
-        
+
         mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Päävalikko:\n"));
     }
-    
+
     @Test
     public void optionOneOpensBookAdder() {
         lines.add("1");
         lines.add("9");
         lines.add("q");
-        
+
         mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Kirjaviitteen lisääminen:\n"));
     }
@@ -84,7 +82,7 @@ public class MainMenuTest {
         mainMenu.execute(null);
         assertEquals(true, io.getPrintedLines().contains("Artikkeliviitteen lisääminen:\n"));
     }
-    
+
     @Test
     public void optionThreeOpensInproceedingsAdder() {
         lines.add("3");

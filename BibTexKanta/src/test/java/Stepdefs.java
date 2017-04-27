@@ -282,8 +282,10 @@ public class Stepdefs {
     
     @Then("^information of the book is printed to the file \"([^\"]*)\"")
     public void book_is_printed_to_file(String filename) throws Throwable {
+        run();
         testfile = Paths.get(filename);
-        assertTrue(!Files.exists(testfile));
+        assertTrue(Files.exists(testfile));
+        Files.delete(testfile);
     }
 
     /**/

@@ -54,6 +54,8 @@ public class ChooseEditedMenu extends Menu{
     public void setReferences(HashMap<String, Reference> refMap){
         this.refMap = refMap;
         listPrinter.setRefMap(refMap);
+        Map<String, Command> menuCommandMap = super.getCommands();  
+        menuCommandMap.put("1", new PredefinedPrintCommand("\nKokeilu!", io));
     }
     
     public boolean setSelection(String selection) {

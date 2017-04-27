@@ -10,6 +10,8 @@ import commandlineUI.common.QuitCommand;
 import database.DAO;
 import io.IO;
 import java.util.Map;
+import reference.BookRef;
+import reference.Reference;
 import service.BibTexIdService;
 
 public class BookEditor extends AbstractEditor{
@@ -38,6 +40,11 @@ public class BookEditor extends AbstractEditor{
         commands.put("7", new SaveEditCommand(this, io));
         commands.put("8", new PrintStatusCommand(io));
         commands.put("9", new QuitCommand());
+    }
+
+    @Override
+    protected Reference createReference() {
+        return new BookRef();
     }
     
 }

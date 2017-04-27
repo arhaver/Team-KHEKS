@@ -14,6 +14,8 @@ import commandlineUI.common.QuitCommand;
 import database.DAO;
 import io.IO;
 import java.util.Map;
+import reference.ArticleRef;
+import reference.Reference;
 import service.BibTexIdService;
 
 public class ArticleEditor extends AbstractEditor{
@@ -50,6 +52,11 @@ public class ArticleEditor extends AbstractEditor{
         commands.put("11", new SaveEditCommand(this, io));
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
+    }
+
+    @Override
+    protected Reference createReference() {
+        return new ArticleRef();
     }
     
 }

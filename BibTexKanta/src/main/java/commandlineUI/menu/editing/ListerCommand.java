@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import reference.ArticleRef;
 import reference.BookRef;
+import reference.InproceedingsRef;
 import reference.Reference;
 import service.BibTexIdService;
 
@@ -17,12 +18,14 @@ public class ListerCommand implements Command {
 
     private DAO<BookRef> bdao;
     private DAO<ArticleRef> adao;
+    private DAO<InproceedingsRef> idao;
     private IO io;
     private BibTexIdService service;
 
-    public ListerCommand(IO io, DAO<BookRef> bdao, DAO<ArticleRef> adao, BibTexIdService service) {
+    public ListerCommand(IO io, DAO<BookRef> bdao, DAO<ArticleRef> adao, DAO<InproceedingsRef> idao, BibTexIdService service) {
         this.bdao = bdao;
         this.adao = adao;
+        this.idao = idao;
         this.io = io;
         this.service = new BibTexIdService();
     }
@@ -30,7 +33,7 @@ public class ListerCommand implements Command {
     @Override
     public boolean execute(Reference ref) {
         HashMap<String, Reference> refMap = buildList();
-        ChooseEditedMenu cm = new ChooseEditedMenu(io, service, adao, bdao);
+        ChooseEditedMenu cm = new ChooseEditedMenu(io, service, adao, bdao, idao);
         cm.setReferences(refMap);
         cm.execute(null);
         return true;

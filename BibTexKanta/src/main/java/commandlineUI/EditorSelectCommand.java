@@ -8,11 +8,13 @@ package commandlineUI;
 import commandlineUI.menu.adder.AbstractEditor;
 import commandlineUI.menu.adder.ArticleEditor;
 import commandlineUI.menu.adder.BookEditor;
+import commandlineUI.menu.adder.InproceedingsEditor;
 import database.DAO;
 import io.IO;
 import java.util.HashMap;
 import reference.ArticleRef;
 import reference.BookRef;
+import reference.InproceedingsRef;
 import reference.Reference;
 
 public class EditorSelectCommand implements Command {
@@ -22,12 +24,14 @@ public class EditorSelectCommand implements Command {
     private DAO[] daos;
     private BookEditor be;
     private Reference ref;
+    private InproceedingsEditor ie;
 
     
-    public EditorSelectCommand(IO io, BookEditor be, ArticleEditor ae) {
+    public EditorSelectCommand(IO io, BookEditor be, ArticleEditor ae, InproceedingsEditor ie) {
         this.be = be;
         this.io = io;
         this.ae = ae;
+        this.ie = ie;
     }
     
     public void setRef(Reference ref) {
@@ -43,6 +47,9 @@ public class EditorSelectCommand implements Command {
         } else if (this.ref instanceof ArticleRef) {
             ae.setRef(this.ref);
             ae.execute(this.ref);
+        } else if (this.ref instanceof InproceedingsRef) {
+            ie.setRef(this.ref);
+            ie.execute(this.ref);
         }
         return true;
     }

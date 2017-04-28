@@ -9,6 +9,7 @@ import commandlineUI.menu.Menu;
 import commandlineUI.menu.adder.ArticleEditor;
 import commandlineUI.menu.adder.BookAdder;
 import commandlineUI.menu.adder.BookEditor;
+import commandlineUI.menu.adder.InproceedingsEditor;
 import database.DAO;
 import io.IO;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class ChooseEditedMenu extends Menu{
     private EditorSelectCommand editorSelector;
     private BookEditor be;
     private ArticleEditor ae;
+    private InproceedingsEditor ie;
     
     public ChooseEditedMenu(IO io, BibTexIdService service, DAO... daos) {
         super(io, new String[0], 
@@ -39,8 +41,9 @@ public class ChooseEditedMenu extends Menu{
                 });
         listPrinter = new ListPrintCommand(io, daos);
         be = new BookEditor(daos[1], io, service);
-        ae = new ArticleEditor(daos[0], io, service);      
-        editorSelector = new EditorSelectCommand(io, be, ae);
+        ae = new ArticleEditor(daos[0], io, service);
+        ie = new InproceedingsEditor(daos[2], io, service);
+        editorSelector = new EditorSelectCommand(io, be, ae, ie);
         
                 ;
         Map<String, Command> menuCommandMap = super.getCommands();        

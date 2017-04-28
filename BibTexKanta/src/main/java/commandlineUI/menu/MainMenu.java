@@ -46,7 +46,7 @@ public class MainMenu extends Menu {
         menuCommandMap.put("3", new InproceedingsAdder(idao, io, service));
         menuCommandMap.put("4", new PrintRef(bdao, adao, idao, io));
         menuCommandMap.put("5", new BibTexUI(translator, filewriter, io, bdao, adao, idao));
-        menuCommandMap.put("6", new ListerCommand(io, bdao, adao, service));
+        menuCommandMap.put("6", new ListerCommand(io, bdao, adao, idao, service));
         menuCommandMap.put("q", new QuitCommand());
 
         setDefaultCommand(new PredefinedPrintCommand("\nVirheellinen komento!", io));

@@ -31,8 +31,12 @@ public class DeleteCommand implements Command {
             for (DAO d : daos)
                 d.remove(toDelete);
             io.print("\nViite poistettu onnistuneesti!\n");
+            
+            return false;
         } 
         
-        return false; 
+        io.print("Peruutetaan");
+        
+        return true; 
     }
 }

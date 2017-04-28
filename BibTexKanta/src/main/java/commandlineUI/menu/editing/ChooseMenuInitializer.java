@@ -11,14 +11,14 @@ import reference.Reference;
 import service.BibTexIdService;
 import service.DaoService;
 
-public class ListerCommand implements Command {
+public class ChooseMenuInitializer implements Command {
 
     private final BibTexIdService bibservice;
     private final DaoService daoService;
     
     private final ChooseMenu chooseMenu;
 
-    public ListerCommand(IO io, DAO<BookRef> bdao, DAO<ArticleRef> adao, DAO<InproceedingsRef> idao, BibTexIdService service) {
+    public ChooseMenuInitializer(IO io, DAO<BookRef> bdao, DAO<ArticleRef> adao, DAO<InproceedingsRef> idao, BibTexIdService service) {
         this.bibservice = service;
         this.daoService = new DaoService(bdao, adao, idao);
         

@@ -37,7 +37,7 @@ public class ListerCommandTest {
     InproceedingsRef iref;
     ChooseMenu cem;
     BibTexIdService service;
-    ListerCommand lc;
+    ChooseMenuInitializer lc;
 
     @Before
     public void setUp() {
@@ -53,7 +53,7 @@ public class ListerCommandTest {
     @Test
     public void testExecute() {
         lines.add("q");
-        lc = new ListerCommand(io, bdao, adao, idao, service);
+        lc = new ChooseMenuInitializer(io, bdao, adao, idao, service);
         BookRef ref = new BookRef();
         ref.setField("title", "title");
         ref.setField("authors", "title");

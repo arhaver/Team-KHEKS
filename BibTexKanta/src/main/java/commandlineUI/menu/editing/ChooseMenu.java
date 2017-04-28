@@ -9,9 +9,13 @@ import commandlineUI.menu.adder.ArticleEditor;
 import commandlineUI.menu.adder.BookEditor;
 import database.DAO;
 import io.IO;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import reference.Reference;
 import service.BibTexIdService;
+import service.DaoService;
+import service.search.SearchService;
 
 public class ChooseMenu extends Menu {
 
@@ -26,18 +30,22 @@ public class ChooseMenu extends Menu {
         super(io, new String[0],
                 new String[]{
                     "\nVIITTEIDEN MUOKKAUS/POISTAMINEN\n",
-                    "L listaa viitteet ja valitse yksi",
-                    "E Siirry muokkaammaan viitettä",
-                    "D Poista viite",
-                    "Q Palaa päävalikkoon\n",
-                    "Valitse ensin viite, ja sitten sille toiminto\n"
+                    "Valitse viite kirjoittamalla sen numero. Muut toiminnot:",
+                    "S Rajaa hakua",
+                    "R Nollaa haku",
+                    "Q Palaa päävalikkoon\n"
                 });
+        
+        DaoService daoService = new DaoService(daos);
+        
         be = new BookEditor(daos[1], io, service);
         ae = new ArticleEditor(daos[0], io, service);
         listPrinter = new ListPrintCommand(io, daos);
         editOrDeleteMenu = new EditOrDeleteMenu(io, be, ae, daos);
 
         Map<String, Command> menuCommandMap = super.getCommands();
+        menuCommandMap.put("s", new SearchMenu(io, this, new SearchService()));
+        menuCommandMap.put("r", new ChooseMenuResetter(this, daoService));
         menuCommandMap.put("q", new QuitCommand());
         
         setDefaultCommand(new PredefinedPrintCommand("\nVirheellinen viitteen numero tai komento!", io));
@@ -46,6 +54,10 @@ public class ChooseMenu extends Menu {
     public void setReferences(Map<Integer, Reference> refMap) {
         this.refMap = refMap;
         listPrinter.setRefMap(refMap);
+    }
+    
+    public List<Reference> getReferences(){
+        return new ArrayList<>(refMap.values());
     }
     
     @Override

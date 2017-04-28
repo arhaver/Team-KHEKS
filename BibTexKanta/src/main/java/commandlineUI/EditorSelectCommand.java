@@ -18,14 +18,12 @@ import reference.Reference;
  */
 public class EditorSelectCommand implements Command {
     
-    private IO io;
     private ArticleEditor ae;
     private BookEditor be;
 
     
-    public EditorSelectCommand(IO io, BookEditor be, ArticleEditor ae) {
+    public EditorSelectCommand(BookEditor be, ArticleEditor ae) {
         this.be = be;
-        this.io = io;
         this.ae = ae;
     }
 
@@ -35,12 +33,13 @@ public class EditorSelectCommand implements Command {
         if (chosen instanceof BookRef) {
             be.setRef(chosen);
             be.execute(chosen);
-        } else if (chosen instanceof ArticleRef) {
+        }
+        
+        if (chosen instanceof ArticleRef) {
             ae.setRef(chosen);
             ae.execute(chosen);
-        } else {
-            io.print("Valitse ensin viite!\n");
         }
+        
         return true;
     }
 }

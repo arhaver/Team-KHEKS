@@ -20,7 +20,7 @@ public class EditOrDeleteMenu extends Menu{
         
         Map<String, Command> commands = super.getCommands();
         
-        commands.put("e", new EditorSelectCommand(io, be, ae));
+        commands.put("e", new EditorSelectCommand(be, ae));
         commands.put("d", new DeleteCommand(io, daos));
         commands.put("q", new QuitCommand());
         

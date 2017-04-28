@@ -14,5 +14,8 @@ public class YearMatcher implements Matcher{
     public boolean matches(Reference ref) {
         return year == ref.getYear();
     }
-    
+
+    public int getYear() {
+        return year;
+    }
 }

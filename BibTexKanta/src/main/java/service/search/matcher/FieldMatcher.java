@@ -22,5 +22,13 @@ public class FieldMatcher implements Matcher{
         
         return false;
     }
+
+    public String getField() {
+        return field;
+    }
+
+    public String getValue() {
+        return value;
+    }
     
 }

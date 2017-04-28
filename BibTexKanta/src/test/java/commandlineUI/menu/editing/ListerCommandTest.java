@@ -10,7 +10,6 @@ import database.InMemoryDAO;
 import io.StubIO;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,7 +18,6 @@ import static org.junit.Assert.*;
 import reference.ArticleRef;
 import reference.BookRef;
 import reference.InproceedingsRef;
-import reference.Reference;
 import service.BibTexIdService;
 
 /**
@@ -40,17 +38,6 @@ public class ListerCommandTest {
     ChooseMenu cem;
     BibTexIdService service;
     ListerCommand lc;
-
-    public ListerCommandTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
 
     @Before
     public void setUp() {

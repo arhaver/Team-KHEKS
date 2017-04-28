@@ -160,4 +160,13 @@ public class InproceedingsRefTest {
         ref.setField("booktitle", booktitle);
         assertTrue(ref.readyForDb());
     }
+    
+    @Test
+    public void constructorWithParametersConstructsRight(){
+        ref = new InproceedingsRef(title, authors, booktitle, year);
+        assertTrue(ref.getField("title").equals(title));
+        assertTrue(ref.getField("authors").equals(authors));
+        assertTrue(ref.getField("booktitle").equals(booktitle));
+        assertEquals(year, ref.getYear());
+    }
 }

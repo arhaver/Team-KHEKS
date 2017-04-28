@@ -3,8 +3,6 @@ package commandlineUI.menu.editing;
 import commandlineUI.Command;
 import database.DAO;
 import io.IO;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import reference.ArticleRef;
 import reference.BookRef;
@@ -18,7 +16,7 @@ public class ListerCommand implements Command {
     private final BibTexIdService bibservice;
     private final DaoService daoService;
     
-    private ChooseMenu chooseMenu;
+    private final ChooseMenu chooseMenu;
 
     public ListerCommand(IO io, DAO<BookRef> bdao, DAO<ArticleRef> adao, DAO<InproceedingsRef> idao, BibTexIdService service) {
         this.bibservice = service;
@@ -29,14 +27,10 @@ public class ListerCommand implements Command {
 
     @Override
     public boolean execute(Reference ref) {
-        Map<Integer, Reference> refMap = getAllReferences();
+        Map<Integer, Reference> refMap = daoService.getReferencesNumbermapped();
         chooseMenu.setReferences(refMap);
         chooseMenu.execute(null);
         return true;
-    }
-
-    private Map<Integer, Reference> getAllReferences() {
-        return daoService.getReferencesNumbermapped();
     }
 
 }

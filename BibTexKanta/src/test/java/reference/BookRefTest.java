@@ -138,4 +138,13 @@ public class BookRefTest {
         ref.setField("publisher", publisher);
         assertTrue(ref.readyForDb());
     }
+    
+    @Test
+    public void constructorWithParametersConstructsRight(){
+        ref = new BookRef(title, authors, publisher, year);
+        assertTrue(ref.getField("title").equals(title));
+        assertTrue(ref.getField("authors").equals(authors));
+        assertTrue(ref.getField("publisher").equals(publisher));
+        assertEquals(year, ref.getYear());
+    }
 }

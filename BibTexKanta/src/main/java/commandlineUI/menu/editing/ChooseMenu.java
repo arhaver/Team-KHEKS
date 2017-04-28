@@ -51,9 +51,7 @@ public class ChooseMenu extends Menu {
     @Override
     public boolean actOnLine(String line){
         try{
-            int number = Integer.parseInt(line);
-            
-            Reference ref = refMap.get(number+"");
+            Reference ref = refMap.get(Integer.parseInt(line));
             
             if(ref != null){
                 editOrDeleteMenu.execute(ref);

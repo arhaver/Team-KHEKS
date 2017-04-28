@@ -31,17 +31,6 @@ public class ArticleRefTest {
     String bibTexId;
     int year;
 
-    public ArticleRefTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
     @Before
     public void setUp() {
         ref = new ArticleRef();
@@ -51,10 +40,6 @@ public class ArticleRefTest {
         year = 1999;
         volume = "34 vk.";
         number = "3b";        
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test
@@ -193,5 +178,16 @@ public class ArticleRefTest {
         ref.setField("number", number);
         ref.setYear(year);
         assertTrue(ref.readyForDb());
+    }
+    
+    @Test
+    public void constructorWithParametersConstructsRight(){
+        ref = new ArticleRef(title, authors, volume, journal, number, year);
+        assertTrue(ref.getField("title").equals(title));
+        assertTrue(ref.getField("authors").equals(authors));
+        assertTrue(ref.getField("volume").equals(volume));
+        assertTrue(ref.getField("journal").equals(journal));
+        assertTrue(ref.getField("number").equals(number));
+        assertEquals(year, ref.getYear());
     }
 }

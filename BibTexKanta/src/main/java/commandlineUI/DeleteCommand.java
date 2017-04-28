@@ -5,7 +5,6 @@
  */
 package commandlineUI;
 
-import commandlineUI.menu.editing.ChooseMenu;
 import database.DAO;
 import io.IO;
 import reference.Reference;
@@ -34,6 +33,6 @@ public class DeleteCommand implements Command {
             io.print("\nViite poistettu onnistuneesti!\n");
         } 
         
-         return false; 
+        return false; 
     }
 }

@@ -41,7 +41,7 @@ public class ChooseMenu extends Menu {
         be = new BookEditor(daos[1], io, service);
         ae = new ArticleEditor(daos[0], io, service);
         listPrinter = new ListPrintCommand(io, daos);
-        editOrDeleteMenu = new EditOrDeleteMenu(io, be, ae, daos);
+        editOrDeleteMenu = new EditOrDeleteMenu(io, this, be, ae, daos);
 
         Map<String, Command> menuCommandMap = super.getCommands();
         menuCommandMap.put("s", new SearchMenu(io, this, new SearchService()));
@@ -58,6 +58,15 @@ public class ChooseMenu extends Menu {
     
     public List<Reference> getReferences(){
         return new ArrayList<>(refMap.values());
+    }
+    
+    public void removeReference(Reference reference){
+        for(Integer key : refMap.keySet()){
+            if(refMap.get(key).equals(reference)){
+                refMap.remove(key);
+                return;
+            }
+        }
     }
     
     @Override

@@ -1,5 +1,6 @@
 package commandlineUI;
 
+import commandlineUI.menu.editing.ChooseMenu;
 import database.DAO;
 import io.StubIO;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class DeleteCommandTest {
     
     private DeleteCommand dc;
     private DAO dao;
+    private ChooseMenu cm;
     
     private Reference ref;
     
@@ -34,8 +36,9 @@ public class DeleteCommandTest {
         io = new StubIO(commands);
         
         dao = mock(DAO.class);
+        cm = mock(ChooseMenu.class);
         
-        dc = new DeleteCommand(io, dao);
+        dc = new DeleteCommand(io, cm, dao);
         
         ref = new BookRef();
         ref.setField("title", "Title");
@@ -49,6 +52,9 @@ public class DeleteCommandTest {
         
         assertTrue(io.outputsContainsLine("Haluatko varmasti poistaa viitteen " + ref.getField("title") + " (k/e)?"));
         assertTrue(io.outputsContainsLine("Peruutetaan"));
+        
+        verify(dao, times(0)).remove(any());
+        verify(cm, times(0)).removeReference(any());
     }
     
     @Test
@@ -59,5 +65,6 @@ public class DeleteCommandTest {
         
         assertTrue(io.outputsContainsLine("\nViite poistettu onnistuneesti!\n"));
         verify(dao, times(1)).remove(eq(ref));
+        verify(cm, times(1)).removeReference(eq(ref));
     }
 }

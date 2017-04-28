@@ -5,6 +5,7 @@
  */
 package commandlineUI;
 
+import commandlineUI.menu.editing.ChooseMenu;
 import database.DAO;
 import io.IO;
 import reference.Reference;
@@ -17,9 +18,11 @@ public class DeleteCommand implements Command {
     
     private IO io;
     private DAO[] daos;
+    private ChooseMenu chooseMenu;
     
-    public DeleteCommand(IO io, DAO... daos) {
+    public DeleteCommand(IO io, ChooseMenu chooseMenu, DAO... daos) {
         this.io = io;
+        this.chooseMenu = chooseMenu;
         this.daos = daos;
     }
 
@@ -28,8 +31,8 @@ public class DeleteCommand implements Command {
         String commitment = io.readLine("Haluatko varmasti poistaa viitteen " + toDelete.getField("title") + " (k/e)?");
         if (commitment.equals("k"))
         {
-            for (DAO d : daos)
-                d.remove(toDelete);
+            for (DAO d : daos) d.remove(toDelete);
+            chooseMenu.removeReference(toDelete);
             io.print("\nViite poistettu onnistuneesti!\n");
             
             return false;

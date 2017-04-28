@@ -13,7 +13,7 @@ public class QueryBuilder {
         this.query = query;
         this.index = 0;
         
-        RecursiveBuilder builder = new RecursiveBuilder(this);
+        RecursiveBuilder builder = new RecursiveBuilder(this, 0);
         return builder.bqrec();
     }
     
@@ -38,21 +38,24 @@ public class QueryBuilder {
             exc("Yhdistehaku ilman toista hakuehtoa");
         }
         
-        exc("Tuntematon virhe");
+        if(matchers.size() > 1){
+            exc("Kahden ehdon välillä ei yhdistäjämerkkiä");
+        }
+        
         return null;
     }
     
     private Matcher createFieldMatcher() throws Exception{
         pop();
         String field = searchUntil(':');
-        String value = searchUntil(')');
         pop();
+        String value = searchUntil(')');
         
         if(field.equals("year")){
             try{
                 return new YearMatcher(Integer.parseInt(value));
             }catch(Exception e){
-                exc("Vuosiluku " + value +" ei ollut luku");
+                exc("Vuosiluku \"" + value +"\" ei ollut luku");
             }
         }else{
             return new FieldMatcher(field, value);
@@ -65,9 +68,7 @@ public class QueryBuilder {
         int startIndex = index;
         while(peek() != c) pop();
         
-        String subString = query.substring(startIndex, index);
-        pop();
-        return subString;
+        return query.substring(startIndex, index);
     }
     
     private char peek(){
@@ -91,14 +92,16 @@ public class QueryBuilder {
     private class RecursiveBuilder{
         
         private QueryBuilder qb;
+        private int taso;
         
         private List<Matcher> matchers;
         private char matchingType;
         private boolean groupingAllowed;
         private boolean cont;
         
-        public RecursiveBuilder(QueryBuilder queryBuilder){
+        public RecursiveBuilder(QueryBuilder queryBuilder, int taso){
             this.qb = queryBuilder;
+            this.taso = taso+1;
             
             matchers = new ArrayList<>();
             matchingType = 'o';
@@ -109,7 +112,7 @@ public class QueryBuilder {
         private Matcher bqrec()throws Exception{
             while(cont){
                 char c = pop();
-
+                
                 switch(c){
                     case 'F': 
                         createFieldMatcher();
@@ -124,11 +127,12 @@ public class QueryBuilder {
                         applyUnifier(c);
                         break;
                     case '-':
-                        return makeNot();
+                        makeNot();
+                        break;
                     case ')':
                         cont = false;
                         break;
-                    default: throw new Exception();
+                    default: exc("Merkki \""+c+"\" epävalidissa kohtaa");
                 }
             }
 
@@ -141,7 +145,7 @@ public class QueryBuilder {
         }
         
         private void recurse() throws Exception{
-            RecursiveBuilder recBuilder = new RecursiveBuilder(qb);
+            RecursiveBuilder recBuilder = new RecursiveBuilder(qb, taso);
             matchers.add(recBuilder.bqrec());
             
             groupingAllowed = true;
@@ -151,22 +155,24 @@ public class QueryBuilder {
             if(groupingAllowed){
                 if(matchingType != currentCharacter){
                     List<Matcher> helper = new ArrayList<>();
-                    helper.add(finishMatcher(matchers, matchingType));
+                    helper.add(qb.finishMatcher(matchers, matchingType));
                     matchers = helper;
                 }
                 matchingType = currentCharacter;
                 groupingAllowed = false;
+                
                 return;
             }
             
             qb.exc("Monta yhdistemerkkiä peräkkäin");
         }
         
-        private Matcher makeNot() throws Exception{
-            RecursiveBuilder rec = new RecursiveBuilder(qb);
+        private void makeNot() throws Exception{
+            RecursiveBuilder rec = new RecursiveBuilder(qb, taso);
             groupingAllowed = true;
             
-            return new Not(rec.bqrec());
+            pop();
+            matchers.add(new Not(rec.bqrec()));
         }
     }
 }

@@ -8,3 +8,7 @@ Coveralls:
 
 Backlog-linkki:
 https://docs.google.com/spreadsheets/d/1VklMzUJEQxukcls4RK51e0rHJNAZalB71iriy8iCdYU/edit?ts=58dcc0c2#gid=1
+
+Viimeisimmän jar -tiedoston lataaminen:
+https://github.com/jon-erikklint/Team-KHEKS/releases
+

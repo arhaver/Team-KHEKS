@@ -11,6 +11,7 @@ import io.IO;
 import java.util.HashMap;
 import java.util.Map;
 import reference.Reference;
+import commandlineUI.SelectCommand;
 
 /**
  *
@@ -21,11 +22,12 @@ public class ListPrintCommand implements Command {
     private IO io;
     private HashMap<String, Reference> refMap;
     private DAO[] daos;
+    private SelectCommand sc;
 
-    
-    public ListPrintCommand(IO io, DAO... daos) {
+    public ListPrintCommand(IO io, SelectCommand sc,  DAO... daos) {
         this.io = io;
         this.daos = daos;
+        this.sc = sc;
     }
     
     public void setRefMap(HashMap<String, Reference> refMap){
@@ -38,11 +40,13 @@ public class ListPrintCommand implements Command {
         
         io.print("Listaus alkaa:\n");
         for (String s : refMap.keySet()) {
-            if (s.equals("q"))
+            if (s.equals("0"))
                 continue;
             io.print("Viite " + s + ":\n");
             printer.printAnyRef(refMap.get(s));           
         }
+        sc.execute(ref);
+        
            
         return true; 
     }

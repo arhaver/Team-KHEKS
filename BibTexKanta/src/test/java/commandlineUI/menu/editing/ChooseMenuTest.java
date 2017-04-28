@@ -9,6 +9,7 @@ import commandlineUI.PrintRef;
 import database.InMemoryDAO;
 import io.StubIO;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -26,8 +27,7 @@ import service.BibTexIdService;
  *
  * @author mikko
  */
-public class ListerCommandTest {
-
+public class ChooseMenuTest {
     List<String> lines;
     StubIO io;
     InMemoryDAO<BookRef> bdao;
@@ -39,41 +39,23 @@ public class ListerCommandTest {
     InproceedingsRef iref;
     ChooseMenu cem;
     BibTexIdService service;
-    ListerCommand lc;
-
-    public ListerCommandTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
+    
+    private BookRef book1;
+    
     @Before
     public void setUp() {
-        service = new BibTexIdService();
         bdao = new InMemoryDAO<>();
         adao = new InMemoryDAO<>();
         idao = new InMemoryDAO<>();
         lines = new ArrayList<>();
+        
         io = new StubIO(lines);
-
+        service =  new BibTexIdService();
+        cem = new ChooseMenu(io, service, adao, bdao, idao);
+        
+        book1 = new BookRef("kirja1", "jätkät", "otava", 1999);
     }
-
-    @Test
-    public void testExecute() {
-        lines.add("q");
-        lc = new ListerCommand(io, bdao, adao, idao, service);
-        BookRef ref = new BookRef();
-        ref.setField("title", "title");
-        ref.setField("authors", "title");
-        ref.setField("publisher", "title");
-        ref.setYear(1999);
-        bdao.add(ref);
-        assertEquals(true, lc.execute(ref));
-    }
-
+    
+    
+    
 }

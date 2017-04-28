@@ -5,12 +5,9 @@
  */
 package commandlineUI;
 
-import commandlineUI.menu.adder.AbstractEditor;
 import commandlineUI.menu.adder.ArticleEditor;
 import commandlineUI.menu.adder.BookEditor;
-import database.DAO;
 import io.IO;
-import java.util.HashMap;
 import reference.ArticleRef;
 import reference.BookRef;
 import reference.Reference;
@@ -23,9 +20,7 @@ public class EditorSelectCommand implements Command {
     
     private IO io;
     private ArticleEditor ae;
-    private DAO[] daos;
     private BookEditor be;
-    private Reference ref;
 
     
     public EditorSelectCommand(IO io, BookEditor be, ArticleEditor ae) {
@@ -33,21 +28,16 @@ public class EditorSelectCommand implements Command {
         this.io = io;
         this.ae = ae;
     }
-    
-    public void setRef(Reference ref) {
-        this.ref = ref;        
-    }
-
 
     @Override
-    public boolean execute(Reference ignorable) {
+    public boolean execute(Reference chosen) {
         
-        if (this.ref instanceof BookRef) {
-            be.setRef(this.ref);
-            be.execute(this.ref);
-        } else if (this.ref instanceof ArticleRef) {
-            ae.setRef(this.ref);
-            ae.execute(this.ref);
+        if (chosen instanceof BookRef) {
+            be.setRef(chosen);
+            be.execute(chosen);
+        } else if (chosen instanceof ArticleRef) {
+            ae.setRef(chosen);
+            ae.execute(chosen);
         } else {
             io.print("Valitse ensin viite!\n");
         }

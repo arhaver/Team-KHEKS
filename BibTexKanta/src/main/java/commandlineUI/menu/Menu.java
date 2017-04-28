@@ -42,20 +42,28 @@ public abstract class Menu implements Command {
         givenRef = ref; //Tarvitaan että voidaan antaa mahdollisuus laittaa eteenpäin
         //menulle annettu reference
 
-        io.printLines(startLines);
+        beforeLoop();
 
         while (true) {
             io.printLines(askPrompts);
             String line = io.readLine("").toLowerCase();
 
-            Command toExecute = commands.getOrDefault(line, defaultCommand);
-
-            if (!toExecute.execute(referenceToGiveToCommands())) {
+            if (!actOnLine(line)) {
                 break;
             }
         }
 
         return true;
+    }
+    
+    public boolean actOnLine(String line){
+        Command toExecute = commands.getOrDefault(line, defaultCommand);
+
+        return toExecute.execute(referenceToGiveToCommands());
+    }
+    
+    public void beforeLoop(){
+        io.printLines(startLines);
     }
 
 }

@@ -6,7 +6,7 @@
 package commandlineUI;
 
 import commandlineUI.menu.Menu;
-import commandlineUI.menu.editing.ChooseEditedMenu;
+import commandlineUI.menu.editing.ChooseMenu;
 import database.DAO;
 import io.IO;
 import reference.Reference;
@@ -19,23 +19,23 @@ import service.BibTexIdService;
 public class SelectCommand implements Command {
     
     private IO io;
-    private ChooseEditedMenu cemenu;
+    private ChooseMenu cemenu;
 
     
-    public SelectCommand(IO io, ChooseEditedMenu cemenu) {
+    public SelectCommand(IO io, ChooseMenu cemenu) {
         this.io = io;
         this.cemenu = cemenu;
     }
 
     @Override
     public boolean execute(Reference ref) {
-        String selection =  io.readLine("Anna viitteen numero (0 lopettaa):\n");
-        
-        while (!cemenu.setSelection(selection)) {      
-            selection = io.readLine("Anna toimiva viitteen numero (0 lopettaa)");                
-        } 
-        if (!selection.toLowerCase().matches("q"))
-            io.print("Valittu: " + selection);
+//        String selection =  io.readLine("Anna viitteen numero (0 lopettaa):\n");
+//        
+//        while (!cemenu.setSelection(selection)) {      
+//            selection = io.readLine("Anna toimiva viitteen numero (0 lopettaa)");                
+//        } 
+//        if (!selection.toLowerCase().matches("q"))
+//            io.print("Valittu: " + selection);
         return true; 
     }
 }

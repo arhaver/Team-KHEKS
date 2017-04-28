@@ -7,6 +7,15 @@ public class BookRef extends AbstractReference implements Reference {
         fields.put("address", null);
 
     }
+    
+    public BookRef(String title, String authors, String publisher, int year){
+        this();
+        fields.put("title", title);
+        fields.put("authors", authors);
+        fields.put("publisher", publisher);
+        
+        this.year = year;
+    }
 
     /*
     public BookRef(String authors, String title, String publisher, String year, String address) {

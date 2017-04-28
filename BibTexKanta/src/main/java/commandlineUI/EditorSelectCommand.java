@@ -21,7 +21,7 @@ public class EditorSelectCommand implements Command {
     private BookEditor be;
     private InproceedingsEditor ie;
     
-    public EditorSelectCommand(IO io, BookEditor be, ArticleEditor ae, InproceedingsEditor ie) {
+    public EditorSelectCommand(BookEditor be, ArticleEditor ae, InproceedingsEditor ie) {
         this.be = be;
         this.ae = ae;
         this.ie = ie;

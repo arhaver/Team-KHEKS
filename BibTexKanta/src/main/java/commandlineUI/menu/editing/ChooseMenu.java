@@ -7,6 +7,7 @@ import commandlineUI.common.QuitCommand;
 import commandlineUI.menu.Menu;
 import commandlineUI.menu.adder.ArticleEditor;
 import commandlineUI.menu.adder.BookEditor;
+import commandlineUI.menu.adder.InproceedingsEditor;
 import database.DAO;
 import io.IO;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class ChooseMenu extends Menu {
     private EditOrDeleteMenu editOrDeleteMenu;
     private BookEditor be;
     private ArticleEditor ae;
+    private InproceedingsEditor ie;
 
     public ChooseMenu(IO io, BibTexIdService service, DAO... daos) {
         super(io, new String[0],
@@ -40,8 +42,9 @@ public class ChooseMenu extends Menu {
         
         be = new BookEditor(daos[1], io, service);
         ae = new ArticleEditor(daos[0], io, service);
+        ie = new InproceedingsEditor(daos[2], io, service);
         listPrinter = new ListPrintCommand(io, daos);
-        editOrDeleteMenu = new EditOrDeleteMenu(io, this, be, ae, daos);
+        editOrDeleteMenu = new EditOrDeleteMenu(io, this, be, ae, ie, daos);
 
         Map<String, Command> menuCommandMap = super.getCommands();
         menuCommandMap.put("s", new SearchMenu(io, this, new SearchService()));

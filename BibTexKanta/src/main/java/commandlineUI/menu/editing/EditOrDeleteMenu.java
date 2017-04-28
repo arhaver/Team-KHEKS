@@ -9,18 +9,19 @@ import commandlineUI.common.QuitCommand;
 import commandlineUI.menu.Menu;
 import commandlineUI.menu.adder.ArticleEditor;
 import commandlineUI.menu.adder.BookEditor;
+import commandlineUI.menu.adder.InproceedingsEditor;
 import database.DAO;
 import io.IO;
 import java.util.Map;
 
 public class EditOrDeleteMenu extends Menu{
     
-    public EditOrDeleteMenu(IO io, ChooseMenu chooseMenu, BookEditor be, ArticleEditor ae, DAO... daos) {
+    public EditOrDeleteMenu(IO io, ChooseMenu chooseMenu, BookEditor be, ArticleEditor ae, InproceedingsEditor ie, DAO... daos) {
         super(io, new String[0], new String[0]);
         
         Map<String, Command> commands = super.getCommands();
         
-        commands.put("e", new EditorSelectCommand(be, ae));
+        commands.put("e", new EditorSelectCommand(be, ae, ie));
         commands.put("d", new DeleteCommand(io,chooseMenu,  daos));
         commands.put("q", new QuitCommand());
         

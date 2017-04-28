@@ -29,10 +29,10 @@ public class SelectCommand implements Command {
 
     @Override
     public boolean execute(Reference ref) {
-        String selection =  io.readLine("Anna viitteen numero (q lopettaa):\n");
+        String selection =  io.readLine("Anna viitteen numero (0 lopettaa):\n");
         
         while (!cemenu.setSelection(selection)) {      
-            selection = io.readLine("Anna toimiva viitteen numero (q lopettaa)");                
+            selection = io.readLine("Anna toimiva viitteen numero (0 lopettaa)");                
         } 
         if (!selection.toLowerCase().matches("q"))
             io.print("Valittu: " + selection);

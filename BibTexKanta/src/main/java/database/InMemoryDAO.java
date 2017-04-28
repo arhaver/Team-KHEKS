@@ -21,4 +21,9 @@ public class InMemoryDAO<T> implements DAO<T> {
         return ts.add(t);
     }
 
+    @Override
+    public boolean remove(T t) {
+        return ts.remove(t);
+    }
+
 }

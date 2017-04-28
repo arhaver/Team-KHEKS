@@ -2,6 +2,7 @@
 package bibtex;
 
 import database.DAO;
+import database.InMemoryDAO;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -13,6 +14,7 @@ import static org.junit.Assert.*;
 import reference.ArticleRef;
 import reference.BookRef;
 import reference.InproceedingsRef;
+import reference.Reference;
 
 public class TranslatorTest implements IBibtexTranslator{
     
@@ -20,6 +22,7 @@ public class TranslatorTest implements IBibtexTranslator{
     DAO<ArticleRef> articleDAO;
     DAO<InproceedingsRef> inDAO;
     List<String> list;
+    InMemoryDAO mDAO;
     
     public TranslatorTest() {
     }
@@ -34,6 +37,13 @@ public class TranslatorTest implements IBibtexTranslator{
     
     @Before
     public void setUp() {
+        mDAO = new InMemoryDAO<>();
+        Reference ref = new BookRef();
+        ref.setField("title", "title");
+        ref.setField("authors", "title");
+        ref.setField("publisher", "title");
+        ref.setYear(1999);
+        mDAO.add(ref);
     }
     
     @After
@@ -75,4 +85,5 @@ public class TranslatorTest implements IBibtexTranslator{
         list = makeInproceedingsBibTex(inDAO, list);
         assertEquals(true, list == null);
     }
+
 }

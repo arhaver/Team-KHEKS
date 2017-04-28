@@ -15,10 +15,6 @@ import reference.ArticleRef;
 import reference.BookRef;
 import reference.Reference;
 
-/**
- *
- * @author mikko
- */
 public class EditorSelectCommand implements Command {
     
     private IO io;

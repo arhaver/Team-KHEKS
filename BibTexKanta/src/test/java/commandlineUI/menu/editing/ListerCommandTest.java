@@ -66,7 +66,7 @@ public class ListerCommandTest {
     @Test
     public void testExecute() {
         lines.add("q");
-        lc = new ListerCommand(io, bdao, adao, service);
+        lc = new ListerCommand(io, bdao, adao, idao, service);
         BookRef ref = new BookRef();
         ref.setField("title", "title");
         ref.setField("authors", "title");

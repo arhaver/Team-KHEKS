@@ -153,6 +153,27 @@ public class ChooseEditedMenuTest {
         cem = new ChooseEditedMenu(io, service, adao, bdao, idao);
         cem.setReferences(refMap);
         cem.execute(null);
-        assertEquals(true, io.outputsContainsLine("\nViite poistettu onnistuneesti!\n"));    
+        assertEquals(true, io.outputsContainsLine("\nViite poistettu onnistuneesti!\n"));   
+        
+    }
+    
+    @Test
+    public void testEditReferenceCannotBeSelectedBeforeSelectionHasBeenMade() {
+        lines.add("e");
+        lines.add("q");
+        io = new StubIO(lines);
+        service =  new BibTexIdService();
+        HashMap<String, Reference> refMap = new HashMap<>();
+                   
+        BookRef myBook = new BookRef();
+        myBook.setField("title", "kirja1");
+        myBook.setField("authors", "jätkät");
+        myBook.setField("publisher", "otava");
+        myBook.setYear(1999);
+        refMap.put("1", myBook);  
+        cem = new ChooseEditedMenu(io, service, adao, bdao, idao);
+        cem.setReferences(refMap);
+        cem.execute(null);
+        assertEquals(true, io.outputsContainsLine("Valitse ensin viite!\n"));   
     }
 }

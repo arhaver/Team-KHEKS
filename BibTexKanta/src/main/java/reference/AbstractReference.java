@@ -1,17 +1,21 @@
 package reference;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public abstract class AbstractReference implements Reference {
 
     private final int CURRENT_YEAR = 2017;
     protected Map<String, String> fields;
+    protected Set<String> tags;
     protected int year;
 
     public AbstractReference() {
         fields = new HashMap<>();
+        tags = new HashSet<>();
 
         fields.put("title", null);
         fields.put("authors", null);
@@ -77,6 +81,27 @@ public abstract class AbstractReference implements Reference {
             return true;
         }
         return false;
+    }
+    
+        
+    @Override
+    public boolean addTag(String tag) {
+        return tags.add(tag.toLowerCase());
+    }
+    
+    @Override
+    public boolean removeTag(String tag) {
+        return tags.remove(tag.toLowerCase());
+    }
+    
+    @Override
+    public boolean hasTag(String tag) {
+        return tags.contains(tag);
+    }
+    
+    @Override
+    public Set<String> getTags() {
+        return tags;
     }
 
     @Override

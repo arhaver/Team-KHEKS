@@ -28,4 +28,12 @@ public interface Reference {
     public boolean isValidString(String fieldName, String value);
 
     public boolean isValidYear(int value);
+        
+    public boolean addTag (String tag);
+    
+    public boolean removeTag (String tag);
+    
+    public Set<String> getTags();
+    
+    public boolean hasTag(String tag);
 }

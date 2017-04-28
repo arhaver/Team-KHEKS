@@ -96,7 +96,7 @@ public abstract class AbstractReference implements Reference {
     
     @Override
     public boolean hasTag(String tag) {
-        return tags.contains(tag);
+        return tags.contains(tag.toLowerCase());
     }
     
     @Override

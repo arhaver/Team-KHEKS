@@ -32,7 +32,8 @@ public class InproceedingsEditor extends AbstractEditor{
                     "8 Sivut",
                     "9 Tallenna ja lopeta",
                     "10 Näytä syötetyt tiedot",
-                    "11 Lopeta tallentamatta"
+                    "11 Lopeta tallentamatta",
+                    "12 Muokkaa viitteen tägejä"
                 });
 
         Map<String, Command> commands = super.getCommands();
@@ -45,6 +46,7 @@ public class InproceedingsEditor extends AbstractEditor{
         commands.put("9", new SaveEditCommand(this, io));
         commands.put("10", new PrintStatusCommand(io));
         commands.put("11", new QuitCommand());
+        commands.put("12", new TagEditor(io));
     }
 
     @Override

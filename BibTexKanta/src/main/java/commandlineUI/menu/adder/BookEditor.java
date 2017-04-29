@@ -29,7 +29,8 @@ public class BookEditor extends AbstractEditor{
                     "6 BibTex -tunniste",
                     "7 Tallenna ja lopeta",
                     "8 Näytä syötetyt tiedot",
-                    "9 Lopeta tallentamatta"
+                    "9 Lopeta tallentamatta",
+                    "10 Muokkaa viitteen tägejä"
                 });
 
         Map<String, Command> commands = super.getCommands();
@@ -40,6 +41,7 @@ public class BookEditor extends AbstractEditor{
         commands.put("7", new SaveEditCommand(this, io));
         commands.put("8", new PrintStatusCommand(io));
         commands.put("9", new QuitCommand());
+        commands.put("10", new TagEditor(io));
     }
 
     @Override

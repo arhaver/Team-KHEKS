@@ -37,7 +37,8 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
                     "10 Sivut",
                     "11 Tallenna ja lopeta",
                     "12 Näytä syötetyt tiedot",
-                    "13 Lopeta tallentamatta"
+                    "13 Lopeta tallentamatta",
+                    "14 Lisää viitteeseen tägejä"
                 }
         );
 
@@ -52,6 +53,7 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
         commands.put("11", new SaveToDbCommand(io,dao, service));
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
+        commands.put("14", new TagEditor(io));
     }
 
     @Override

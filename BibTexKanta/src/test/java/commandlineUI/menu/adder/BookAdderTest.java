@@ -115,4 +115,74 @@ public class BookAdderTest {
         bookAdder.execute(null);
         assertEquals(true, io.getPrintedLines().contains("title: EkaNimi\n"));
     }
+    
+        @Test
+    public void tagCanBeAdded() {
+        lines.add("10");
+        lines.add("1");
+        lines.add("tagini");
+        lines.add("4");
+        lines.add("9");
+
+        bookAdder.execute(null);
+        assertEquals(true, io.getPrintedLines().contains("Tägi 'tagini' lisätty onnistuneesti"));
+    }
+    
+    @Test
+    public void tagCanBeRemoved() {
+        lines.add("10");
+        lines.add("1");
+        lines.add("tagini");
+        lines.add("2");
+        lines.add("tagini");
+        lines.add("4");
+        lines.add("9");
+
+        bookAdder.execute(null);
+        assertEquals(true, io.getPrintedLines().contains("Tägi 'tagini' poistettu\n"));
+    }
+    
+    @Test
+    public void nonexistentTagCannotBeRemoved() {
+        lines.add("10");
+        lines.add("1");
+        lines.add("tagini");
+        lines.add("2");
+        lines.add("tagino");
+        lines.add("4");
+        lines.add("9");
+
+        bookAdder.execute(null);
+        assertEquals(true, io.getPrintedLines().contains("Tägin 'tagino' poisto ei onnistunut\n"));
+    }
+    
+    @Test
+    public void sameTagCannotBeAddedTwice() {
+        lines.add("10");
+        lines.add("1");
+        lines.add("tagini");
+        lines.add("1");
+        lines.add("tagini");
+        lines.add("4");
+        lines.add("9");
+
+        bookAdder.execute(null);
+        assertEquals(true, io.getPrintedLines().contains("Tägin 'tagini' lisäys ei onnistunut\n"));
+    }    
+    
+    @Test
+    public void tagsCanBeListed() {
+        lines.add("10");
+        lines.add("1");
+        lines.add("tagini");
+        lines.add("1");
+        lines.add("tagino");
+        lines.add("3");
+        lines.add("4");
+        lines.add("9");
+
+        bookAdder.execute(null);
+        boolean expected = io.getPrintedLines().contains("\ttagini") && io.getPrintedLines().contains("\ttagino");
+        assertEquals(true, expected);
+    }
 }

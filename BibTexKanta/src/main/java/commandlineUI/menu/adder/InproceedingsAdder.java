@@ -36,7 +36,8 @@ public class InproceedingsAdder extends AbstractAdder<InproceedingsRef> {
                     "8 Sivut",
                     "9 Tallenna ja lopeta",
                     "10 Näytä syötetyt tiedot",
-                    "11 Lopeta tallentamatta"
+                    "11 Lopeta tallentamatta",
+                    "12 Lisää viitteeseen tägejä"
                 }
         );
 
@@ -52,6 +53,7 @@ public class InproceedingsAdder extends AbstractAdder<InproceedingsRef> {
         commands.put("9", new SaveToDbCommand(io,dao, service));
         commands.put("10", new PrintStatusCommand(io));
         commands.put("11", new QuitCommand());
+        commands.put("12", new TagEditor(io));
     }
 
     @Override

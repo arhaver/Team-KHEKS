@@ -36,5 +36,7 @@ public interface Reference {
     
     public Set<String> getTags();
     
+    public void setTags(Set<String> tags);
+    
     public boolean hasTag(String tag);
 }

@@ -15,6 +15,7 @@ public class AbstractRefTest {
     BookRef book2;
     BookRef book3;
     BookRef book4;
+    BookRef book5;
 
     @Before
     public void setUp() {
@@ -41,6 +42,13 @@ public class AbstractRefTest {
         book4.setField("authors", "title2");
         book4.setField("publisher", "title3");
         book4.setYear(1991);
+        
+        book5 = new BookRef();
+        book5.setField("title", "title1");
+        book5.setField("authors", "title2");
+        book5.setField("publisher", "title3");
+        book5.setYear(1991);
+        book5.addTag("tagini");
     }
 
     @Test
@@ -52,5 +60,13 @@ public class AbstractRefTest {
         assertTrue(book1.equals(book2));
         assertTrue(!book1.equals(book3));
         assertTrue(!book1.equals(book4));
+    }
+    
+    @Test
+    public void addTagAndHasTagWork() {
+        assertTrue(book5.hasTag("tagini"));
+        assertFalse(book5.hasTag("tagino"));
+
+
     }
 }

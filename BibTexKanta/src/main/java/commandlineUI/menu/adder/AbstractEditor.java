@@ -25,6 +25,7 @@ public abstract class AbstractEditor extends AbstractAdder{
         }
 
         editRef.setYear(trueRef.getYear());
+        editRef.setTags(trueRef.getTags());
     }
 
     public Reference getTrueRef() {

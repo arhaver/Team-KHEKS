@@ -36,7 +36,7 @@ public class Main {
         book1.setField("authors", "Writer, Tim and Helper, Tina");
         book1.setField("publisher", "Academic Awesome");
         book1.setField("address", "Philadelpia, PA");
-        book1.addTag("XP");
+        book1.addTag("XPKS");
         
         BookRef book2 = new BookRef();
         book2.setYear(2000);
@@ -44,7 +44,7 @@ public class Main {
         book2.setField("authors", "Writer, Tim, Helper, Tina and Secondhelper, Tom");
         book2.setField("publisher", "Academic Awesome");
         book2.setField("address", "PA, USA");
-        book2.addTag("XP");
+        book2.addTag("XPKS");
         book2.addTag("Scrum");
         
         BookRef book3 = new BookRef();

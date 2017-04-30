@@ -28,7 +28,8 @@ public class BookAdder extends AbstractAdder<BookRef> {
                     "6 BibTex -tunniste",
                     "7 Tallenna ja lopeta",
                     "8 Näytä syötetyt tiedot",
-                    "9 Lopeta tallentamatta"
+                    "9 Lopeta tallentamatta",
+                    "10 Lisää viitteeseen tägejä"
                 });
 
         Map<String, Command> commands = super.getCommands();
@@ -37,8 +38,9 @@ public class BookAdder extends AbstractAdder<BookRef> {
         commands.put("5", new AddressCommand(io));
         commands.put("6", new BibTexIdCommand(io, dao, service));
         commands.put("7", new SaveToDbCommand(io,dao, service));
-        commands.put("8", new PrintStatusCommand(io));
+        commands.put("8", new PrintStatusCommand(io));        
         commands.put("9", new QuitCommand());
+        commands.put("10", new TagEditor(io));
     }
 
     @Override

@@ -103,6 +103,11 @@ public abstract class AbstractReference implements Reference {
     public Set<String> getTags() {
         return tags;
     }
+    
+    @Override
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
 
     @Override
     public String toString() {

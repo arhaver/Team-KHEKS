@@ -442,31 +442,19 @@ public class Stepdefs {
         user_types_valid_BibTeXId(bibtex);
     }
 
-//    @Given("^I've added a book with title \"([^\"]*)\", author \"([^\"]*)\", publishing year \"([^\"]*)\" and publisher name \"([^\"]*)\" and tag \"([^\"]*)\"$")
-//    public void i_ve_added_a_book_with_title_author_publishing_year_and_publisher_name_and_tag(String title, String author, String year, String publisher, String tag) throws Throwable {
-//                inputs.add("1");
-//        add_choice_input(1, title);
-//        add_choice_input(2, author);
-//        add_choice_input(3, year);
-//        add_choice_input(4, publisher);
-//        inputs.add("10");
-//        add_choice_input(1, tag);
-//        inputs.add("4");
-//        inputs.add("7");
-////        inputs.add("9");
-//
-//    }
-//    
-//    @Then("^Search with \"([^\"]*)\" returns correct book$")
-//    public void search_with_returns_correct_book(String arg1) throws Throwable {
-//                inputs.add("6");
-//        inputs.add("S");
-//        inputs.add(arg1);
-//        assertTrue(isOutput("Viite 1:"));
-//        inputs.add("q");
-//        inputs.add("q");
-//
-//    }
+    @Given("^I've added a tag to reference number \"([^\"]*)\"$")
+    public void i_have_added_a_tag(String tag, String number) {
+        inputs.add("6");
+        inputs.add(number);
+        inputs.add("e");
+        inputs.add("10");
+        inputs.add("1");
+        inputs.add(tag);
+        inputs.add("4");
+        inputs.add("7");
+        inputs.add("q");
+        inputs.add("q");        
+    }
     @When("^I search references by field \"([^\"]*)\"$")
     public void i_search_references_published(String search) throws Throwable {
         inputs.add("6");

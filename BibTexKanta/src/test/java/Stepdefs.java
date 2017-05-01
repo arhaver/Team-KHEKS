@@ -465,7 +465,7 @@ public class Stepdefs {
         inputs.add("1");
         inputs.add(tag);
         inputs.add("4");
-        inputs.add("7");
+        inputs.add("11");
         inputs.add("q");
         inputs.add("q");
     }
@@ -479,7 +479,7 @@ public class Stepdefs {
         inputs.add("1");
         inputs.add(tag);
         inputs.add("4");
-        inputs.add("7");
+        inputs.add("9");
         inputs.add("q");
         inputs.add("q");
     }

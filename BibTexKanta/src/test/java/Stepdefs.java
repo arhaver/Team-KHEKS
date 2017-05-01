@@ -484,14 +484,36 @@ public class Stepdefs {
         inputs.add("q");
     }
     
-    @Then("^Tag \"([^\"]*)\" is added")
-    public void tag_is_added(String tag) {
+    @Then("^Tag \"([^\"]*)\" is added to book")
+    public void tag_is_added_to_book(String tag) {
         inputs.add("6");
         inputs.add("1");
         inputs.add("e");
         inputs.add("10");
         inputs.add("3");
         run("4", "7", "q", "q");
+        assertTrue(isOutput("\t" + tag));
+    }
+    
+    @Then("^Tag \"([^\"]*)\" is added to article")
+    public void tag_is_added_to_article(String tag) {
+        inputs.add("6");
+        inputs.add("1");
+        inputs.add("e");
+        inputs.add("14");
+        inputs.add("3");
+        run("4", "11", "q", "q");
+        assertTrue(isOutput("\t" + tag));
+    }
+    
+    @Then("^Tag \"([^\"]*)\" is added to inproceedings")
+    public void tag_is_added_to_inproceedings(String tag) {
+        inputs.add("6");
+        inputs.add("1");
+        inputs.add("e");
+        inputs.add("12");
+        inputs.add("3");
+        run("4", "9", "q", "q");
         assertTrue(isOutput("\t" + tag));
     }
     

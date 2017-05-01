@@ -17,7 +17,14 @@ import java.util.Map;
 public class EditOrDeleteMenu extends Menu{
     
     public EditOrDeleteMenu(IO io, ChooseMenu chooseMenu, BookEditor be, ArticleEditor ae, InproceedingsEditor ie, DAO... daos) {
-        super(io, new String[0], new String[0]);
+        super(io, new String[0], 
+                new String[]{
+                    "\nHALUATKO MUOKATA VIITETTÄ VAI POISTAA VIITTEEN\n",
+                    "Valitse toiminto kirjoittamalla sitä vastaava kirjain.",
+                    "e Muokkaa viitettä",
+                    "d Poista viite",
+                    "Q Palaa viitteen valintaan\n"
+                });
         
         Map<String, Command> commands = super.getCommands();
         

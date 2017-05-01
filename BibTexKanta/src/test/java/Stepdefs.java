@@ -289,6 +289,160 @@ public class Stepdefs {
         assertTrue(Files.exists(testfile));
         Files.delete(testfile);
     }
+    
+    @When("^User chooses to edit this book")
+    public void user_chooses_to_edit_this_book(){
+        inputs.add("6");
+        inputs.add("1");
+        inputs.add("e");
+    }
+    
+    @Then("^title is changed$")
+    public void title_is_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Title: Alkeiden esimerkit"));
+    }
+
+    @Then("^title is not changed$")
+    public void title_is_not_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Title: Esimerkkikirjallisuuden alkeet"));
+    }
+
+    @Then("^author is changed$")
+    public void author_is_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Author(s): Harri Hakkeri"));
+    }
+
+    @Then("^author is not changed$")
+    public void author_is_not_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Author(s): Kalle Kirjailija"));
+    }
+
+    @Then("^year is changed$")
+    public void year_is_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Year: 1002"));
+    }
+
+    @Then("^year is not changed$")
+    public void year_is_not_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Year: 1001"));
+    }
+
+    @Then("^publisher name is changed$")
+    public void publisher_name_is_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Publisher: Kustantajat Oy"));
+    }
+
+    @Then("^publisher name is not changed$")
+    public void publisher_name_is_not_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Publisher: Julkaisijat OY"));
+    }
+
+    @Then("^publisher address is changed$")
+    public void publisher_address_is_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Address: Osoite 1 B"));
+    }
+
+    @Then("^publisher address is not changed$")
+    public void publisher_address_is_not_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertFalse(isOutput("Address: 1b"));
+    }
+
+    @Then("^BibTeXId is changed$")
+    public void bibtexid_is_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertTrue(isOutput("Tex Id: KK00"));
+    }
+
+    @Then("^BibTeXId is not changed$")
+    public void bibtexid_is_not_changed() throws Throwable {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
+        
+        assertFalse(isOutput("Tex Id: KK"));
+    }
+    
+    @When("^User types invalid authors name \"([^\"]*)\"$")
+    public void user_types_invalid_authors_name(String authors) throws Throwable {
+        user_types_valid_authors_name(authors);
+    }
+
+    @When("^User types invalid publisher name \"([^\"]*)\"$")
+    public void user_types_invalid_publisher_name(String publisher) throws Throwable {
+        user_types_valid_publisher_name(publisher);
+    }
+
+    @When("^User types invalid publisher address \"([^\"]*)\"$")
+    public void user_types_invalid_publisher_address(String address) throws Throwable {
+        user_types_valid_publisher_address(address);
+    }
+
+    @When("^User types valid BibTeXId \"([^\"]*)\"$")
+    public void user_types_valid_BibTeXId(String bibtex) throws Throwable {
+        add_choice_input(6, bibtex);
+    }
+
+    @When("^User types invalid BibTeXId \"([^\"]*)\"$")
+    public void user_types_invalid_BibTeXId(String bibtex) throws Throwable {
+        user_types_valid_BibTeXId(bibtex);
+    }
+
+
 
     /**/
     //Käynnistää menun ja varmistaa että ohjelma sammuu eikä jää ikuiseen looppiin

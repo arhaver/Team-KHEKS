@@ -442,7 +442,7 @@ public class Stepdefs {
         user_types_valid_BibTeXId(bibtex);
     }
 
-    @Given("^I've added a tag to reference number \"([^\"]*)\"$")
+    @Given("^I've added tag \"([^\"]*)\" to reference number \"([^\"]*)\"$")
     public void i_have_added_a_tag(String tag, String number) {
         inputs.add("6");
         inputs.add(number);

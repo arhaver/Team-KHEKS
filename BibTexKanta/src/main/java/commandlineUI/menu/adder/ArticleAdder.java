@@ -4,6 +4,8 @@ import commandlineUI.AddressCommand;
 import commandlineUI.BibTexIdCommand;
 import commandlineUI.Command;
 import commandlineUI.JournalCommand;
+import commandlineUI.MonthCommand;
+import commandlineUI.NoteCommand;
 import commandlineUI.NumberCommand;
 import commandlineUI.PagesCommand;
 import commandlineUI.PrintStatusCommand;
@@ -38,7 +40,9 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
                     "11 Tallenna ja lopeta",
                     "12 Näytä syötetyt tiedot",
                     "13 Lopeta tallentamatta",
-                    "14 Lisää viitteeseen tägejä"
+                    "14 Lisää viitteeseen tägejä",
+                    "15 Lisää kuukausi",
+                    "16 Lisätietoja"
                 }
         );
 
@@ -54,6 +58,8 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
         commands.put("14", new TagEditor(io));
+        commands.put("15", new MonthCommand(io));
+        commands.put("16", new NoteCommand(io));
     }
 
     @Override

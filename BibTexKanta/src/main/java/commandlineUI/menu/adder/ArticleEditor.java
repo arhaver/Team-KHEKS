@@ -4,6 +4,8 @@ import commandlineUI.AddressCommand;
 import commandlineUI.BibTexIdCommand;
 import commandlineUI.Command;
 import commandlineUI.JournalCommand;
+import commandlineUI.MonthCommand;
+import commandlineUI.NoteCommand;
 import commandlineUI.NumberCommand;
 import commandlineUI.PagesCommand;
 import commandlineUI.PrintStatusCommand;
@@ -37,7 +39,9 @@ public class ArticleEditor extends AbstractEditor{
                     "11 Tallenna ja lopeta",
                     "12 Näytä syötetyt tiedot",
                     "13 Lopeta tallentamatta",
-                    "14 Muokkaa viitteen tägejä"
+                    "14 Muokkaa viitteen tägejä",
+                    "15 Kuukausi",
+                    "16 Lisätietoja"
                 });
 
         Map<String, Command> commands = super.getCommands();
@@ -53,6 +57,8 @@ public class ArticleEditor extends AbstractEditor{
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
         commands.put("14", new TagEditor(io));
+        commands.put("15", new MonthCommand(io));
+        commands.put("16", new NoteCommand(io));
     }
 
     @Override

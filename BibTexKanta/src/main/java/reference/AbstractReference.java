@@ -150,6 +150,24 @@ public abstract class AbstractReference implements Reference {
         if (this.year > 0) {
             response += "year: " + this.year + "\n";
         }
+        if(fields.get("edition") != null) {
+            response += "edition: " +fields.get("edition") +"\n";
+        }
+        if(fields.get("editor") != null) {
+            response += "editor: " +fields.get("editor") +"\n";
+        }
+        if(fields.get("month") != null) {
+            response += "month: " +fields.get("month") +"\n";
+        }
+        if(fields.get("organization") != null) {
+            response += "organization" +fields.get("organization") +"\n";
+        }
+        if(fields.get("series") != null) {
+            response += "series: " +fields.get("series") +"\n";
+        }
+        if(fields.get("note") != null) {
+            response += "notes: " +fields.get("note") +"\n";
+        }
         return response;
 
     }

@@ -9,6 +9,8 @@ public class ArticleRef extends AbstractReference implements Reference {
         fields.put("number", null);
         fields.put("volume", null);
         fields.put("pages", null);
+        fields.put("month", null);
+        fields.put("note", null);
     }
     
     public ArticleRef(String title, String authors, String volume, String journal, String number, int year){

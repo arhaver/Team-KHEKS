@@ -53,12 +53,14 @@ public class PrintRef implements Command {
         io.print("Title: " + article.getField("title"));
         io.print("Author(s): " + article.getField("authors"));
         io.print("Year: " + article.getYear());
-        io.print("Publisher: " + article.getField("publisher"));
-        io.print("Address: " + article.getField("address"));
+        if(article.getField("publisher") != null) io.print("Publisher: " + article.getField("publisher"));
+        if(article.getField("address") != null) io.print("Address: " + article.getField("address"));
         io.print("Volume: " + article.getField("volume"));
         io.print("Journal: " + article.getField("journal"));
-        io.print("Number: " + article.getField("number"));
-        io.print("Pages: " + article.getField("pages"));
+        if(article.getField("number") != null) io.print("Number: " + article.getField("number"));
+        if(article.getField("pages") != null) io.print("Pages: " + article.getField("pages"));
+        if(article.getField("month") != null) io.print("Month: " +article.getField("month"));
+        if(article.getField("note") != null) io.print("Notes: " +article.getField("note"));
         io.print("Tex Id: " + article.getField("biTexId"));
         io.print("");
     }
@@ -68,7 +70,11 @@ public class PrintRef implements Command {
         io.print("Author(s): " + book.getField("authors"));
         io.print("Year: " + book.getYear());
         io.print("Publisher: " + book.getField("publisher"));
-        io.print("Address: " + book.getField("address"));
+        if(book.getField("address") != null) io.print("Address: " + book.getField("address"));
+        if(book.getField("series") != null) io.print("Series: " +book.getField("series"));
+        if(book.getField("edition") != null) io.print("Edition: " +book.getField("edition"));
+        if(book.getField("month") != null) io.print("Month: " +book.getField("month"));
+        if(book.getField("note") != null) io.print("Notes: " +book.getField("note"));
         io.print("Tex Id: " + book.getField("bibTexId"));
         io.print("");
     }
@@ -77,9 +83,16 @@ public class PrintRef implements Command {
         io.print("Title: " + inproceed.getField("title"));
         io.print("Book Title: " + inproceed.getField("booktitle"));
         io.print("Author(s): " + inproceed.getField("authors"));
-        io.print("Pages: " + inproceed.getField("pages"));
-        io.print("Publisher: " + inproceed.getField("publisher"));
-        io.print("Address: " + inproceed.getField("address"));
+        io.print("Year: " +inproceed.getYear());
+        if(inproceed.getField("pages") != null) io.print("Pages: " + inproceed.getField("pages"));
+        if(inproceed.getField("publisher") != null) io.print("Publisher: " + inproceed.getField("publisher"));
+        if(inproceed.getField("address") != null) io.print("Address: " + inproceed.getField("address"));
+        if(inproceed.getField("editor") != null) io.print("Editor: " +inproceed.getField("editor"));
+        if(inproceed.getField("number") != null) io.print("Number: " +inproceed.getField("number"));
+        if(inproceed.getField("series") != null) io.print("Series: " +inproceed.getField("series"));
+        if(inproceed.getField("month") != null) io.print("Month: " +inproceed.getField("month"));
+        if(inproceed.getField("organization") != null) io.print("Organization: " +inproceed.getField("organization"));
+        if(inproceed.getField("note") != null) io.print("Notes: " +inproceed.getField("note"));
         io.print("Tex Id: " + inproceed.getField("bibTexId"));
         io.print("");
     }

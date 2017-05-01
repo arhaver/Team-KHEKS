@@ -467,18 +467,18 @@ public class Stepdefs {
 //        inputs.add("q");
 //
 //    }
-    @When("^I search references published \"([^\"]*)\"$")
-    public void i_search_references_published(String year) throws Throwable {
+    @When("^I search references by field \"([^\"]*)\"$")
+    public void i_search_references_published(String search) throws Throwable {
         inputs.add("6");
         inputs.add("s");
-        inputs.add("f:year:" + year);
+        inputs.add(search);
     }
 
-    @Then("^references printed are published \"([^\"]*)\" and not \"([^\"]*)\"$")
-    public void references_printed_are_published_and_not(String validyear, String invalidyear) throws Throwable {
+    @Then("^references printed have line \"([^\"]*)\" and not \"([^\"]*)\"$")
+    public void references_printed_are_published_and_not(String validline, String invalidline) throws Throwable {
         run("q");
-        assertTrue(io.getPrintedLines().subList(io.getPrintedLines().lastIndexOf("\nListaus alkaa:\n"), io.getPrintedLines().size() - 1).contains("Year: " + validyear));
-        assertFalse(io.getPrintedLines().subList(io.getPrintedLines().lastIndexOf("\nListaus alkaa:\n"), io.getPrintedLines().size() - 1).contains("Year: " + invalidyear));
+        assertTrue(io.getPrintedLines().subList(io.getPrintedLines().lastIndexOf("\nListaus alkaa:\n"), io.getPrintedLines().size() - 1).contains(validline));
+        assertFalse(io.getPrintedLines().subList(io.getPrintedLines().lastIndexOf("\nListaus alkaa:\n"), io.getPrintedLines().size() - 1).contains(invalidline));
     }
 
     /**/

@@ -442,19 +442,43 @@ public class Stepdefs {
         user_types_valid_BibTeXId(bibtex);
     }
 
-    @Given("^I've added tag \"([^\"]*)\" to reference number \"([^\"]*)\"$")
-    public void i_have_added_a_tag(String tag, String number) {
+    @When("^I add tag \"([^\"]*)\" to book reference number \"([^\"]*)\"$")
+    public void i_add_tag_to_book_reference(String tag, String number) {
         inputs.add("6");
         inputs.add(number);
         inputs.add("e");
         inputs.add("10");
         inputs.add("1");
-        inputs.add(tag);
-        inputs.add("4");
-        inputs.add("7");
-        inputs.add("q");
-        inputs.add("q");        
+        inputs.add(tag);        
     }
+    
+    @When("^I add tag \"([^\"]*)\" to article reference number \"([^\"]*)\"$")
+    public void i_add_tag_to_article_reference(String tag, String number) {
+        inputs.add("6");
+        inputs.add(number);
+        inputs.add("e");
+        inputs.add("14");
+        inputs.add("1");
+        inputs.add(tag);        
+    }
+    
+    @When("^I add tag \"([^\"]*)\" to inproceedings reference number \"([^\"]*)\"$")
+    public void i_add_tag_to_inproceedings_reference(String tag, String number) {
+        inputs.add("6");
+        inputs.add(number);
+        inputs.add("e");
+        inputs.add("12");
+        inputs.add("1");
+        inputs.add(tag);        
+    }
+    
+    @Then("^Tag \"([^\"]*)\" is added")
+    public void tag_is_added(String tag) {
+        inputs.add("3");
+        run("4", "7", "q", "q");
+        assertTrue(isOutput("\t" + tag));
+    }
+    
     @When("^I search references by field \"([^\"]*)\"$")
     public void i_search_references_published(String search) throws Throwable {
         inputs.add("6");

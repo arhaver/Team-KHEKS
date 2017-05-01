@@ -77,6 +77,7 @@ public class PrintRef implements Command {
         io.print("Title: " + inproceed.getField("title"));
         io.print("Book Title: " + inproceed.getField("booktitle"));
         io.print("Author(s): " + inproceed.getField("authors"));
+        io.print("Year: " + inproceed.getYear());
         io.print("Pages: " + inproceed.getField("pages"));
         io.print("Publisher: " + inproceed.getField("publisher"));
         io.print("Address: " + inproceed.getField("address"));

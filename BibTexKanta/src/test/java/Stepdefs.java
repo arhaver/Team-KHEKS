@@ -477,7 +477,8 @@ public class Stepdefs {
     @Then("^references printed are published \"([^\"]*)\" and not \"([^\"]*)\"$")
     public void references_printed_are_published_and_not(String validyear, String invalidyear) throws Throwable {
         run("q");
-        assertTrue(isOutput("Year: " + validyear));
+        assertTrue(io.getPrintedLines().subList(io.getPrintedLines().lastIndexOf("\nListaus alkaa:\n"), io.getPrintedLines().size() - 1).contains("Year: " + validyear));
+        assertFalse(io.getPrintedLines().subList(io.getPrintedLines().lastIndexOf("\nListaus alkaa:\n"), io.getPrintedLines().size() - 1).contains("Year: " + invalidyear));
     }
 
     /**/

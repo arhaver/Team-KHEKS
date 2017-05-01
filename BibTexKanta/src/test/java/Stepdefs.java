@@ -237,7 +237,7 @@ public class Stepdefs {
 
         List<String> outputs = io.getPrintedLines();
         List<String> beginnings = new ArrayList<>();
-        beginnings.addAll(Arrays.asList("Title:", "Author(s):", "Year:", "Publisher:", "Volume:", "Journal:", "Number:", "Tex Id: "));
+        beginnings.addAll(Arrays.asList("Title:", "Author(s):", "Year:", "Volume:", "Journal:", "Number:", "Tex Id: "));
 
         int foundArticles = find_amount_of_given_start_combinations(outputs, beginnings);
 

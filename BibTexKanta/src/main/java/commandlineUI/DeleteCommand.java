@@ -8,6 +8,9 @@ package commandlineUI;
 import commandlineUI.menu.editing.ChooseMenu;
 import database.DAO;
 import io.IO;
+import reference.ArticleRef;
+import reference.BookRef;
+import reference.InproceedingsRef;
 import reference.Reference;
 
 /**
@@ -31,7 +34,13 @@ public class DeleteCommand implements Command {
         String commitment = io.readLine("Haluatko varmasti poistaa viitteen " + toDelete.getField("title") + " (k/e)?");
         if (commitment.equals("k"))
         {
-            for (DAO d : daos) d.remove(toDelete);
+            if (toDelete instanceof ArticleRef) {
+                daos[0].remove(toDelete);
+            } else if (toDelete instanceof BookRef) {
+                daos[1].remove(toDelete);
+            } else if (toDelete instanceof InproceedingsRef) {
+                daos[2].remove(toDelete);
+            }
             chooseMenu.removeReference(toDelete);
             io.print("\nViite poistettu onnistuneesti!\n");
             

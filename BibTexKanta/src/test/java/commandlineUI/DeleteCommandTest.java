@@ -12,7 +12,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import reference.ArticleRef;
 import reference.BookRef;
+import reference.InproceedingsRef;
 import reference.Reference;
 
 /**
@@ -25,10 +27,14 @@ public class DeleteCommandTest {
     private List<String> commands;
     
     private DeleteCommand dc;
+    private DeleteCommand dc2;
+    private DeleteCommand dc3;
     private DAO dao;
     private ChooseMenu cm;
     
     private Reference ref;
+    private Reference ref2;
+    private Reference ref3;
     
     @Before
     public void setUp() {
@@ -38,10 +44,18 @@ public class DeleteCommandTest {
         dao = mock(DAO.class);
         cm = mock(ChooseMenu.class);
         
-        dc = new DeleteCommand(io, cm, dao);
+        dc = new DeleteCommand(io, cm, null, dao, null);
+        dc2 = new DeleteCommand(io, cm, dao, null, null);
+        dc3 = new DeleteCommand(io, cm, null, null, dao);
         
         ref = new BookRef();
         ref.setField("title", "Title");
+        
+        ref2 = new ArticleRef();
+        ref2.setField("title", "Title");
+        
+        ref3 = new InproceedingsRef();
+        ref3.setField("title", "Title");
     }
     
     @Test
@@ -58,7 +72,7 @@ public class DeleteCommandTest {
     }
     
     @Test
-    public void acceptDeletes(){
+    public void acceptDeletesOfBooks(){
         commands.add("k");
         
         assertTrue(!dc.execute(ref));
@@ -66,5 +80,27 @@ public class DeleteCommandTest {
         assertTrue(io.outputsContainsLine("\nViite poistettu onnistuneesti!\n"));
         verify(dao, times(1)).remove(eq(ref));
         verify(cm, times(1)).removeReference(eq(ref));
+    }
+    
+    @Test
+    public void acceptDeletesOfArticles(){
+        commands.add("k");
+        
+        assertTrue(!dc2.execute(ref2));
+        
+        assertTrue(io.outputsContainsLine("\nViite poistettu onnistuneesti!\n"));
+        verify(dao, times(1)).remove(eq(ref2));
+        verify(cm, times(1)).removeReference(eq(ref2));
+    }
+    
+        @Test
+    public void acceptDeletesOfInproceedings(){
+        commands.add("k");
+        
+        assertTrue(!dc3.execute(ref3));
+        
+        assertTrue(io.outputsContainsLine("\nViite poistettu onnistuneesti!\n"));
+        verify(dao, times(1)).remove(eq(ref3));
+        verify(cm, times(1)).removeReference(eq(ref3));
     }
 }

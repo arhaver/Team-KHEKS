@@ -16,6 +16,12 @@ public class InproceedingsRef extends AbstractReference implements Reference {
         fields.put("pages", null);
         fields.put("publisher", null);
         fields.put("address", null);
+        fields.put("editor", null);
+        fields.put("number", null);
+        fields.put("series", null);
+        fields.put("month", null);
+        fields.put("organization", null);
+        fields.put("note", null);
     }
     
     public InproceedingsRef(String title, String authors, String booktitle, int year){

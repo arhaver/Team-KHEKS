@@ -5,6 +5,10 @@ public class BookRef extends AbstractReference implements Reference {
     public BookRef() {
         fields.put("publisher", null);
         fields.put("address", null);
+        fields.put("series", null);
+        fields.put("edition", null);
+        fields.put("month", null);
+        fields.put("note", null);
 
     }
     

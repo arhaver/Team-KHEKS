@@ -74,5 +74,50 @@ public class Main {
         bdao.add(book4);
         bdao.add(book5);
         bdao.add(book6);
+        
+        InproceedingsRef iref1, iref2, iref3;
+        
+        iref1 = new InproceedingsRef("Important Article on Scrum", "Tim Tam", "Articles on Agile", 2016);
+        iref1.addTag("scrum");
+        iref1.addTag("agile");
+        
+        iref2 = new InproceedingsRef("Important Article on XP", "Will Guy", "Articles on Agile", 2016);
+        iref2.addTag("xp");
+        iref2.addTag("agile");
+        
+        iref3 = new InproceedingsRef("Important Article on Kanban", "Derek Dude", "Articles on Agile", 2016);
+        iref3.addTag("kanban");
+        iref3.addTag("agile");
+        
+        service.generateId(iref1);
+        service.generateId(iref2);
+        service.generateId(iref3);
+        
+        idao.add(iref1);
+        idao.add(iref2);
+        idao.add(iref3);
+        
+        ArticleRef aref1, aref2, aref3;
+        
+        aref1 = new ArticleRef("XP XPlored", "Tammy Tongue", "9", "Journal on Agile", "12", 2016);
+        aref1.addTag("XP");
+        aref1.addTag("agile");
+        
+        aref2 = new ArticleRef("The Problem With Waterfall", "Chad Chiq", "9", "Journal on Waterfall", "55", 2012);
+        aref2.addTag("Waterfall");
+        aref2.addTag("problem"); 
+        
+        aref3 = new ArticleRef("The Problem With CS", "Chad Chiq", "11", "Journal on Computer Science", "16", 2010);
+        aref3.addTag("Computer Science");
+        aref3.addTag("CS");
+        aref3.addTag("problem");
+        
+        service.generateId(aref1);
+        service.generateId(aref2);
+        service.generateId(aref3);
+        adao.add(aref1);
+        adao.add(aref2);
+        adao.add(aref3);
+        
     }
 }

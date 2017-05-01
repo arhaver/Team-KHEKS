@@ -41,6 +41,7 @@ public class BibTexIdService {
             }
             candidate = candidate + "_" + i;
         }
+        idset.add(candidate);
         ref.setField("bibTexId", candidate);
     }
 

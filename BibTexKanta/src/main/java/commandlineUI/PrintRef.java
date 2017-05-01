@@ -59,7 +59,7 @@ public class PrintRef implements Command {
         io.print("Journal: " + article.getField("journal"));
         io.print("Number: " + article.getField("number"));
         io.print("Pages: " + article.getField("pages"));
-        io.print("Tex Id: " + article.getField("biTexId"));
+        io.print("Tex Id: " + article.getField("bibTexId"));
         io.print("");
     }
 

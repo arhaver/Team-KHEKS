@@ -16,7 +16,15 @@ public class SearchMenu extends Menu{
     private final SearchService search;
     
     public SearchMenu(IO io, ChooseMenu choose, SearchService search) {
-        super(io, new String[0], 
+        super(io, new String[]{
+            "Yksinkertainen haku:\n",
+            " Tägillä: \t\"T:<haettu tägi>\" (esim. \"T:suosikki\")",
+            " Kentällä: \t\"F:<kentän nimi>:<kentän arvo>\" (esim. \"F:title:Easyname1\")",
+            "\nMonimutkaisempia hakuja:\n",
+            " Negaatio: \t\"-(<haku>)\" (esim. \"-(F:title:Easyname1)\")",
+            " Yhdiste: \t\"(<haku1>)v(<haku2>)\" (esim. \"(T:Scrum)v(T:XP)\"",
+            " Leikkaus: \t\"(<haku1>)^(<haku2>)\" (esim. \"(T:Scrum)^(T:XP)\"\n"           
+        }, 
                 new String[]{
                     "Anna hakukriteeri (q peruuttaa):"
                 });

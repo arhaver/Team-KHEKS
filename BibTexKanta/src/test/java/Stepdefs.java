@@ -469,11 +469,19 @@ public class Stepdefs {
         inputs.add("e");
         inputs.add("12");
         inputs.add("1");
-        inputs.add(tag);        
+        inputs.add(tag);
+        inputs.add("4");
+        inputs.add("7");
+        inputs.add("q");
+        inputs.add("q");
     }
     
     @Then("^Tag \"([^\"]*)\" is added")
     public void tag_is_added(String tag) {
+        inputs.add("6");
+        inputs.add("1");
+        inputs.add("e");
+        inputs.add("10");
         inputs.add("3");
         run("4", "7", "q", "q");
         assertTrue(isOutput("\t" + tag));

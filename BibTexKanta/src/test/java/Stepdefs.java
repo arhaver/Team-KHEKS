@@ -467,6 +467,18 @@ public class Stepdefs {
 //        inputs.add("q");
 //
 //    }
+    @When("^I search references published \"([^\"]*)\"$")
+    public void i_search_references_published(String year) throws Throwable {
+        inputs.add("6");
+        inputs.add("s");
+        inputs.add("f:year:" + year);
+    }
+
+    @Then("^references printed are published \"([^\"]*)\" and not \"([^\"]*)\"$")
+    public void references_printed_are_published_and_not(String validyear, String invalidyear) throws Throwable {
+        run("q");
+        assertTrue(isOutput("Year: " + validyear));
+    }
 
     /**/
     //Käynnistää menun ja varmistaa että ohjelma sammuu eikä jää ikuiseen looppiin

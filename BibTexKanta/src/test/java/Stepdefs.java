@@ -449,7 +449,11 @@ public class Stepdefs {
         inputs.add("e");
         inputs.add("10");
         inputs.add("1");
-        inputs.add(tag);        
+        inputs.add(tag);
+        inputs.add("4");
+        inputs.add("7");
+        inputs.add("q");
+        inputs.add("q");
     }
     
     @When("^I add tag \"([^\"]*)\" to article reference number \"([^\"]*)\"$")
@@ -459,7 +463,11 @@ public class Stepdefs {
         inputs.add("e");
         inputs.add("14");
         inputs.add("1");
-        inputs.add(tag);        
+        inputs.add(tag);
+        inputs.add("4");
+        inputs.add("7");
+        inputs.add("q");
+        inputs.add("q");
     }
     
     @When("^I add tag \"([^\"]*)\" to inproceedings reference number \"([^\"]*)\"$")

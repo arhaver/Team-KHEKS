@@ -8,5 +8,5 @@ Feature: As a user I want to search references by tag
     When I add tag "testitag1" to article reference number "1"
     And I add tag "testitag2" to book reference number "2"
     And I add tag "testitag3" to inproceedings reference number "3"
-    And I search references by field "t:testitag3"
+    And I search references by field "t:testitag1"
     Then references printed have line "Title: Artikkeli esimerkki" and not "Title: Esimerkkikirjallisuuden alkeet"

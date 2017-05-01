@@ -67,7 +67,6 @@ public class QueryBuilder {
     private Matcher createTagMatcher() {
         pop();
         String tag = searchUntil(')');
-            System.out.println("tag: " + tag);
         return new TagMatcher(tag);
     }
        

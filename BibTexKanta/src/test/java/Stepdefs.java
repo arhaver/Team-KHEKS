@@ -442,7 +442,43 @@ public class Stepdefs {
         user_types_valid_BibTeXId(bibtex);
     }
 
+//    @Given("^I've added a book with title \"([^\"]*)\", author \"([^\"]*)\", publishing year \"([^\"]*)\" and publisher name \"([^\"]*)\" and tag \"([^\"]*)\"$")
+//    public void i_ve_added_a_book_with_title_author_publishing_year_and_publisher_name_and_tag(String title, String author, String year, String publisher, String tag) throws Throwable {
+//                inputs.add("1");
+//        add_choice_input(1, title);
+//        add_choice_input(2, author);
+//        add_choice_input(3, year);
+//        add_choice_input(4, publisher);
+//        inputs.add("10");
+//        add_choice_input(1, tag);
+//        inputs.add("4");
+//        inputs.add("7");
+////        inputs.add("9");
+//
+//    }
+//    
+//    @Then("^Search with \"([^\"]*)\" returns correct book$")
+//    public void search_with_returns_correct_book(String arg1) throws Throwable {
+//                inputs.add("6");
+//        inputs.add("S");
+//        inputs.add(arg1);
+//        assertTrue(isOutput("Viite 1:"));
+//        inputs.add("q");
+//        inputs.add("q");
+//
+//    }
+    @When("^I search references published \"([^\"]*)\"$")
+    public void i_search_references_published(String year) throws Throwable {
+        inputs.add("6");
+        inputs.add("s");
+        inputs.add("f:year:" + year);
+    }
 
+    @Then("^references printed are published \"([^\"]*)\" and not \"([^\"]*)\"$")
+    public void references_printed_are_published_and_not(String validyear, String invalidyear) throws Throwable {
+        run("q");
+        assertTrue(isOutput("Year: " + validyear));
+    }
 
     /**/
     //Käynnistää menun ja varmistaa että ohjelma sammuu eikä jää ikuiseen looppiin

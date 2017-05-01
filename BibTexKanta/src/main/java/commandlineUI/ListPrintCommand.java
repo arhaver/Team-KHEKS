@@ -31,9 +31,9 @@ public class ListPrintCommand implements Command {
 
     @Override
     public boolean execute(Reference ref) {
-        PrintRef printer = new PrintRef(daos[0], daos[1], null, io);
+        PrintRef printer = new PrintRef(null, null, null, io); // daos[0], daos[1], daos[2]
         
-        io.print("Listaus alkaa:\n");
+        io.print("\nListaus alkaa:\n");
         for (Integer i : refMap.keySet()) {
             io.print("Viite " + i + ":\n");
             printer.printAnyRef(refMap.get(i));           

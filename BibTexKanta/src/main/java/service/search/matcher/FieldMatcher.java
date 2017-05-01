@@ -9,7 +9,7 @@ public class FieldMatcher implements Matcher{
 
     public FieldMatcher(String field, String value) {
         this.field = field;
-        this.value = value;
+        this.value = value.toLowerCase();
     }
 
     @Override
@@ -17,7 +17,7 @@ public class FieldMatcher implements Matcher{
         String gottenValue = ref.getField(field);
         
         if(gottenValue != null){
-            return value.equals(gottenValue);
+            return value.equals(gottenValue.toLowerCase());
         }
         
         return false;

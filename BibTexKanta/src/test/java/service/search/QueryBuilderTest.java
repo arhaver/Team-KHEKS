@@ -21,12 +21,13 @@ public class QueryBuilderTest {
         help1 = new BookRef("title", "authors", "publisher", 1900);
         help2 = new BookRef("title2", "authors2", "publisher2", 1990);
         help3 = new BookRef("title3", "authors3", "publisher3", 1999);
+        help1.addTag("test");
     }
     
     @Test
     public void simpleFieldQueryWorks() throws Exception{
-        Matcher matcher1 = builder.buildQuery("F:title:sad");
-        Matcher matcher2 = builder.buildQuery("F:year:200");
+        Matcher matcher1 = builder.buildQuery("f:title:sad");
+        Matcher matcher2 = builder.buildQuery("f:year:200");
         
         assertTrue(matcher1.getClass() == FieldMatcher.class);
         assertTrue(matcher2.getClass() == YearMatcher.class);
@@ -41,8 +42,18 @@ public class QueryBuilderTest {
     }
     
     @Test
+    public void simpleTagQueryWorks() throws Exception{
+        Matcher matcher1 = builder.buildQuery("t:test");
+        
+        assertTrue(matcher1.getClass() == TagMatcher.class); 
+        TagMatcher m1 = (TagMatcher) matcher1;
+
+        assertTrue(m1.matches(help1));
+    }
+    
+    @Test
     public void simpleQueryWithBracletsWork() throws Exception{
-        Matcher matcher = builder.buildQuery("(F:title:asd)");
+        Matcher matcher = builder.buildQuery("(f:title:asd)");
         
         assertTrue(matcher.getClass() == FieldMatcher.class);
         
@@ -53,8 +64,18 @@ public class QueryBuilderTest {
     }
     
     @Test
+    public void simpleTagQueryWithBracesWorks() throws Exception{
+        Matcher matcher1 = builder.buildQuery("(t:test)");
+        
+        assertTrue(matcher1.getClass() == TagMatcher.class); 
+        TagMatcher m1 = (TagMatcher) matcher1;
+
+        assertTrue(m1.matches(help1));
+    }
+    
+    @Test
     public void notQueryWorks() throws Exception{
-        Matcher matcher = builder.buildQuery("-(F:title:title)");
+        Matcher matcher = builder.buildQuery("-(f:title:title)");
         
         assertTrue(matcher.getClass() == Not.class);
         
@@ -63,9 +84,21 @@ public class QueryBuilderTest {
     }
     
     @Test
+    public void simpleTagQueryWithNotWorks() throws Exception{
+        Matcher matcher1 = builder.buildQuery("-(t:test)");
+        
+        assertTrue(matcher1.getClass() == Not.class); 
+
+        assertFalse(matcher1.matches(help1));
+        assertTrue(matcher1.matches(help2));
+    }
+    
+    
+    
+    @Test
     public void andQueryWorks() throws Exception{
-        Matcher matcher1 = builder.buildQuery("(F:title:title)^(F:authors:authors)");
-        Matcher matcher2 = builder.buildQuery("(F:title:title2)^(F:authors:authors2)^(F:publisher:publisher2)");
+        Matcher matcher1 = builder.buildQuery("(f:title:title)^(f:authors:authors)");
+        Matcher matcher2 = builder.buildQuery("(f:title:title2)^(f:authors:authors2)^(f:publisher:publisher2)");
         
         assertTrue(matcher1.getClass() == And.class);
         assertTrue(matcher2.getClass() == And.class);
@@ -79,8 +112,8 @@ public class QueryBuilderTest {
     
     @Test
     public void orQueryWorks() throws Exception{
-        Matcher matcher1 = builder.buildQuery("(F:title:title)v(F:authors:authors2)");
-        Matcher matcher2 = builder.buildQuery("(F:title:title2)v(F:authors:authors4)v(F:publisher:publisher)");
+        Matcher matcher1 = builder.buildQuery("(f:title:title)v(f:authors:authors2)");
+        Matcher matcher2 = builder.buildQuery("(f:title:title2)v(f:authors:authors4)v(f:publisher:publisher)");
         
         assertTrue(matcher1.getClass() == Or.class);
         assertTrue(matcher2.getClass() == Or.class);
@@ -96,8 +129,8 @@ public class QueryBuilderTest {
     
     @Test
     public void andAndOrWithoutBrackletsWorks() throws Exception{
-        Matcher matcher1 = builder.buildQuery("(F:year:1900)v(F:title:title2)^(F:authors:authors2)");
-        Matcher matcher2 = builder.buildQuery("(F:year:1900)^(F:title:title2)v(F:authors:authors2)");
+        Matcher matcher1 = builder.buildQuery("(f:year:1900)v(f:title:title2)^(f:authors:authors2)");
+        Matcher matcher2 = builder.buildQuery("(f:year:1900)^(f:title:title2)v(f:authors:authors2)");
         
         assertTrue(matcher1.getClass() == And.class);
         assertTrue(matcher2.getClass() == Or.class);
@@ -114,11 +147,11 @@ public class QueryBuilderTest {
     @Test
     public void queryOfMultipleLevelsWorks() throws Exception{
         Matcher matcher1 = builder.buildQuery(
-                "((F:year:1900)^(F:title:title))v((F:year:1990)^(F:title:title2))");
+                "((f:year:1900)^(f:title:title))v((f:year:1990)^(f:title:title2))");
         Matcher matcher2 = builder.buildQuery(
-                "((F:year:1999)v(F:title:title))^((F:year:1990)v(F:title:title3))");
+                "((f:year:1999)v(f:title:title))^((f:year:1990)v(f:title:title3))");
         Matcher matcher3 = builder.buildQuery(
-                "-(F:title:title)^((F:year:1900)v(F:authors:authors3))");
+                "-(f:title:title)^((f:year:1900)v(f:authors:authors3))");
         
         assertTrue(matcher1.getClass() == Or.class);
         assertTrue(matcher2.getClass() == And.class);
@@ -140,7 +173,7 @@ public class QueryBuilderTest {
     @Test
     public void yearErrorShownCorrectly(){
         try{
-            Matcher wrong = builder.buildQuery("F:year:asd");
+            Matcher wrong = builder.buildQuery("f:year:asd");
             assertTrue(false);
         }catch(Exception e){
             assertEquals(e.getMessage(), "Vuosiluku \"asd\" ei ollut luku");
@@ -157,14 +190,14 @@ public class QueryBuilderTest {
         }
         
         try{
-            Matcher wrong = builder.buildQuery("(F:year:100)4");
+            Matcher wrong = builder.buildQuery("(f:year:100)4");
             assertTrue(false);
         }catch(Exception e){
             assertEquals(e.getMessage(), "Merkki \"4\" epävalidissa kohtaa");
         }
         
         try{
-            Matcher wrong = builder.buildQuery("(F:year:100)^A(F:title:title)");
+            Matcher wrong = builder.buildQuery("(f:year:100)^A(f:title:title)");
             assertTrue(false);
         }catch(Exception e){
             assertEquals(e.getMessage(), "Merkki \"A\" epävalidissa kohtaa");
@@ -174,7 +207,7 @@ public class QueryBuilderTest {
     @Test
     public void emptyBrackletsErrorShows(){
         try{
-            Matcher wrong = builder.buildQuery("(F:year:100)^()");
+            Matcher wrong = builder.buildQuery("(f:year:100)^()");
             assertTrue(false);
         }catch(Exception e){
             assertEquals(e.getMessage(), "Tyhjät sulut");
@@ -184,7 +217,7 @@ public class QueryBuilderTest {
     @Test
     public void twoFieldsWithoutUnifierShowsRightError(){
         try{
-            Matcher wrong = builder.buildQuery("(F:year:100)(F:title:title)");
+            Matcher wrong = builder.buildQuery("(f:year:100)(f:title:title)");
             assertTrue(false);
         }catch(Exception e){
             assertEquals(e.getMessage(), "Kahden ehdon välillä ei yhdistäjämerkkiä");
@@ -194,14 +227,14 @@ public class QueryBuilderTest {
     @Test
     public void oneFieldAndUnifierShowsRightError(){
         try{
-            Matcher wrong = builder.buildQuery("(F:year:100)^");
+            Matcher wrong = builder.buildQuery("(f:year:100)^");
             assertTrue(false);
         }catch(Exception e){
             assertEquals(e.getMessage(), "Yhdistehaku ilman toista hakuehtoa");
         }
         
         try{
-            Matcher wrong = builder.buildQuery("(F:year:100)v");
+            Matcher wrong = builder.buildQuery("(f:year:100)v");
             assertTrue(false);
         }catch(Exception e){
             assertEquals(e.getMessage(), "Yhdistehaku ilman toista hakuehtoa");
@@ -211,7 +244,7 @@ public class QueryBuilderTest {
     @Test
     public void multipleUnifiersInRowCausesError(){
         try{
-            Matcher wrong = builder.buildQuery("(F:year:100)vv(F:title:title)");
+            Matcher wrong = builder.buildQuery("(f:year:100)vv(f:title:title)");
             assertTrue(false);
         }catch(Exception e){
             assertEquals(e.getMessage(), "Monta yhdistemerkkiä peräkkäin");

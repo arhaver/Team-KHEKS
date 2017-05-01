@@ -57,6 +57,7 @@ public class ChooseMenu extends Menu {
     public void setReferences(Map<Integer, Reference> refMap) {
         this.refMap = refMap;
         listPrinter.setRefMap(refMap);
+        listPrinter.execute(null);
     }
     
     public List<Reference> getReferences(){

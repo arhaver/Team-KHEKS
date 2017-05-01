@@ -64,6 +64,13 @@ public class QueryBuilder {
         return null;
     }
     
+    private Matcher createTagMatcher() {
+        pop();
+        String tag = searchUntil(')');
+            System.out.println("tag: " + tag);
+        return new TagMatcher(tag);
+    }
+       
     private String searchUntil(char c){
         int startIndex = index;
         while(peek() != c) pop();
@@ -114,9 +121,12 @@ public class QueryBuilder {
                 char c = pop();
                 
                 switch(c){
-                    case 'F': 
+                    case 'f': 
                         createFieldMatcher();
                         break; 
+                    case 't': 
+                        createTagMatcher();
+                        break;                         
                     case '(':
                         recurse();
                         break;
@@ -141,6 +151,11 @@ public class QueryBuilder {
         
         private void createFieldMatcher() throws Exception{
             matchers.add(qb.createFieldMatcher());
+            groupingAllowed = true;
+        }
+
+        private void createTagMatcher() throws Exception{
+            matchers.add(qb.createTagMatcher());
             groupingAllowed = true;
         }
         

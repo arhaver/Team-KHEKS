@@ -4,6 +4,7 @@ import database.DAO;
 import io.IO;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import reference.InproceedingsRef;
 import reference.ArticleRef;
 import reference.BookRef;
@@ -40,6 +41,11 @@ public class PrintRef implements Command {
     }
 
     public void printAnyRef(Reference newRef) {
+        Set<String> tags = newRef.getTags();
+        String tagPrint = "Tags: ";
+        for (String tag : tags)
+            tagPrint += "'" + tag + "' ";
+        io.print(tagPrint);
         if (newRef instanceof ArticleRef) {
             printArticle(newRef);
         } else if (newRef instanceof BookRef) {
@@ -47,6 +53,7 @@ public class PrintRef implements Command {
         } else if (newRef instanceof InproceedingsRef) {
             printInproceed(newRef);
         }
+
     }
 
     private void printArticle(Reference article) {

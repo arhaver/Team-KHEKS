@@ -23,7 +23,10 @@ public class InMemoryDAO<T> implements DAO<T> {
 
     @Override
     public boolean remove(T t) {
+        try {
         return ts.remove(t);
+        } catch (Exception e) {}
+        return false;
     }
 
 }

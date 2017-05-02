@@ -68,7 +68,7 @@ public class PrintRef implements Command {
         if(article.getField("pages") != null) io.print("Pages: " + article.getField("pages"));
         if(article.getField("month") != null) io.print("Month: " +article.getField("month"));
         if(article.getField("note") != null) io.print("Notes: " +article.getField("note"));
-        io.print("Tex Id: " + article.getField("biTexId"));
+        io.print("Tex Id: " + article.getField("bibTexId"));
         io.print("");
     }
 

@@ -11,4 +11,5 @@ https://docs.google.com/spreadsheets/d/1VklMzUJEQxukcls4RK51e0rHJNAZalB71iriy8iC
 
 Viimeisimmän jar -tiedoston lataaminen:
 https://github.com/jon-erikklint/Team-KHEKS/releases
-
+ 
+.

@@ -44,8 +44,8 @@ public class DeleteCommandTest {
         dao = mock(DAO.class);
         cm = mock(ChooseMenu.class);
         
-        dc = new DeleteCommand(io, cm, null, dao, null);
-        dc2 = new DeleteCommand(io, cm, dao, null, null);
+        dc = new DeleteCommand(io, cm, dao, null, null);
+        dc2 = new DeleteCommand(io, cm, null, dao, null);
         dc3 = new DeleteCommand(io, cm, null, null, dao);
         
         ref = new BookRef();

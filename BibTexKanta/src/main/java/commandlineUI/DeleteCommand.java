@@ -35,9 +35,9 @@ public class DeleteCommand implements Command {
         if (commitment.equals("k"))
         {
             if (toDelete instanceof ArticleRef) {
-                daos[0].remove(toDelete);
-            } else if (toDelete instanceof BookRef) {
                 daos[1].remove(toDelete);
+            } else if (toDelete instanceof BookRef) {
+                daos[0].remove(toDelete);
             } else if (toDelete instanceof InproceedingsRef) {
                 daos[2].remove(toDelete);
             }

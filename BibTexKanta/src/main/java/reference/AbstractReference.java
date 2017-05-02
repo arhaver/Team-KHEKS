@@ -168,8 +168,15 @@ public abstract class AbstractReference implements Reference {
         if(fields.get("note") != null) {
             response += "notes: " +fields.get("note") +"\n";
         }
+        if(this.tags != null) {
+            response += "tags: ";
+            for (String s : this.tags) {
+                response += "\t" +s;
+            }
+            response += "\n";
+        }
         return response;
-
+        
     }
 
     @Override

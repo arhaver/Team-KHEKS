@@ -30,7 +30,7 @@ public class Main {
         private static void generateReferences (BibTexIdService service, InMemoryDAO<ArticleRef> adao, InMemoryDAO<BookRef> bdao, InMemoryDAO<InproceedingsRef> idao) {
         
         //BookRefs
-        BookRef book1, book2, book3, book4, book5, book6;
+        BookRef book1, book2, book3, book4, book5, book6, book7, book8, book9;
         
         book1 = new BookRef("AwesomeBook I", "Writer, Tim", "Academic Awesome", 2006);
         book1.setField("address", "Philadelpia, PA");
@@ -59,6 +59,18 @@ public class Main {
         book6.setField("address", "NY, USA");
         book6.addTag("kanban");
         book6.addTag("agile");
+        
+        book7 = new BookRef("Design Patterns", "Gamma et.al", "Addison-Wesley", 1994);
+        book7.setField("address", "Indianapolis, IN, USA");
+        book7.addTag("prototype");
+        book7.addTag("abstract factory");
+        
+        book8 = new BookRef("Hitch-Hiker's Guide to the Galaxy", "Douglas Adams", "WSOY", 1979);
+        book8.addTag("42");
+        
+        book9 = new BookRef("C on helppoa ja hauskaa", "Henri Åhlson", "Otava", 1982);
+        book9.setField("address", "Helsinki, Finland");
+        book9.addTag("muistiviite");
   
         
         service.generateId(book1);
@@ -67,6 +79,9 @@ public class Main {
         service.generateId(book4);
         service.generateId(book5);
         service.generateId(book6);
+        service.generateId(book7);
+        service.generateId(book8);
+        service.generateId(book9);
         
         bdao.add(book1);
         bdao.add(book2);
@@ -74,8 +89,11 @@ public class Main {
         bdao.add(book4);
         bdao.add(book5);
         bdao.add(book6);
+        bdao.add(book7);
+        bdao.add(book8);
+        bdao.add(book9);
         
-        InproceedingsRef iref1, iref2, iref3;
+        InproceedingsRef iref1, iref2, iref3, iref4, iref5;
         
         iref1 = new InproceedingsRef("Important Article on Scrum", "Tim Tam", "Articles on Agile", 2016);
         iref1.addTag("scrum");
@@ -89,15 +107,25 @@ public class Main {
         iref3.addTag("kanban");
         iref3.addTag("agile");
         
+        iref4 = new InproceedingsRef("Väitös: kone ja kieli", "Jussi Kari", "Väikkäri", 2000);
+        iref4.addTag("kieli");
+        
+        iref5 = new InproceedingsRef("Let's talk about future", "Fields, McIntyre, Carroll", "Future conference", 1976);
+        iref5.addTag("future");
+        
         service.generateId(iref1);
         service.generateId(iref2);
         service.generateId(iref3);
+        service.generateId(iref4);
+        service.generateId(iref5);
         
         idao.add(iref1);
         idao.add(iref2);
         idao.add(iref3);
+        idao.add(iref4);
+        idao.add(iref5);
         
-        ArticleRef aref1, aref2, aref3;
+        ArticleRef aref1, aref2, aref3, aref4, aref5;
         
         aref1 = new ArticleRef("XP XPlored", "Tammy Tongue", "9", "Journal on Agile", "12", 2016);
         aref1.addTag("XP");
@@ -112,12 +140,24 @@ public class Main {
         aref3.addTag("CS");
         aref3.addTag("problem");
         
+        aref4 = new ArticleRef("Pelitutkimus", "Maiju Koskinen", "2", "Tieto ja Kone", "14", 2007);
+        aref4.addTag("pelitutkimus");
+        
+        aref5 = new ArticleRef("Magic of Microprocessors", "Steve Hicks", "14", "Electronics", "43", 1973);
+        aref5.addTag("micro");
+        aref5.addTag("processor");
+        
         service.generateId(aref1);
         service.generateId(aref2);
         service.generateId(aref3);
+        service.generateId(aref4);
+        service.generateId(aref5);
+        
         adao.add(aref1);
         adao.add(aref2);
         adao.add(aref3);
+        adao.add(aref4);
+        adao.add(aref5);
         
     }
 }

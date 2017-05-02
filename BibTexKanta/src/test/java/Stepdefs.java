@@ -523,12 +523,26 @@ public class Stepdefs {
         inputs.add("s");
         inputs.add(search);
     }
+    
+    @When("^I delete reference number \"([^\"]*)\"$")
+    public void i_delete_reference(String number) throws Throwable {
+        inputs.add("6");
+        inputs.add(number);
+        inputs.add("d");
+        inputs.add("k");
+        inputs.add("q");
+    }
 
     @Then("^references printed have line \"([^\"]*)\" and not \"([^\"]*)\"$")
     public void references_printed_are_published_and_not(String validline, String invalidline) throws Throwable {
         run("q");
         assertTrue(io.getPrintedLines().subList(io.getPrintedLines().lastIndexOf("\nListaus alkaa:\n"), io.getPrintedLines().size() - 1).contains(validline));
         assertFalse(io.getPrintedLines().subList(io.getPrintedLines().lastIndexOf("\nListaus alkaa:\n"), io.getPrintedLines().size() - 1).contains(invalidline));
+    }
+    
+    @When("^I reset search")
+    public void i_reset_search() throws Throwable {
+        inputs.add("r");
     }
 
     /**/

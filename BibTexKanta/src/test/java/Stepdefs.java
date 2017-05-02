@@ -53,7 +53,7 @@ public class Stepdefs {
     public void user_chooses_to_add_book_reference() throws Throwable {
         inputs.add("1");
     }
-    
+
     @When("^User chooses to add inproceedings reference$")
     public void user_chooses_to_add_inproceedings_reference() throws Throwable {
         inputs.add("3");
@@ -83,7 +83,7 @@ public class Stepdefs {
     public void user_confirms_the_information() throws Throwable {
         inputs.add("7");
     }
-    
+
     @When("^User types valid booktitle \"([^\"]*)\"$")
     public void user_types_valid_booktitle(String booktitle) throws Throwable {
         add_choice_input(7, booktitle);
@@ -163,7 +163,7 @@ public class Stepdefs {
     public void user_types_valid_pages(String pages) throws Throwable {
         add_choice_input(10, pages);
     }
-    
+
     @When("^User types valid inproceeding pages \"([^\"]*)\"$")
     public void user_types_valid_inprociiding_pages(String pages) throws Throwable {
         add_choice_input(8, pages);
@@ -173,7 +173,7 @@ public class Stepdefs {
     public void user_confirms_the_article_information() throws Throwable {
         inputs.add("11");
     }
-    
+
     @When("^User confirms the inproceedings information$")
     public void user_confirms_the_inproceedings_information() throws Throwable {
         inputs.add("9");
@@ -184,7 +184,7 @@ public class Stepdefs {
         run();
         assertTrue(isOutput("Viite lisätty onnistuneesti\n"));
     }
-    
+
     @Then("^inproceedings will be added$")
     public void inproceedings_will_be_added() throws Throwable {
         run();
@@ -196,7 +196,7 @@ public class Stepdefs {
         run("13");
         assertTrue(isOutput("Tallennus epäonnistui\n"));
     }
-    
+
     @Then("^inproceedings won't be added$")
     public void inproceedings_won_t_be_added() throws Throwable {
         run("11");
@@ -255,7 +255,7 @@ public class Stepdefs {
         add_choice_input(9, journal);
         inputs.add("11");
     }
-    
+
     @Given("^I've added an inproceedings with title \"([^\"]*)\", author \"([^\"]*)\", publishing year \"([^\"]*)\", booktitle name \"([^\"]*)\"")
     public void i_ve_added_an_inproceedings_with_title_author_publishing_year_booktitle(String title, String author, String year, String booktitle) throws Throwable {
         inputs.add("3");
@@ -275,13 +275,13 @@ public class Stepdefs {
         inputs.add("7");
         inputs.add("9");
     }
-    
+
     @When("^I print references to BibTex file \"([^\"]*)\"")
     public void i_print_references_to_bibtex_file(String filename) throws Throwable {
-        inputs.add("5"); 
+        inputs.add("5");
         add_choice_input(1, filename);
     }
-    
+
     @Then("^information of the book is printed to the file \"([^\"]*)\"")
     public void book_is_printed_to_file(String filename) throws Throwable {
         run();
@@ -289,134 +289,86 @@ public class Stepdefs {
         assertTrue(Files.exists(testfile));
         Files.delete(testfile);
     }
-    
+
     @When("^User chooses to edit this book")
-    public void user_chooses_to_edit_this_book(){
+    public void user_chooses_to_edit_this_book() {
         inputs.add("6");
         inputs.add("1");
         inputs.add("e");
     }
-    
+
     @Then("^title is changed$")
     public void title_is_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Title: Alkeiden esimerkit"));
     }
 
     @Then("^title is not changed$")
     public void title_is_not_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Title: Esimerkkikirjallisuuden alkeet"));
     }
 
     @Then("^author is changed$")
     public void author_is_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Author(s): Harri Hakkeri"));
     }
 
     @Then("^author is not changed$")
     public void author_is_not_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Author(s): Kalle Kirjailija"));
     }
 
     @Then("^year is changed$")
     public void year_is_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Year: 1002"));
     }
 
     @Then("^year is not changed$")
     public void year_is_not_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Year: 1001"));
     }
 
     @Then("^publisher name is changed$")
     public void publisher_name_is_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Publisher: Kustantajat Oy"));
     }
 
     @Then("^publisher name is not changed$")
     public void publisher_name_is_not_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Publisher: Julkaisijat OY"));
     }
 
     @Then("^publisher address is changed$")
     public void publisher_address_is_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Address: Osoite 1 B"));
     }
 
     @Then("^publisher address is not changed$")
     public void publisher_address_is_not_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertFalse(isOutput("Address: 1b"));
     }
 
     @Then("^BibTeXId is changed$")
     public void bibtexid_is_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertTrue(isOutput("Tex Id: KK00"));
     }
 
     @Then("^BibTeXId is not changed$")
     public void bibtexid_is_not_changed() throws Throwable {
-        inputs.add("q");
-        inputs.add("q");
-        inputs.add("4");
-        run();
-        
+        add_q_q_4_and_run();
         assertFalse(isOutput("Tex Id: KK"));
     }
-    
+
     @When("^User types invalid authors name \"([^\"]*)\"$")
     public void user_types_invalid_authors_name(String authors) throws Throwable {
         user_types_valid_authors_name(authors);
@@ -455,7 +407,7 @@ public class Stepdefs {
         inputs.add("q");
         inputs.add("q");
     }
-    
+
     @When("^I add tag \"([^\"]*)\" to article reference number \"([^\"]*)\"$")
     public void i_add_tag_to_article_reference(String tag, String number) {
         inputs.add("6");
@@ -469,7 +421,7 @@ public class Stepdefs {
         inputs.add("q");
         inputs.add("q");
     }
-    
+
     @When("^I add tag \"([^\"]*)\" to inproceedings reference number \"([^\"]*)\"$")
     public void i_add_tag_to_inproceedings_reference(String tag, String number) {
         inputs.add("6");
@@ -483,7 +435,7 @@ public class Stepdefs {
         inputs.add("q");
         inputs.add("q");
     }
-    
+
     @Then("^Tag \"([^\"]*)\" is added to book")
     public void tag_is_added_to_book(String tag) {
         inputs.add("6");
@@ -494,7 +446,7 @@ public class Stepdefs {
         run("4", "7", "q", "q");
         assertTrue(isOutput("\t" + tag));
     }
-    
+
     @Then("^Tag \"([^\"]*)\" is added to article")
     public void tag_is_added_to_article(String tag) {
         inputs.add("6");
@@ -505,7 +457,7 @@ public class Stepdefs {
         run("4", "11", "q", "q");
         assertTrue(isOutput("\t" + tag));
     }
-    
+
     @Then("^Tag \"([^\"]*)\" is added to inproceedings")
     public void tag_is_added_to_inproceedings(String tag) {
         inputs.add("6");
@@ -516,7 +468,7 @@ public class Stepdefs {
         run("4", "9", "q", "q");
         assertTrue(isOutput("\t" + tag));
     }
-    
+
     @When("^I search references by field \"([^\"]*)\"$")
     public void i_search_references_published(String search) throws Throwable {
         inputs.add("6");
@@ -539,6 +491,13 @@ public class Stepdefs {
         }
         inputs.add("q");
         menu.execute(null);
+    }
+
+    private void add_q_q_4_and_run() {
+        inputs.add("q");
+        inputs.add("q");
+        inputs.add("4");
+        run();
     }
 
     private void add_choice_input(int choice, String input) {

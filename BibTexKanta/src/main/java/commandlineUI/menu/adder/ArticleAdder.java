@@ -54,7 +54,7 @@ public class ArticleAdder extends AbstractAdder<ArticleRef> {
         commands.put("8", new NumberCommand(io));
         commands.put("9", new JournalCommand(io));
         commands.put("10", new PagesCommand(io));
-        commands.put("11", new SaveToDbCommand(io,dao, service));
+        commands.put("11", new SaveToDbCommand(io, dao, service));
         commands.put("12", new PrintStatusCommand(io));
         commands.put("13", new QuitCommand());
         commands.put("14", new TagEditor(io));
